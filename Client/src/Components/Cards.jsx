@@ -1,18 +1,57 @@
 const members = [
     {
-        icon: "",
+        icon: <svg className="w-8 h-8" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="32" y="96" width="448" height="320" fill="#6EBF5D" />
+            <path
+                d="M496,448H16c-8.836,0-16-7.164-16-16V80c0-8.836,7.164-16,16-16h480c8.836,0,16,7.164,16,16v352
+            C512,440.836,504.836,448,496,448z M32,416h448V96H32V416z"
+                fill="#003B54"
+            />
+            <path
+                d="M336,256.016c0.016-38.703-27.492-70.985-64-78.406V96h-32v81.61
+            c-36.515,7.422-64.015,39.703-64,78.406c-0.007,38.703,27.477,70.969,64,78.382V416h32v-81.602
+            C308.508,326.985,336.016,294.719,336,256.016z M208.008,256.016c0.008-20.89,13.367-38.61,31.992-45.203v90.406
+            C221.375,294.626,208.016,276.906,208.008,256.016z M272,301.211v-90.406c18.633,6.586,32,24.321,32,45.195
+            C303.993,276.875,290.633,294.61,272,301.211z"
+                fill="white"
+            />
+            <path
+                d="M480.016,320c-8,0-7.234,0-16.032,0h-16c-8.797,0-16-7.202-16-16v-96c0-8.797,7.203-16,16-16H480
+            c0.008,0,0.008,0,0.008,0l0.008-32c0,0-0.008,0-0.016,0h-32.016C421.586,160,400,181.61,400,208v96c0,26.406,21.586,48,47.984,48
+            H480c0.008,0,0.008,0,0.008,0L480.016,320z"
+                fill="white"
+            />
+            <path
+                d="M31.984,192c8,0,7.234,0,16.032,0h16c8.797,0,16,7.203,16,16v96c0,8.798-7.203,16-16,16H32
+            c0,0-0.008,0-0.016,0v32c0.008,0,0.008,0,0.008,0h32.024C90.414,352,112,330.406,112,304v-96c0-26.39-21.586-48-47.984-48H32
+            c0,0-0.008,0-0.016,0V192z"
+                fill="white"
+            />
+        </svg>
+        ,
         tag: "Equipe Nationale Masculine Sénoir",
         infos: "Les Guépards ont entamé les préparatifs des 7e et 8e journées des Éliminatoires de la Coupe du Monde 2026-Zone Afrique depuis ce lundi 1er septembre à Abidjan.",
         date: "[01-09-2025]"
     },
     {
-        icon: "",
+        icon: <svg className="w-8 h-8" viewBox="0 0 256 256" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path
+                d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm8,39.38,24.79-17.05a88.41,88.41,0,0,1,36.18,27l-8,26.94c-.2,0-.41.1-.61.17l-22.82,7.41a7.59,7.59,0,0,0-1,.4L136,88.62c0-.2,0-.41,0-.62V64C136,63.79,136,63.58,136,63.38ZM95.24,46.33,120,63.38c0,.2,0,.41,0,.62V88c0,.21,0,.42,0,.62L91.44,108.29a7.59,7.59,0,0,0-1-.4l-22.82-7.41c-.2-.07-.41-.12-.61-.17l-8-26.94A88.41,88.41,0,0,1,95.24,46.33Zm-13,129.09H53.9a87.4,87.4,0,0,1-13.79-43.07l22-16.88a5.77,5.77,0,0,0,.58.22l22.83,7.42a7.83,7.83,0,0,0,.93.22l10.79,31.42c-.15.18-.3.36-.44.55L82.7,174.71A7.8,7.8,0,0,0,82.24,175.42ZM150.69,213a88.16,88.16,0,0,1-45.38,0L95.25,184.6c.13-.16.27-.31.39-.48l14.11-19.42a7.66,7.66,0,0,0,.46-.7h35.58a7.66,7.66,0,0,0,.46.7l14.11,19.42c.12.17.26.32.39.48Zm23.07-37.61a7.8,7.8,0,0,0-.46-.71L159.19,155.3c-.14-.19-.29-.37-.44-.55l10.79-31.42a7.83,7.83,0,0,0,.93-.22l22.83-7.42a5.77,5.77,0,0,0,.58-.22l22,16.88a87.4,87.4,0,0,1-13.79,43.07Z"
+                fill="#34495E"
+            />
+        </svg>,
         tag: "Joueurs",
         infos: "𝗔𝗡𝗗𝗥𝗘𝗔𝗦 𝗛𝗢𝗨𝗡𝗧𝗢𝗡𝗗𝗝𝗜 encore butteur avec le club allemand St. Pauli, dans une victoire 0-2 face au Hambourg SV. ",
         date: "[31-08-2025]"
     },
     {
-        icon: "",
+        icon: <svg className="w-8 h-8" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path
+                d="M36 0v6H0v6h36v6l12-9zM12 24 0 33l12 9v-6h36v-6H12z"
+                fill="#07B737"
+            />
+        </svg>
+        ,
         tag: "Mercato",
         infos: "Yolande Gnammi s’engage avec l’AS FAR au Maroc en provenance d'Ittihad Football Féminin Ranger.",
         date: "[20-08-2025]"
@@ -22,28 +61,28 @@ const members = [
 export default () => (
     <section className="py-28">
         <div className="max-w-screen-lg mx-auto px-4 md:px-8">
-            <div className="max-w-md">
-                <h1 className="text-gray-800 text-2xl font-extrabold sm:text-3xl">Open Positions</h1>
-                <p className="text-gray-600 mt-2">We're currently looking talent software engineers, and designers to help us in our missions and to grow up.</p>
+            <div className="max-w-xl">
+                <h1 className="text-gray-800 text-2xl font-extrabold sm:text-3xl">Toute l’actualité du football béninois.</h1>
+                <p className="text-gray-600 mt-2 mb-8">Retrouvez en temps réel, les dernières nouvelles, résultats et coulisses sur le football béninois. De la ligue locale aux compétitions internationales, ne manquez rien de ce qui fait vibrer les supporters au Bénin.</p>
             </div>
-            <ul className="mt-12 space-y-3">
+            <ul>
                 {
                     members.map((item, idx) => (
-                        <li key={idx} className="px-4 py-5 duration-150 hover:border-white hover:rounded-xl hover:bg-gray-50">
-                            <a className="space-y-3">
+                        <li key={idx} className="px-4 py-2 duration-150 hover:border-white hover:rounded-xl hover:bg-green-50">
+                            <a >
                                 <div className="flex items-center gap-x-3">
-                                    <div className="bg-white w-14 h-14 flex items-center justify-center">
+                                    <div className="bg-white w-4 h-4 flex items-center justify-center pt-1">
                                         {item.icon}
                                     </div>
                                     <div>
-                                        <h3 className="text-base text-gray-800 font-semibold mt-1">{item.tag}</h3>
+                                        <h3 className="text-red-700 text-sm font-semibold mt-1">{item.tag}</h3>
                                     </div>
                                 </div>
-                                <div className="flex items-center gap-3">
-                                    <span className="flex items-center gap-2">
+                                <div className="items-center grid grid-cols-[auto_1fr] gap-4">
+                                    <span className="items-center text-sm">
                                         {item.date}
                                     </span>
-                                    <p className="flex text-gray-600 sm:text-sm">
+                                    <p className="text-sm">
                                         {item.infos}
                                     </p>
                                 </div>
