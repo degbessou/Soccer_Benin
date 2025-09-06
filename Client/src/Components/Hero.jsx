@@ -1,3 +1,22 @@
+import ImageCarousel from "../assets/ImageCarousel";
+
+const carouselImages = [
+    {
+        src: "/steeve_mounie.jpg",
+        alt: "Steeve Yago Mounié",
+        caption: "Cover : Steeve Yago Mounié"
+    },
+    {
+        src: "/women-soccer.jpeg",
+        alt: "Équipe féminine de football",
+        caption: "Cover : Équipe féminine de football"
+    },
+    {
+        src: "/dadje-fc.jpeg",
+        alt: "Dadjè FC",
+        caption: "Dadjè FC, champion du Bénin 2025-2026"
+    }
+];
 
 export default () => {
     return (
@@ -5,13 +24,16 @@ export default () => {
             <div className="max-w-screen-lg mx-auto md:px-8">
                 <div className="items-center gap-x-12 sm:px-4 md:px-0 lg:flex">
                     <div className="flex-1 lg:block">
-                        <img src="/steeve_mounie.jpg" className="md:max-w-lg sm:rounded-lg" alt="" />
-                        <h3 className="text-yellow-600 text-sm">Cover : Steeve Yago Mounié</h3>
+                        {/* Utilisation du composant Carousel */}
+                        <ImageCarousel
+                            images={carouselImages}
+                            interval={5000}
+                        />
                     </div>
-                    <div className="hidden md:block max-w-xl px-4 space-y-3 mt-6 sm:px-0 md:mt-0 lg:max-w-2xl">
+                    <div className="md:block max-w-xl px-4 space-y-3 mt-6 sm:px-0 md:mt-0 md:py-4 lg:max-w-2xl">
 
-                        <p className="text-gray-800 text-3xl font-semibold sm:text-4xl">
-                            Toute l’actualité du football béninois, en temps réel.
+                        <p className="text-gray-800 text-2xl font-extrabold sm:text-3xl">
+                            Toute l’actualité du football béninois.
                         </p>
                         <p className="mt-3 text-gray-600">
                             Retrouvez en temps réel, les dernières nouvelles, résultats et coulisses sur le football béninois.

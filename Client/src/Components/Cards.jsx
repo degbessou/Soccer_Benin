@@ -34,12 +34,7 @@ const members = [
         date: "[01-09-2025]"
     },
     {
-        icon: <svg className="w-8 h-8" viewBox="0 0 256 256" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-            <path
-                d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm8,39.38,24.79-17.05a88.41,88.41,0,0,1,36.18,27l-8,26.94c-.2,0-.41.1-.61.17l-22.82,7.41a7.59,7.59,0,0,0-1,.4L136,88.62c0-.2,0-.41,0-.62V64C136,63.79,136,63.58,136,63.38ZM95.24,46.33,120,63.38c0,.2,0,.41,0,.62V88c0,.21,0,.42,0,.62L91.44,108.29a7.59,7.59,0,0,0-1-.4l-22.82-7.41c-.2-.07-.41-.12-.61-.17l-8-26.94A88.41,88.41,0,0,1,95.24,46.33Zm-13,129.09H53.9a87.4,87.4,0,0,1-13.79-43.07l22-16.88a5.77,5.77,0,0,0,.58.22l22.83,7.42a7.83,7.83,0,0,0,.93.22l10.79,31.42c-.15.18-.3.36-.44.55L82.7,174.71A7.8,7.8,0,0,0,82.24,175.42ZM150.69,213a88.16,88.16,0,0,1-45.38,0L95.25,184.6c.13-.16.27-.31.39-.48l14.11-19.42a7.66,7.66,0,0,0,.46-.7h35.58a7.66,7.66,0,0,0,.46.7l14.11,19.42c.12.17.26.32.39.48Zm23.07-37.61a7.8,7.8,0,0,0-.46-.71L159.19,155.3c-.14-.19-.29-.37-.44-.55l10.79-31.42a7.83,7.83,0,0,0,.93-.22l22.83-7.42a5.77,5.77,0,0,0,.58-.22l22,16.88a87.4,87.4,0,0,1-13.79,43.07Z"
-                fill="#34495E"
-            />
-        </svg>,
+        icon: "⚽",
         tag: "Joueurs",
         infos: "𝗔𝗡𝗗𝗥𝗘𝗔𝗦 𝗛𝗢𝗨𝗡𝗧𝗢𝗡𝗗𝗝𝗜 encore butteur avec le club allemand St. Pauli, dans une victoire 0-2 face au Hambourg SV. ",
         date: "[31-08-2025]"
@@ -61,9 +56,9 @@ const members = [
 export default () => (
     <section className="py-4">
         <div className="max-w-screen-lg mx-auto px-4 md:px-8">
-            <div className="max-w-xl">
-                <h1 className="text-gray-800 text-2xl font-extrabold sm:text-3xl">Toute l’actualité du football béninois.</h1>
-                <p className="text-gray-600 mt-2 mb-8">Retrouvez en temps réel, les dernières nouvelles, résultats et coulisses sur le football béninois. De la ligue locale aux compétitions internationales, ne manquez rien de ce qui fait vibrer les supporters au Bénin.</p>
+            <div className="max-w-xl mb-8">
+                <h1 className="text-gray-800 text-2xl font-extrabold sm:text-3xl">L’actualité de septembre 🍁</h1>
+                {/*<p className="text-gray-600 mt-2 mb-8">Retrouvez en temps réel, les dernières nouvelles, résultats et coulisses sur le football béninois. De la ligue locale aux compétitions internationales, ne manquez rien de ce qui fait vibrer les supporters au Bénin.</p>*/}
             </div>
             <ul>
                 {
