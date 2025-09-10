@@ -27,7 +27,7 @@ const ImageCarousel = ({ images, interval = 5000 }) => {
                     >
                         <img
                             src={image.src}
-                            className="md:max-w-lg sm:rounded-lg"
+                            className="object-cover md:max-w-lg sm:rounded-lg"
                             alt={image.alt}
                         />
                         <h3 className="text-yellow-700 text-sm mt-2">

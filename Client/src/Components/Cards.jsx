@@ -30,11 +30,13 @@ const members = [
         </svg>
         ,
         tag: "Equipe Nationale Masculine Sénoir",
+        image: "/en_benin.jpeg",
         infos: "Les Guépards ont entamé les préparatifs des 7e et 8e journées des Éliminatoires de la Coupe du Monde 2026-Zone Afrique depuis ce lundi 1er septembre à Abidjan.",
         date: "[01-09-2025]"
     },
     {
         icon: "⚽",
+        image: "/A_Hountondji.jpg",
         tag: "Joueurs",
         infos: "𝗔𝗡𝗗𝗥𝗘𝗔𝗦 𝗛𝗢𝗨𝗡𝗧𝗢𝗡𝗗𝗝𝗜 encore butteur avec le club allemand St. Pauli, dans une victoire 0-2 face au Hambourg SV. ",
         date: "[31-08-2025]"
@@ -48,6 +50,7 @@ const members = [
         </svg>
         ,
         tag: "Mercato",
+        image: "/yol_gnanmi.jpeg",
         infos: "Yolande Gnammi s’engage avec l’AS FAR au Maroc en provenance d'Ittihad Football Féminin Ranger.",
         date: "[20-08-2025]"
     }
@@ -66,17 +69,24 @@ export default () => (
                         <li key={idx} className="px-4 py-2 duration-150 hover:border-white hover:rounded-xl hover:bg-green-50">
                             <a >
                                 <div className="flex items-center gap-x-3">
-                                    <div className="bg-white w-4 h-4 flex items-center justify-center pt-1">
-                                        {item.icon}
-                                    </div>
-                                    <div>
-                                        <h3 className="text-red-700 text-sm font-semibold mt-1">{item.tag}</h3>
-                                    </div>
-                                </div>
-                                <div className="items-center grid grid-cols-[auto_1fr] gap-4">
                                     <span className="items-center text-sm">
                                         {item.date}
                                     </span>
+                                    <div>
+                                        <h3 className="text-red-700 text-sm font-semibold ">{item.tag}</h3>
+                                    </div>
+                                    <div className="bg-white w-4 h-4 flex items-center justify-center ">
+                                        {item.icon}
+                                    </div>
+                                </div>
+                                <div className="items-center pt-2 grid grid-cols-[auto_1fr] gap-4">
+                                    <div className="w-[185px] h-[105px] flex items-center justify-center bg-gray-100 rounded-md overflow-hidden flex-shrink-0">
+                                        <img
+                                            src={item.image}
+                                            alt="Image"
+                                            className="w-full h-full object-cover"
+                                        />
+                                    </div>
                                     <p className="text-sm">
                                         {item.infos}
                                     </p>
