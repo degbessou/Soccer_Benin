@@ -1,20 +1,12 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
-import App from './Components/App.jsx'
-import './Components/Navbar.jsx'
-import Navbar from './Components/Navbar.jsx'
-import Hero from './Components/Hero.jsx'
-import Footer from './Components/Footer.jsx'
-import Cards from './Components/Cards.jsx'
+import App from './App'
 
 
-createRoot(document.getElementById('root')).render(
+const root = createRoot(document.getElementById('root'));
+root.render(
   <StrictMode>
-    {/*<App />*/}
-    <Navbar />
-    <Hero />
-    <Cards />
-    <Footer />
+    <App />
   </StrictMode>
-)
+);
