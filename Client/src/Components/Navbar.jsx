@@ -12,7 +12,7 @@ export default () => {
         { title: "Le football béninois", path: "javascript:void(0)" },
         { title: "Championnats", path: "javascript:void(0)" },
         { title: "Mercato", path: "/mercato" },
-        { title: "Archives", path: "javascript:void(0)" }
+        { title: "Archives", path: "/page404" }
     ]
 
     useEffect(() => {
