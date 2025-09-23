@@ -3,7 +3,7 @@
 const MercatoTitle = () => {
 
     return (
-        <div className="md:block max-w-xl px-4 space-y-3 mt-6 sm:px-0 md:mt-0 md:py-4 lg:max-w-2xl">
+        <div className="md:block text-center max-w-xl px-4 space-y-3 mt-6 sm:px-0 lg:text-justify md:mt-0 md:py-4 lg:max-w-2xl">
             <p className="text-gray-800 text-2xl font-extrabold sm:text-3xl">
                 Le mercato béninois, c'est ici.
             </p>
