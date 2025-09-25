@@ -10,7 +10,7 @@ export default () => {
     // Replace javascript:void(0) paths with your paths
     const navigation = [
         { title: "Le football béninois", path: "javascript:void(0)" },
-        { title: "Championnats", path: "javascript:void(0)" },
+        { title: "Championnats", path: "/championship" },
         { title: "Mercato", path: "/mercato" },
         { title: "Archives", path: "/page404" }
     ]
