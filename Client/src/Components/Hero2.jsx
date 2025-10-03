@@ -1,5 +1,5 @@
 import ImageCarousel from "../assets/ImageCarousel";
-import MercatoTitle from "../assets/MercatoTitle";
+import Title from "../assets/Title";
 
 const carouselImages = [
     {
@@ -31,7 +31,8 @@ export default () => {
                             interval={5000}
                         />
                     </div>
-                    <MercatoTitle />
+                    <Title title="Le mercato béninois, c'est ici."
+                        description="Suivez pas à pas l’actualité du marché des transferts des béninois d'ici et d'ailleurs. Rumeurs, officialisations et mouvements de joueurs : ne manquez aucune information sur vos clubs et stars préférés." />
                 </div>
             </div>
         </section>

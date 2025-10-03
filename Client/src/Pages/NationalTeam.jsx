@@ -8,7 +8,7 @@ export default function Home() {
     return (
         <>
             <Navbar />
-            <HeroStatiq src="/dadje-fc.jpeg" alt="équipe de dadje fc" />
+            <HeroStatiq src="/en_benin.jpeg" alt="équipe nationale senoir homme" />
             <TitleBis />
             <Footer />
         </>
