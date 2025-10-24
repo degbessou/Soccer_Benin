@@ -14,7 +14,8 @@ export default function Mercato() {
             const { data, error } = await supabase
                 .from("mercato")
                 .select("*")
-                .order("id", { ascending: false })
+                .order("category", { ascending: true })
+                .order("player", { ascending: true })
 
             if (error) {
                 console.error("Erreur lors de la récupération des données :", error)
