@@ -9,7 +9,7 @@ const Table = ({ title, description, rows }) => {
     const headers = ['Category', 'Year', 'Competition', 'Participation', 'Result', 'Detail', 'Record'];
 
     return (
-        <section className="py-8">
+        <section id="table-section" className="scroll-mt-24 py-8">
             <div className="max-w-screen-xl mx-auto px-4 md:px-8">
                 <div className="max-w-lg mb-8">
                     <h3 className="text-gray-800 text-xl font-bold sm:text-2xl">

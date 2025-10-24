@@ -16,12 +16,13 @@ const Paragraph = ({
     image,
     imageAlt,
     link,
-    imageOnRight = true
+    imageOnRight = true,
+    sectionId
 }) => {
     if (image) {
         // Paragraphe avec image
         return (
-            <section className="py-2">
+            <section id={sectionId} className="py-2 scroll-mt-32">
                 <div className="max-w-screen-xl mx-auto md:px-8">
                     <div className="items-center gap-x-12 sm:px-4 md:px-0 lg:flex">
                         {imageOnRight ? (
@@ -95,7 +96,7 @@ const Paragraph = ({
 
     // Paragraphe sans image
     return (
-        <section className="py-2">
+        <section id={sectionId} className="py-2 scroll-mt-32">
             <div className="max-w-screen-xl mx-auto md:px-8">
                 <div className="mx-auto space-y-3">
                     {heading && (
