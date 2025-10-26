@@ -9,17 +9,24 @@ import Hero2 from "../Components/Hero2"
 export default function Mercato() {
     const [mercato, setMercato] = useState([])
     const [selectedItem, setSelectedItem] = useState(0)
+    const [loading, setLoading] = useState(true)
+
     useEffect(() => {
         async function fetchData() {
+            setLoading(true)
             const { data, error } = await supabase
                 .from("mercato")
-                .select("*")
+                .select("id, *")
                 .order("category", { ascending: true })
                 .order("player", { ascending: true })
 
             if (error) {
                 console.error("Erreur lors de la récupération des données :", error)
+                setLoading(false)
             } else {
+                //console.log("Données reçues:", data)
+                //console.log("Nombre de lignes:", data?.length)
+
                 // Regrouper les joueurs par catégorie/titre
                 const grouped = data.reduce((acc, row) => {
                     const key = `${row.category}-${row.title}`
@@ -38,8 +45,9 @@ export default function Mercato() {
                     })
                     return acc
                 }, {})
-
+                //console.log("Données groupées:", Object.values(grouped))
                 setMercato(Object.values(grouped))
+                setLoading(false)
             }
         }
         fetchData()
@@ -67,7 +75,7 @@ export default function Mercato() {
                         <ul role="tablist" className="w-full flex items-center gap-x-3 overflow-x-auto">
                             {
                                 mercato.map((item, idx) => (
-                                    <li key={idx} className={`py-2 border-b-2 ${selectedItem == idx ? "border-yellow-600 text-yellow-600" : "border-white text-gray-500"}`}>
+                                    <li key={`${item.category}-${item.title}`} className={`py-2 border-b-2 ${selectedItem == idx ? "border-yellow-600 text-yellow-600" : "border-white text-gray-500"}`}>
                                         <button
                                             role="tab"
                                             aria-selected={selectedItem == idx ? true : false}
@@ -81,8 +89,10 @@ export default function Mercato() {
                                 ))
                             }
                         </ul>
-                        {mercato.length === 0 ? (
+                        {loading ? (
                             <p className="text-center py-8 text-gray-500">Chargement...</p>
+                        ) : mercato.length === 0 ? (
+                            <p className="text-center py-8 text-gray-500">Aucune donnée disponible.</p>
                         ) : (
                             <table className="w-full table-auto text-left">
                                 <thead className="text-gray-600 font-medium border-b border-gray-300">
@@ -96,7 +106,7 @@ export default function Mercato() {
                                 <tbody className="text-gray-600 divide-y divide-gray-300">
                                     {
                                         mercato[selectedItem]?.items?.map((item, idx) => (
-                                            <tr key={idx}>
+                                            <tr key={item.id}>
                                                 <td className="pr-6 py-4 whitespace-nowrap">{item.player}</td>
                                                 <td className="pr-6 py-4 whitespace-nowrap text-600 text-center">{item.from}</td>
                                                 <td className="pr-6 py-4 whitespace-nowrap text-center">
