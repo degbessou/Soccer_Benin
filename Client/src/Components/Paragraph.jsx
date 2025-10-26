@@ -29,11 +29,11 @@ const Paragraph = ({
                             <>
                                 <div className="max-w-xl px-4 space-y-3 mt-6 sm:px-0 md:mt-0 lg:max-w-2xl">
                                     {heading && (
-                                        <h3 className="text-indigo-600 font-semibold text-lg">
+                                        <h3 className="text-yellow-700 lg:font-extrabold text-lg">
                                             {heading}
                                         </h3>
                                     )}
-                                    <p className="text-gray-600 text-base leading-relaxed whitespace-pre-line">
+                                    <p className="text-base leading-relaxed whitespace-pre-line">
                                         {text}
                                     </p>
                                     {link && (
@@ -67,11 +67,11 @@ const Paragraph = ({
                                 </div>
                                 <div className="max-w-xl px-4 space-y-3 mt-6 sm:px-0 md:mt-0 lg:max-w-2xl">
                                     {heading && (
-                                        <h3 className="text-indigo-600 font-semibold text-lg">
+                                        <h3 className="text-yellow-700 lg:font-extrabold text-lg">
                                             {heading}
                                         </h3>
                                     )}
-                                    <p className="text-gray-600 text-base leading-relaxed whitespace-pre-line">
+                                    <p className="text-base leading-relaxed whitespace-pre-line">
                                         {text}
                                     </p>
                                     {link && (
@@ -100,11 +100,11 @@ const Paragraph = ({
             <div className="max-w-screen-xl mx-auto md:px-8">
                 <div className="mx-auto space-y-3">
                     {heading && (
-                        <h3 className="text-indigo-600 font-semibold text-lg">
+                        <h3 className="text-yellow-700 lg:font-extrabold text-lg">
                             {heading}
                         </h3>
                     )}
-                    <p className="text-gray-600 text-base leading-relaxed whitespace-pre-line">
+                    <p className="text-base leading-relaxed whitespace-pre-line">
                         {text}
                     </p>
                     {link && (
