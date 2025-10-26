@@ -1,16 +1,30 @@
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-
 export default () => {
-
     const [state, setState] = useState(false)
+    const [openDropdown, setOpenDropdown] = useState(null)
     const navigate = useNavigate();
 
-    // Replace javascript:void(0) paths with your paths
     const navigation = [
-        { title: "Le football béninois", path: "/NationalTeam" },
-        { title: "Championnats", path: "/championship" },
+        {
+            title: "Le football béninois",
+            path: "/NationalTeam",
+            submenu: [
+                { title: "Équipe nationale homme", path: "/NationalTeam" },
+                { title: "Équipe nationale femme", path: "/national-team/women" },
+                { title: "Équipe U20", path: "/national-team/u20" }
+            ]
+        },
+        {
+            title: "Championnats",
+            path: "/championship",
+            submenu: [
+                { title: "Histoire", path: "/championship/history" },
+                { title: "Ligue 1", path: "/championship/ligue1" },
+                { title: "Ligue 2", path: "/championship/ligue2" }
+            ]
+        },
         { title: "Mercato", path: "/mercato" },
         { title: "Archives", path: "/page404" }
     ]
@@ -18,15 +32,28 @@ export default () => {
     useEffect(() => {
         document.onclick = (e) => {
             const target = e.target;
-            if (!target.closest(".menu-btn")) setState(false);
+            if (!target.closest(".menu-btn") && !target.closest(".dropdown-item")) {
+                setState(false);
+                setOpenDropdown(null);
+            }
         };
     }, [])
+
+    const toggleDropdown = (idx) => {
+        setOpenDropdown(openDropdown === idx ? null : idx);
+    }
+
+    const handleNavigation = (path) => {
+        navigate(path);
+        setState(false);
+        setOpenDropdown(null);
+    }
 
     return (
         <nav className={`bg-white pb-5 md:text-sm ${state ? "shadow-lg rounded-xl border mx-2 mt-2 md:shadow-none md:border-none md:mx-2 md:mt-0" : ""}`}>
             <div className="gap-x-14 items-center max-w-screen-lg mx-auto px-4 md:flex md:px-8">
                 <div className="flex items-center justify-between py-5 md:block">
-                    <a href="/" onClick={() => navigate("/")}>
+                    <a href="/" onClick={(e) => { e.preventDefault(); handleNavigation("/"); }}>
                         <img
                             src="https://www.floatui.com/logo.svg"
                             width={120}
@@ -54,17 +81,59 @@ export default () => {
                 </div>
                 <div className={`flex-1 items-center mt-8 md:mt-0 md:flex ${state ? 'block' : 'hidden'} `}>
                     <ul className="justify-center items-center space-y-6 md:flex md:space-x-6 md:space-y-0">
-                        {
-                            navigation.map((item, idx) => {
-                                return (
-                                    <li key={idx} className="text-gray-700 hover:text-gray-900">
-                                        <a href={item.path} onClick={() => navigate(item.path)} className="block">
+                        {navigation.map((item, idx) => {
+                            return (
+                                <li key={idx} className="relative dropdown-item z-50">
+                                    {item.submenu ? (
+                                        <div>
+                                            <button
+                                                onClick={() => toggleDropdown(idx)}
+                                                className="text-gray-700 hover:text-gray-900 flex items-center gap-1"
+                                            >
+                                                {item.title}
+                                                <svg
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    viewBox="0 0 20 20"
+                                                    fill="currentColor"
+                                                    className={`w-4 h-4 transition-transform ${openDropdown === idx ? 'rotate-180' : ''}`}
+                                                >
+                                                    <path fillRule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clipRule="evenodd" />
+                                                </svg>
+                                            </button>
+                                            {openDropdown === idx && (
+                                                <ul className="md:absolute md:top-full md:left-0 md:mt-2 md:bg-white md:shadow-lg md:rounded-lg md:min-w-[220px] md:py-2 md:z-50 mt-2 space-y-2 md:space-y-0 md:border">
+                                                    {item.submenu.map((subItem, subIdx) => (
+                                                        <li key={subIdx}>
+                                                            <a
+                                                                href={subItem.path}
+                                                                onClick={(e) => {
+                                                                    e.preventDefault();
+                                                                    handleNavigation(subItem.path);
+                                                                }}
+                                                                className="block px-4 py-2 text-gray-700 hover:bg-gray-100 hover:text-gray-900 md:rounded"
+                                                            >
+                                                                {subItem.title}
+                                                            </a>
+                                                        </li>
+                                                    ))}
+                                                </ul>
+                                            )}
+                                        </div>
+                                    ) : (
+                                        <a
+                                            href={item.path}
+                                            onClick={(e) => {
+                                                e.preventDefault();
+                                                handleNavigation(item.path);
+                                            }}
+                                            className="block text-gray-700 hover:text-gray-900"
+                                        >
                                             {item.title}
                                         </a>
-                                    </li>
-                                )
-                            })
-                        }
+                                    )}
+                                </li>
+                            )
+                        })}
                     </ul>
                     <div className="flex-1 gap-x-6 items-center justify-end mt-6 space-y-6 md:flex md:space-y-0 md:mt-0">
                         <a href="javascript:void(0)" className="flex items-center justify-center gap-x-1 py-2 px-4 text-white font-medium bg-gray-800 hover:bg-gray-700 active:bg-gray-900 rounded-full md:inline-flex">
