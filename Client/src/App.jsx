@@ -5,6 +5,8 @@ import Mercato from "./Pages/Mercato";
 import Page404 from "./Pages/Page404";
 import Championship from "./Pages/Championship";
 import NationalTeam from "./Pages/NationalTeam";
+import WomenNationalTeam from "./Pages/WomenNationalTeam";
+import JuniorNationalTeam from "./Pages/JuniorNationalTeam";
 
 
 
@@ -18,6 +20,8 @@ function App() {
                 <Route exact path="/Page404" Component={Page404} />
                 <Route exact path="/Championship" Component={Championship} />
                 <Route exact path="/NationalTeam" Component={NationalTeam} />
+                <Route exact path="/WomenNationalTeam" Component={WomenNationalTeam} />
+                <Route exact path="/JuniorNationalTeam" Component={JuniorNationalTeam} />
             </Routes>
         </Router>
     );

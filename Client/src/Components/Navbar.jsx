@@ -12,8 +12,8 @@ export default () => {
             path: "/NationalTeam",
             submenu: [
                 { title: "Équipe nationale homme", path: "/NationalTeam" },
-                { title: "Équipe nationale femme", path: "/national-team/women" },
-                { title: "Équipe U20", path: "/national-team/u20" }
+                { title: "Équipe nationale femme", path: "/WomenNationalTeam" },
+                { title: "Équipe U20", path: "/JuniorNationalTeam" }
             ]
         },
         {
