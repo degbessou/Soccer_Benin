@@ -1,7 +1,5 @@
 
-const TitleBis = ({ title = "Lorem ipsum dolor sit amet",
-    description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
-}) => {
+const TitleBis = ({ title = "Lorem ipsum dolor sit amet", description }) => {
 
     return (
         <div className="md:block text-center px-4 space-y-3 mt-6 sm:px-0 md:mt-0 md:py-4 lg:text-center lg:max-w-screen-lg lg:mx-auto">
