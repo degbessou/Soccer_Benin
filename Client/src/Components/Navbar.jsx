@@ -20,9 +20,9 @@ export default () => {
             title: "Championnats",
             path: "/championship",
             submenu: [
-                { title: "Histoire", path: "/championship/history" },
+                { title: "Histoire", path: "/Championship" },
                 { title: "Ligue 1", path: "/LeagueOne" },
-                { title: "Ligue 2", path: "/championship/ligue2" }
+                { title: "Ligue 2", path: "/LeagueTwo" }
             ]
         },
         { title: "Mercato", path: "/mercato" },

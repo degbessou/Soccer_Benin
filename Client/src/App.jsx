@@ -8,6 +8,7 @@ import NationalTeam from "./Pages/NationalTeam";
 import WomenNationalTeam from "./Pages/WomenNationalTeam";
 import JuniorNationalTeam from "./Pages/JuniorNationalTeam";
 import LeagueOne from "./Pages/LeagueOne";
+import LeagueTwo from "./Pages/LeagueTwo";
 
 
 
@@ -24,6 +25,7 @@ function App() {
                 <Route exact path="/WomenNationalTeam" Component={WomenNationalTeam} />
                 <Route exact path="/JuniorNationalTeam" Component={JuniorNationalTeam} />
                 <Route exact path="/LeagueOne" Component={LeagueOne} />
+                <Route exact path="/LeagueTwo" Component={LeagueTwo} />
             </Routes>
         </Router>
     );
