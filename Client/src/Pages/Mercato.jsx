@@ -4,12 +4,32 @@ import { supabase } from "../Functions/SupabaseClient"
 import React from "react"
 import Navbar from "../Components/Navbar"
 import Footer from "../Components/Footer"
-import Hero2 from "../Components/Hero2"
+import HeroDynamiq from "../Components/HeroDynamiq"
+import Title from "../assets/Title"
+import TitleBis from "../assets/TitleBis"
 
 export default function Mercato() {
     const [mercato, setMercato] = useState([])
     const [selectedItem, setSelectedItem] = useState(0)
     const [loading, setLoading] = useState(true)
+
+    const carouselImages = [
+        {
+            src: "/steeve_mounie.jpg",
+            alt: "Steeve Yago Mounié",
+            caption: "Cover : Steeve Yago Mounié"
+        },
+        {
+            src: "/women-soccer.jpeg",
+            alt: "Équipe féminine de football",
+            caption: "Cover : Équipe féminine de football"
+        },
+        {
+            src: "/dadje-fc.jpeg",
+            alt: "Dadjè FC",
+            caption: "Cover : Dadjè FC, champion du Bénin 2025-2026"
+        }
+    ];
 
     useEffect(() => {
         async function fetchData() {
@@ -68,7 +88,9 @@ export default function Mercato() {
     return (
         <>
             <Navbar />
-            <Hero2 />
+            <HeroDynamiq images={carouselImages} />
+            <TitleBis title="Le mercato béninois, c'est ici."
+                description="Suivez pas à pas l’actualité du marché des transferts des béninois d'ici et d'ailleurs. Rumeurs, officialisations et mouvements de joueurs : ne manquez aucune information sur vos clubs et stars préférés." />
             <main>
                 <div className="max-w-screen-lg mx-auto px-4 md:px-8">
                     <div className="text-sm mt-12 overflow-x-auto">
