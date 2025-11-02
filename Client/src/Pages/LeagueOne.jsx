@@ -34,7 +34,7 @@ export default () => {
             .eq('nom_saison', 'Saison 2025-2026')
             .order('position', { ascending: true })
 
-        console.log('Classement:', data, error)
+        //console.log('Classement:', data, error)
         return data
     }
 
