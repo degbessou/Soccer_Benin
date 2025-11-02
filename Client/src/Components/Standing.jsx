@@ -57,14 +57,16 @@ export default function Standing({ nomSaison = 'Saison 2025-2026', supabaseQuery
                             {standing.map((team, idx) => (
                                 <tr
                                     key={team.id_standing}
-                                    className={`hover:bg-gray-50 ${idx < 2 ? 'bg-green-50' :
-                                        idx >= standing.length - 2 ? 'bg-red-50' : ''
+                                    className={` ${idx === 0 ? 'bg-green-50' :
+                                        idx === 1 ? 'bg-yellow-50' :
+                                            idx >= standing.length - 2 ? 'bg-red-50' : ''
                                         }`}
                                 >
                                     <td className="py-3 px-4">
-                                        <span className={`font-bold ${idx < 2 ? 'text-green-600' :
-                                            idx >= standing.length - 2 ? 'text-red-600' :
-                                                'text-gray-800'
+                                        <span className={`font-bold ${idx === 0 ? 'text-green-600' :
+                                            idx === 1 ? 'text-yellow-600' :
+                                                idx >= standing.length - 2 ? 'text-red-600' :
+                                                    'text-gray-800'
                                             }`}>
                                             {team.position || idx + 1}
                                         </span>
@@ -106,15 +108,17 @@ export default function Standing({ nomSaison = 'Saison 2025-2026', supabaseQuery
                     {standing.map((team, idx) => (
                         <div
                             key={team.id_standing}
-                            className={`p-4 border-b border-gray-300 ${idx < 3 ? 'bg-green-50' :
-                                idx >= standing.length - 3 ? 'bg-red-50' : ''
+                            className={`p-4 border-b border-gray-300 ${idx === 0 ? 'bg-green-50' :
+                                idx === 1 ? 'bg-yellow-50' :
+                                    idx >= standing.length - 2 ? 'bg-red-50' : ''
                                 }`}
                         >
                             <div className="flex items-center justify-between mb-2">
                                 <div className="flex items-center gap-3">
-                                    <span className={`text-lg font-bold ${idx < 3 ? 'text-green-600' :
-                                        idx >= standing.length - 3 ? 'text-red-600' :
-                                            'text-gray-800'
+                                    <span className={`text-lg font-bold ${idx === 0 ? 'text-green-600' :
+                                        idx === 1 ? 'text-yellow-600' :
+                                            idx >= standing.length - 2 ? 'text-red-600' :
+                                                'text-gray-800'
                                         }`}>
                                         {team.position || idx + 1}
                                     </span>
@@ -165,11 +169,15 @@ export default function Standing({ nomSaison = 'Saison 2025-2026', supabaseQuery
             {/* Légende */}
             <div className="mt-6 flex flex-wrap gap-4 text-sm text-gray-600">
                 <div className="flex items-center gap-2">
-                    <div className="w-4 h-4 bg-green-50 border border-green-200 rounded"></div>
-                    <span>Qualification</span>
+                    <div className="w-4 h-4 bg-green-100 border border-green-300 rounded"></div>
+                    <span>Champion / Ligue des Champions CAF</span>
                 </div>
                 <div className="flex items-center gap-2">
-                    <div className="w-4 h-4 bg-red-50 border border-red-200 rounded"></div>
+                    <div className="w-4 h-4 bg-yellow-100 border border-yellow-300 rounded"></div>
+                    <span>Coupe de la Confédération CAF</span>
+                </div>
+                <div className="flex items-center gap-2">
+                    <div className="w-4 h-4 bg-red-100 border border-red-300 rounded"></div>
                     <span>Relégation</span>
                 </div>
             </div>
