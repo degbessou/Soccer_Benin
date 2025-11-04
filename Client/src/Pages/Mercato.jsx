@@ -15,19 +15,24 @@ export default function Mercato() {
 
     const carouselImages = [
         {
-            src: "/steeve_mounie.jpg",
-            alt: "Steeve Yago Mounié",
-            caption: "Cover : Steeve Yago Mounié"
-        },
-        {
-            src: "/women-soccer.jpeg",
-            alt: "Équipe féminine de football",
-            caption: "Cover : Équipe féminine de football"
-        },
-        {
-            src: "/dadje-fc.jpeg",
+            src: "medias/banner/dadje_banner.jpg",
             alt: "Dadjè FC",
             caption: "Cover : Dadjè FC, champion du Bénin 2025-2026"
+        },
+        {
+            src: "medias/banner/coton_un.jpeg",
+            alt: "Coton FC",
+            caption: "Cover : Coton FC, vice champion du Bénin 2025-2026"
+        },
+        {
+            src: "medias/banner/dabomey_banner.jpg",
+            alt: "Dynamo vs Dragons",
+            caption: "Cover : Macth Dynamo vs Dragons"
+        },
+        {
+            src: "medias/banner/espoirfc_banner.jpg",
+            alt: "Espoir FC",
+            caption: "Cover : Espoir FC"
         }
     ];
 
