@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { getSupabaseImageUrl } from '../assets/Helpers'
 
 export default () => {
     const [state, setState] = useState(false)
@@ -57,7 +58,7 @@ export default () => {
                     <div className="w-32 h-32 ">
                         <a href="/" onClick={(e) => { e.preventDefault(); handleNavigation("/"); }}>
                             <img
-                                src="/logo.png"
+                                src={getSupabaseImageUrl('medias/icons/logo.png')}
                                 alt="BencoFoot"
                                 className="w-full h-full object-cover"
                             />
