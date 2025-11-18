@@ -52,13 +52,13 @@ export default function Cards() {
                             </h1>
                             <ul>
                                 {news.map((item, idx) => (
-                                    <li key={idx} className="px-4 py-2 hover:bg-green-50 rounded-xl transition-colors">
-                                        <div className="flex gap-x-3">
-                                            <span className="text-sm">{item.date}</span>
-                                            <h3 className="text-red-700 text-sm font-semibold">
+                                    <li key={idx} className="py-2 hover:bg-green-50 rounded-xl transition-colors">
+                                        <div className="px-4 flex item-center">
+                                            <span className="text-sm w-32 font-semibold">{item.date}</span>
+                                            <h3 className="text-red-700 text-sm font-semibold ">
                                                 {item.tag}
                                             </h3>
-                                            <h3 className="text-red-700 text-sm font-semibold">
+                                            <h3 className="text-red-700 text-sm font-semibold ">
                                                 {item.tag_un}
                                             </h3>
                                             <h3 className="text-red-700 text-sm font-semibold">

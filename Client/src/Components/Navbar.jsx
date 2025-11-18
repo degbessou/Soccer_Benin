@@ -7,6 +7,7 @@ export default () => {
     const navigate = useNavigate();
 
     const navigation = [
+        { title: "Actualités", path: "/" },
         {
             title: "Le football béninois",
             path: "/NationalTeam",
@@ -53,14 +54,15 @@ export default () => {
         <nav className={`bg-white pb-5 md:text-sm ${state ? "shadow-lg rounded-xl border mx-2 mt-2 md:shadow-none md:border-none md:mx-2 md:mt-0" : ""}`}>
             <div className="gap-x-14 items-center max-w-screen-lg mx-auto px-4 md:flex md:px-8">
                 <div className="flex items-center justify-between py-5 md:block">
-                    <a href="/" onClick={(e) => { e.preventDefault(); handleNavigation("/"); }}>
-                        <img
-                            src="https://www.floatui.com/logo.svg"
-                            width={120}
-                            height={50}
-                            alt="Float UI logo"
-                        />
-                    </a>
+                    <div className="w-32 h-32 ">
+                        <a href="/" onClick={(e) => { e.preventDefault(); handleNavigation("/"); }}>
+                            <img
+                                src="/logo.png"
+                                alt="BencoFoot"
+                                className="w-full h-full object-cover"
+                            />
+                        </a>
+                    </div>
                     <div className="md:hidden">
                         <button className="menu-btn text-gray-500 hover:text-gray-800"
                             onClick={() => setState(!state)}
@@ -88,7 +90,7 @@ export default () => {
                                         <div>
                                             <button
                                                 onClick={() => toggleDropdown(idx)}
-                                                className="text-gray-700 hover:text-gray-900 flex items-center gap-1"
+                                                className="hover:text-yellow-700 flex items-center gap-1"
                                             >
                                                 {item.title}
                                                 <svg
@@ -110,7 +112,7 @@ export default () => {
                                                                     e.preventDefault();
                                                                     handleNavigation(subItem.path);
                                                                 }}
-                                                                className="block px-4 py-2 text-gray-700 hover:bg-gray-100 hover:text-gray-900 md:rounded"
+                                                                className="block px-4 py-2 hover:bg-gray-100 hover:text-yellow-700 md:rounded"
                                                             >
                                                                 {subItem.title}
                                                             </a>
@@ -126,7 +128,7 @@ export default () => {
                                                 e.preventDefault();
                                                 handleNavigation(item.path);
                                             }}
-                                            className="block text-gray-700 hover:text-gray-900"
+                                            className="block hover:text-yellow-700"
                                         >
                                             {item.title}
                                         </a>
