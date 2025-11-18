@@ -17,24 +17,27 @@ const ImageCarousel = ({ images, interval = 5000 }) => {
 
     return (
         <div className="relative">
-            {/* Conteneur d'image avec transition */}
-            <div className="overflow-hidden md:max-w-lg">
+            {/* Conteneur d'image avec dimensions fixes */}
+            <div className="overflow-hidden h-80 bg-gray-100 rounded-lg">
                 {images.map((image, index) => (
                     <div
                         key={index}
-                        className={`transition-opacity duration-1000 ${index === currentImageIndex ? 'opacity-100' : 'opacity-0 absolute top-0'
-                            }`}
+                        className={`${index === currentImageIndex ? 'block' : 'hidden'}`}
                     >
                         <img
                             src={image.src}
-                            className="object-cover md:max-w-lg sm:rounded-lg"
+                            className="w-full h-full object-cover"
                             alt={image.alt}
                         />
-                        <h3 className="text-yellow-700 text-sm mt-2">
-                            {image.caption}
-                        </h3>
                     </div>
                 ))}
+            </div>
+
+            {/* Légende en dehors du cadre fixe */}
+            <div className="mt-2">
+                <h3 className="text-yellow-700 text-sm text-center">
+                    {images[currentImageIndex]?.caption}
+                </h3>
             </div>
 
             {/* Indicateurs de slide */}
