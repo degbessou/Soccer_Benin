@@ -6,6 +6,7 @@ import HeroStatiq from "../Components/HeroStatiq";
 import ArticlePage from '../Components/ArticlePage';
 import Paragraph from '../Components/Paragraph';
 import Table from '../Components/Table';
+import { getSupabaseImageUrl } from "../assets/Helpers";
 
 
 
@@ -70,15 +71,6 @@ export default function Home() {
         } finally {
             setLoading(false);
         }
-    };
-
-    // Fonction helper en haut de votre fichier ou dans un fichier utils
-    const getSupabaseImageUrl = (path) => {
-        if (!path) return null;
-        // Si c'est déjà une URL complète, la retourner telle quelle
-        if (path.startsWith('http')) return path;
-        // Sinon, construire l'URL complète
-        return `https://balpqdcvdoytjtkscgxx.supabase.co/storage/v1/object/public/${path}`;
     };
 
     return (

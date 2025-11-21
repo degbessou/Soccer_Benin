@@ -27,15 +27,16 @@ const Paragraph = ({
                     <div className="items-center gap-x-12 sm:px-4 md:px-0 lg:flex">
                         {imageOnRight ? (
                             <>
-                                <div className="max-w-xl px-4 space-y-3 mt-6 sm:px-0 md:mt-0 lg:max-w-2xl">
+                                <div className="max-w-xl space-y-3 mt-6 sm:px-0 md:mt-0 lg:max-w-2xl">
                                     {heading && (
-                                        <h3 className="text-yellow-700 lg:font-extrabold text-lg">
+                                        <h3 className="text-yellow-700 font-extrabold text-lg">
                                             {heading}
                                         </h3>
                                     )}
-                                    <p className="text-base leading-relaxed whitespace-pre-line">
-                                        {text}
-                                    </p>
+                                    <div
+                                        className="prose prose-slate max-w-none"
+                                        dangerouslySetInnerHTML={{ __html: text }}
+                                    ></div>
                                     {link && (
                                         <a
                                             href={link.url}
@@ -65,15 +66,16 @@ const Paragraph = ({
                                         alt={imageAlt || "Image"}
                                     />
                                 </div>
-                                <div className="max-w-xl px-4 space-y-3 mt-6 sm:px-0 md:mt-0 lg:max-w-2xl">
+                                <div className="max-w-xl space-y-3 mt-6 sm:px-0 md:mt-0 lg:max-w-2xl">
                                     {heading && (
-                                        <h3 className="text-yellow-700 lg:font-extrabold text-lg">
+                                        <h3 className="text-yellow-700 font-extrabold text-lg">
                                             {heading}
                                         </h3>
                                     )}
-                                    <p className="text-base leading-relaxed whitespace-pre-line">
-                                        {text}
-                                    </p>
+                                    <div
+                                        className="prose prose-slate max-w-none"
+                                        dangerouslySetInnerHTML={{ __html: text }}
+                                    ></div>
                                     {link && (
                                         <a
                                             href={link.url}
@@ -100,13 +102,15 @@ const Paragraph = ({
             <div className="max-w-screen-xl mx-auto md:px-8">
                 <div className="mx-auto space-y-3">
                     {heading && (
-                        <h3 className="text-yellow-700 lg:font-extrabold text-lg">
+                        <h3 className="text-yellow-700 font-extrabold text-lg">
                             {heading}
                         </h3>
                     )}
-                    <p className="text-base leading-relaxed whitespace-pre-line">
-                        {text}
-                    </p>
+                    <div
+                        className="prose prose-slate max-w-none"
+                        dangerouslySetInnerHTML={{ __html: text }}
+                    ></div>
+
                     {link && (
                         <a
                             href={link.url}

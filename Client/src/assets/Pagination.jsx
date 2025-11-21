@@ -4,7 +4,7 @@ export default function Pagination({ totalPages, currentPage, onPageChange }) {
     const pages = Array.from({ length: totalPages }, (_, i) => (i + 1).toString());
 
     return (
-        <div className="max-w-screen-xl mx-auto mt-12 px-4 text-gray-600 md:px-8">
+        <div className="max-w-screen-xl mx-auto mt-12 px-4 md:px-8">
             <div className="hidden items-center justify-between sm:flex" aria-label="Pagination">
                 <button
                     onClick={() => currentPage > 1 && onPageChange(currentPage - 1)}
@@ -50,19 +50,19 @@ export default function Pagination({ totalPages, currentPage, onPageChange }) {
                 </button>
             </div>
             {/* Mobile */}
-            <div className="flex items-center justify-between text-sm text-gray-600 font-medium sm:hidden">
+            <div className="flex items-center justify-between text-sm font-medium sm:hidden">
                 <button
                     onClick={() => currentPage > 1 && onPageChange(currentPage - 1)}
-                    className="px-4 py-2 border rounded-lg duration-150 hover:bg-yellow-50"
+                    className="px-4 py-2 duration-150 hover:bg-green-100 hover:text-green-700 hover:rounded-lg"
                 >
                     Précédent
                 </button>
 
-                <div className="font-medium">Page {currentPage} sur {totalPages}</div>
+                <div className="font-medium ">Page {currentPage} sur {totalPages}</div>
 
                 <button
                     onClick={() => currentPage < totalPages && onPageChange(currentPage + 1)}
-                    className="px-4 py-2 border rounded-lg duration-150 hover:bg-yellow-50"
+                    className="px-4 py-2 duration-150 hover:bg-green-100 hover:text-green-700 hover:rounded-lg"
                 >
                     Suivant
                 </button>

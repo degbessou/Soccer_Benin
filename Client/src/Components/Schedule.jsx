@@ -191,7 +191,7 @@ export default function LeagueCalendar({
                             <div className="h-10 flex items-center gap-1 bg-white border border-gray-300 rounded-lg shadow-sm">
                                 <button
                                     onClick={handlePreviousJournee}
-                                    className="px-1 py-2 text-gray-600 hover:bg-gray-50 hover:text-yellow-600 transition-colors rounded-l-lg"
+                                    className="px-1 py-2  hover:bg-gray-50 hover:text-yellow-600 transition-colors rounded-l-lg"
                                 >
                                     <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                                         <path fillRule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clipRule="evenodd" />
@@ -202,7 +202,7 @@ export default function LeagueCalendar({
                                 </div>
                                 <button
                                     onClick={handleNextJournee}
-                                    className="px-1 py-2 text-gray-600 hover:bg-gray-50 hover:text-yellow-600 transition-colors rounded-r-lg"
+                                    className="px-1 py-2  hover:bg-gray-50 hover:text-yellow-600 transition-colors rounded-r-lg"
                                 >
                                     <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                                         <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
@@ -318,18 +318,18 @@ export default function LeagueCalendar({
                                 </div>
                                 <div className="overflow-x-auto">
                                     <table className="w-full table-auto text-sm">
-                                        <tbody className="text-gray-600 divide-y divide-gray-300">
+                                        <tbody className=" divide-y divide-gray-300">
                                             {journeeMatches.map(match => (
                                                 <tr key={match.id_match} className="hover:bg-gray-50">
                                                     {/* Version Desktop */}
-                                                    <td className="hidden md:table-cell px-6 py-4 whitespace-nowrap">
+                                                    <td className="hidden md:table-cell text-gray-500 px-6 py-4 whitespace-nowrap">
                                                         {new Date(match.date_match).toLocaleDateString('fr-FR', {
                                                             weekday: 'short',
                                                             day: '2-digit',
                                                             month: 'short'
                                                         })}
                                                     </td>
-                                                    <td className="hidden md:table-cell px-6 py-4 whitespace-nowrap">
+                                                    <td className="hidden md:table-cell text-gray-500 px-6 py-4 whitespace-nowrap">
                                                         {match.stade}
                                                     </td>
                                                     <td className="hidden md:table-cell px-6 py-4 text-right font-medium">{match.equipe_domicile}</td>
@@ -422,7 +422,7 @@ export default function LeagueCalendar({
 const SelectItem = React.forwardRef(({ children, ...props }, forwardedRef) => {
     return (
         <Select.Item
-            className="flex items-center justify-between px-3 cursor-default py-2 duration-150 text-gray-600 data-[state=checked]:text-yellow-600 data-[state=checked]:bg-yellow-50 data-[highlighted]:text-yellow-600 data-[highlighted]:bg-yellow-50 outline-none"
+            className="flex items-center justify-between px-3 cursor-default py-2 duration-150  data-[state=checked]:text-yellow-600 data-[state=checked]:bg-yellow-50 data-[highlighted]:text-yellow-600 data-[highlighted]:bg-yellow-50 outline-none"
             {...props}
             ref={forwardedRef}
         >

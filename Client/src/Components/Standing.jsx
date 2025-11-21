@@ -39,7 +39,7 @@ export default function Standing({ nomSaison = 'Saison 2025-2026', supabaseQuery
                 {/* Version Desktop */}
                 <div className="hidden md:block overflow-x-auto">
                     <table className="w-full table-auto text-sm">
-                        <thead className="bg-gray-50 text-gray-600 font-medium border-b border-gray-300">
+                        <thead className="bg-gray-50 font-medium border-b border-gray-300">
                             <tr>
                                 <th className="py-3 px-4 text-left">#</th>
                                 <th className="py-3 px-6 text-left">Équipe</th>
@@ -53,7 +53,7 @@ export default function Standing({ nomSaison = 'Saison 2025-2026', supabaseQuery
                                 <th className="py-3 px-3 text-center">Diff</th>
                             </tr>
                         </thead>
-                        <tbody className="text-gray-600 divide-y divide-gray-300">
+                        <tbody className=" divide-y divide-gray-300">
                             {standing.map((team, idx) => (
                                 <tr
                                     key={team.id_standing}
@@ -85,15 +85,15 @@ export default function Standing({ nomSaison = 'Saison 2025-2026', supabaseQuery
                                         </div>
                                     </td>
                                     <td className="py-3 px-3 text-center font-bold text-gray-800">{team.points}</td>
-                                    <td className="py-3 px-3 text-center">{team.matchs_joues}</td>
-                                    <td className="py-3 px-3 text-center">{team.victoires}</td>
-                                    <td className="py-3 px-3 text-center">{team.nuls}</td>
-                                    <td className="py-3 px-3 text-center">{team.defaites}</td>
-                                    <td className="py-3 px-3 text-center">{team.buts_pour}</td>
-                                    <td className="py-3 px-3 text-center">{team.buts_contre}</td>
+                                    <td className="py-3 text-gray-600 px-3 text-center">{team.matchs_joues}</td>
+                                    <td className="py-3 text-gray-600 px-3 text-center">{team.victoires}</td>
+                                    <td className="py-3 text-gray-600 px-3 text-center">{team.nuls}</td>
+                                    <td className="py-3 text-gray-600 px-3 text-center">{team.defaites}</td>
+                                    <td className="py-3 text-gray-600 px-3 text-center">{team.buts_pour}</td>
+                                    <td className="py-3 text-gray-600 px-3 text-center">{team.buts_contre}</td>
                                     <td className={`py-3 px-3 text-center font-medium ${team.difference_buts > 0 ? 'text-green-600' :
                                         team.difference_buts < 0 ? 'text-red-600' :
-                                            'text-gray-600'
+                                            ''
                                         }`}>
                                         {team.difference_buts > 0 ? '+' : ''}{team.difference_buts}
                                     </td>
@@ -134,7 +134,7 @@ export default function Standing({ nomSaison = 'Saison 2025-2026', supabaseQuery
                                 </div>
                                 <span className="text-xl font-bold text-yellow-600">{team.points}</span>
                             </div>
-                            <div className="grid grid-cols-5 gap-2 text-xs text-gray-600 mt-2">
+                            <div className="grid grid-cols-5 gap-2 text-xs  mt-2">
                                 <div className="text-center">
                                     <div className="font-medium">J</div>
                                     <div>{team.matchs_joues}</div>
@@ -167,7 +167,7 @@ export default function Standing({ nomSaison = 'Saison 2025-2026', supabaseQuery
             </div>
 
             {/* Légende */}
-            <div className="mt-6 flex flex-wrap gap-4 text-sm text-gray-600">
+            <div className="mt-6 flex flex-wrap gap-4 text-sm ">
                 <div className="flex items-center gap-2">
                     <div className="w-4 h-4 bg-green-100 border border-green-300 rounded"></div>
                     <span>Champion / Ligue des Champions CAF</span>

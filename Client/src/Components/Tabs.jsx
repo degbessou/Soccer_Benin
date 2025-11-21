@@ -16,7 +16,7 @@ export const TabsList = ({ items }) => (
         {items.map((item, idx) => (
             <Tabs.Trigger
                 key={idx}
-                className="group outline-none text-gray-500 py-1.5 border-b-2 border-white data-[state=active]:border-yellow-600 data-[state=active]:text-yellow-600"
+                className="group outline-none py-1.5 border-b-2 border-white data-[state=active]:border-yellow-600 data-[state=active]:text-yellow-600"
                 value={item.value}
             >
                 <div className="py-1.5 px-3 rounded-lg duration-150 group-hover:text-yellow-600 group-hover:bg-gray-50 group-active:bg-yellow-100 font-medium">
