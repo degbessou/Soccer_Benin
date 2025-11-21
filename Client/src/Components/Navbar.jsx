@@ -65,7 +65,7 @@ export default () => {
                         </a>
                     </div>
                     <div className="md:hidden">
-                        <button className="menu-btn text-gray-500 hover:text-gray-800"
+                        <button className="menu-btn text-yellow-700 hover:text-yellow-400"
                             onClick={() => setState(!state)}
                         >
                             {
@@ -83,7 +83,7 @@ export default () => {
                     </div>
                 </div>
                 <div className={`flex-1 items-center mt-8 md:mt-0 md:flex ${state ? 'block' : 'hidden'} `}>
-                    <ul className="justify-center items-center space-y-6 md:flex md:space-x-6 md:space-y-0">
+                    <ul className="justify-center items-center space-y-6 px-2 md:flex md:space-x-6 md:space-y-0">
                         {navigation.map((item, idx) => {
                             return (
                                 <li key={idx} className="relative dropdown-item z-50">
@@ -91,7 +91,7 @@ export default () => {
                                         <div>
                                             <button
                                                 onClick={() => toggleDropdown(idx)}
-                                                className="hover:text-yellow-700 flex items-center gap-1"
+                                                className="hover:text-yellow-700 flex items-center gap-2"
                                             >
                                                 {item.title}
                                                 <svg

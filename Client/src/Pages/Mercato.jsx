@@ -102,7 +102,7 @@ export default function Mercato() {
                         <ul role="tablist" className="w-full flex items-center gap-x-3 overflow-x-auto">
                             {
                                 mercato.map((item, idx) => (
-                                    <li key={`${item.category}-${item.title}`} className={`py-2 border-b-2 ${selectedItem == idx ? "border-yellow-600 text-yellow-600" : "border-white text-gray-500"}`}>
+                                    <li key={`${item.category}-${item.title}`} className={`py-2 border-b-2 ${selectedItem == idx ? "border-yellow-600 text-yellow-600" : "border-white"}`}>
                                         <button
                                             role="tab"
                                             aria-selected={selectedItem == idx ? true : false}
@@ -122,7 +122,7 @@ export default function Mercato() {
                             <p className="text-center py-8 text-gray-500">Aucune donnée disponible.</p>
                         ) : (
                             <table className="w-full table-auto text-left">
-                                <thead className="text-gray-600 font-medium border-b border-gray-300">
+                                <thead className="font-medium border-b border-gray-300">
                                     <tr>
                                         <th className="w-5/12 py-4 pr-6">{mercato[selectedItem].title}</th>
                                         <th className="text-center py-4 pr-6">De</th>
