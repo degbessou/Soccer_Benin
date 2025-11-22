@@ -11,6 +11,7 @@ import LeagueOne from "./Pages/LeagueOne";
 import LeagueTwo from "./Pages/LeagueTwo";
 import Careers from "./Pages/Careers";
 import About from "./Pages/About";
+import Contact from "./Pages/Contact";
 
 
 
@@ -30,6 +31,8 @@ function App() {
                 <Route exact path="/LeagueTwo" Component={LeagueTwo} />
                 <Route exact path="/Careers" Component={Careers} />
                 <Route exact path="/About" Component={About} />
+                <Route exact path="/Contact" Component={Contact} />
+
             </Routes>
         </Router>
     );
