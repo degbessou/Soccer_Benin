@@ -10,6 +10,7 @@ import JuniorNationalTeam from "./Pages/JuniorNationalTeam";
 import LeagueOne from "./Pages/LeagueOne";
 import LeagueTwo from "./Pages/LeagueTwo";
 import Careers from "./Pages/Careers";
+import About from "./Pages/About";
 
 
 
@@ -28,6 +29,7 @@ function App() {
                 <Route exact path="/LeagueOne" Component={LeagueOne} />
                 <Route exact path="/LeagueTwo" Component={LeagueTwo} />
                 <Route exact path="/Careers" Component={Careers} />
+                <Route exact path="/About" Component={About} />
             </Routes>
         </Router>
     );
