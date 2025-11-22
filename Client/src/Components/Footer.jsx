@@ -10,7 +10,7 @@ export default () => {
             name: 'Contact'
         },
         {
-            href: 'javascript:void()',
+            href: '/Careers',
             name: 'Carrière'
         },
         {
@@ -26,7 +26,7 @@ export default () => {
                     <ul className="flex flex-wrap items-center gap-4 mt-6 sm:text-sm sm:mt-0">
                         {
                             footerNavs.map((item, idx) => (
-                                <li key={idx} className="hover:text-gray-500 duration-150">
+                                <li key={idx} className="hover:text-yellow-400 duration-150">
                                     <a href={item.href}>
                                         {item.name}
                                     </a>

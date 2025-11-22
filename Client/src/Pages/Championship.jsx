@@ -56,7 +56,7 @@ export default function Home() {
     return (
         <>
             <Navbar />
-            <HeroStatiq src="/dadje-fc.jpeg" alt="équipe de dadje fc" />
+            <HeroStatiq src={getSupabaseImageUrl('medias/banner/dadje_un.jpg')} alt="équipe de dadje fc, champion en titre" />
 
             {/* Section Article */}
             {loading ? (

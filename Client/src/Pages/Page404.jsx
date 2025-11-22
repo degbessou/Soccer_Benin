@@ -1,4 +1,5 @@
 import Navbar from "../Components/Navbar"
+import Footer from "../Components/Footer"
 
 export default () => {
     return (
@@ -23,6 +24,8 @@ export default () => {
                     </div>
                 </div>
             </main>
+
+            <Footer />
         </>
     )
 }

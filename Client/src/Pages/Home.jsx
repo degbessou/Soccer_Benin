@@ -14,14 +14,24 @@ export default function Home() {
             caption: "Cover : Équipe nationale masculine du Bénin 2025"
         },
         {
+            src: "medias/wnt/wnt_quatre.jpg",
+            alt: "WNT",
+            caption: "Cover : Équipe nationale féminine du Bénin 2025"
+        },
+        {
             src: "medias/mjnt/u20_douze.jpg",
             alt: "espoirs Misserete",
             caption: "Cover : Jeunes espoirs du centre de formation national de Misserete"
         },
         {
-            src: "medias/wnt/wnt_quatre.jpg",
+            src: "medias/banner/dadje_deux.jpg",
             alt: "WNT",
-            caption: "Cover : Équipe nationale féminine du Bénin 2025"
+            caption: "Cover : Dadjè FC 2025"
+        },
+        {
+            src: "medias/banner/buffle_deux.jpg",
+            alt: "WNT",
+            caption: "Cover : Buffles du Borgou 2025"
         }
     ];
 
