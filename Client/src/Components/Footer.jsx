@@ -6,7 +6,7 @@ export default () => {
             name: 'Crédits'
         },
         {
-            href: 'javascript:void()',
+            href: '/Contact',
             name: 'Contact'
         },
         {
