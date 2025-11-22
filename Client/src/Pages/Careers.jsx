@@ -1,5 +1,4 @@
-import { useEffect, useState } from "react"
-import { supabase } from "../Functions/SupabaseClient"
+
 import Navbar from "../Components/Navbar"
 import Footer from "../Components/Footer"
 import HeroStatiq from "../Components/HeroStatiq";
@@ -7,7 +6,7 @@ import { getSupabaseImageUrl } from "../assets/Helpers"
 
 
 
-export default function Home() {
+export default function Careers() {
     const features = [
         {
             icon:
@@ -26,7 +25,7 @@ export default function Home() {
             <Navbar />
             <HeroStatiq src={getSupabaseImageUrl('medias/banner/damissa_un.jpg')} alt="équipe de damissa fc" />
             <section className="py-14">
-                <div className="max-w-screen-xl mx-auto px-4 text-center md:px-8">
+                <div className="max-w-screen-lg mx-auto px-4 text-center md:px-8">
                     <div className="max-w-2xl mx-auto">
                         <h3 className="text-gray-800 text-3xl font-semibold sm:text-4xl">
                             Participez à l’aventure BENCOFOOT
