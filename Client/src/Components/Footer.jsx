@@ -2,7 +2,7 @@ export default () => {
 
     const footerNavs = [
         {
-            href: 'javascript:void()',
+            href: '/Credits',
             name: 'Crédits'
         },
         {

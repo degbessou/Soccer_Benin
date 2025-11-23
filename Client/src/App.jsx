@@ -12,6 +12,7 @@ import LeagueTwo from "./Pages/LeagueTwo";
 import Careers from "./Pages/Careers";
 import About from "./Pages/About";
 import Contact from "./Pages/Contact";
+import Credits from "./Pages/Credits";
 
 
 
@@ -32,7 +33,7 @@ function App() {
                 <Route exact path="/Careers" Component={Careers} />
                 <Route exact path="/About" Component={About} />
                 <Route exact path="/Contact" Component={Contact} />
-
+                <Route exact path="/Credits" Component={Credits} />
             </Routes>
         </Router>
     );
