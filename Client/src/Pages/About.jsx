@@ -4,8 +4,6 @@ import Footer from "../Components/Footer"
 import HeroStatiq from "../Components/HeroStatiq";
 import { getSupabaseImageUrl } from "../assets/Helpers"
 
-
-
 export default function About() {
     const faqsList = [
         {
