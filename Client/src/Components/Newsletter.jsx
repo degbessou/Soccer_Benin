@@ -1,16 +1,56 @@
 import { useState } from 'react';
+import { supabase } from "../Functions/SupabaseClient"
 
 export default ({ isOpen, setIsOpen }) => {
     const [email, setEmail] = useState('');
     const [name, setName] = useState('');
+    const [status, setStatus] = useState('idle'); // idle | loading | success | error
+    const [message, setMessage] = useState('');
 
-    const handleSubmit = () => {
-        console.log('Inscription:', { name, email });
-        // Ici tu ajouteras la logique Supabase
-        setIsOpen(false);
-        setEmail('');
-        setName('');
+    const handleSubmit = async () => {
+        if (!name || !email) {
+            setStatus('error');
+            setMessage('Veuillez remplir tous les champs');
+            return;
+        }
+
+        setStatus('loading');
+
+        try {
+            // Appeler la fonction RPC
+            const { data, error } = await supabase.rpc('subscribe_to_newsletter', {
+                subscriber_name: name,
+                subscriber_email: email
+            });
+
+            if (error) {
+                throw new Error(error.message);
+            }
+
+            // Vérifier le résultat de la fonction
+            if (!data.success) {
+                throw new Error(data.error);
+            }
+
+            setStatus('success');
+            setMessage(data.message);
+            setEmail('');
+            setName('');
+
+            // Fermer après 3 secondes
+            setTimeout(() => {
+                setIsOpen(false);
+                setStatus('idle');
+                setMessage('');
+            }, 3000);
+
+        } catch (error) {
+            setStatus('error');
+            setMessage(error.message || 'Une erreur est survenue. Réessaie plus tard.');
+        }
     };
+
+    if (!isOpen) return null;
 
     return (
         <>
@@ -55,6 +95,7 @@ export default ({ isOpen, setIsOpen }) => {
                                                 placeholder="Votre nom"
                                                 value={name}
                                                 onChange={(e) => setName(e.target.value)}
+                                                disabled={status === 'loading'}
                                                 className="text-gray-700 w-full p-3 outline-none rounded-lg"
                                             />
                                         </div>
@@ -66,17 +107,25 @@ export default ({ isOpen, setIsOpen }) => {
                                                 placeholder="Votre email"
                                                 value={email}
                                                 onChange={(e) => setEmail(e.target.value)}
+                                                disabled={status === 'loading'}
                                                 className="text-gray-700 w-full p-3 outline-none"
                                             />
                                             <button
                                                 onClick={handleSubmit}
+                                                disabled={status === 'loading'}
                                                 className="p-3 px-6 rounded-lg font-medium text-white bg-yellow-700 hover:bg-yellow-900 active:bg-yellow-700 duration-150 outline-none shadow-md focus:shadow-none whitespace-nowrap"
                                             >
-                                                S'abonner
+                                                {status === 'loading' ? 'En cours...' : "S'abonner"}
                                             </button>
                                         </div>
                                     </div>
-
+                                    {/* Message de succès/erreur */}
+                                    {message && (
+                                        <div className={`mt-4 p-3 rounded-lg ${status === 'success' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'
+                                            }`}>
+                                            {message}
+                                        </div>
+                                    )}
                                     <p className="mt-4 text-sm text-blue-100">
                                         Aucun spam, jamais. Nous respectons la protection de vos données.
                                         <br />
