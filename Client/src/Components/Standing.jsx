@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 
-export default function Standing({ nomSaison = 'Saison 2025-2026', supabaseQuery }) {
+export default function Standing({ title = 'Classement', supabaseQuery, caption_green, caption_yellow, caption_red }) {
     const [standing, setStanding] = useState([])
     const [loading, setLoading] = useState(true)
 
@@ -33,7 +33,7 @@ export default function Standing({ nomSaison = 'Saison 2025-2026', supabaseQuery
 
     return (
         <div className="py-8">
-            <h2 className="text-2xl font-bold text-gray-800 mb-6">Classement Ligue 1</h2>
+            <h2 className="text-2xl font-bold text-gray-800 mb-6">{title}</h2>
 
             <div className="rounded-lg overflow-hidden shadow-sm border border-gray-300">
                 {/* Version Desktop */}
@@ -170,15 +170,15 @@ export default function Standing({ nomSaison = 'Saison 2025-2026', supabaseQuery
             <div className="mt-6 flex flex-wrap gap-4 text-sm ">
                 <div className="flex items-center gap-2">
                     <div className="w-4 h-4 bg-green-100 border border-green-300 rounded"></div>
-                    <span>Champion / Ligue des Champions CAF</span>
+                    <span>{caption_green}</span>
                 </div>
                 <div className="flex items-center gap-2">
                     <div className="w-4 h-4 bg-yellow-100 border border-yellow-300 rounded"></div>
-                    <span>Coupe de la Confédération CAF</span>
+                    <span>{caption_yellow}</span>
                 </div>
                 <div className="flex items-center gap-2">
                     <div className="w-4 h-4 bg-red-100 border border-red-300 rounded"></div>
-                    <span>Relégation</span>
+                    <span>{caption_red}</span>
                 </div>
             </div>
         </div>
