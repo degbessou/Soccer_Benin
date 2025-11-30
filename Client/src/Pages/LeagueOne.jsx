@@ -21,6 +21,7 @@ export default () => {
             .from('matchs')
             .select('*')
             .eq('nom_saison', 'Saison 2025-2026')
+            .eq('ligue', 'Celtiis Ligue 1')
             .order('numero', { ascending: true })
             .order('date_match', { ascending: true })
 
@@ -29,7 +30,7 @@ export default () => {
 
     const fetchLeague1Standing = async () => {
         const { data, error } = await supabase
-            .from('classement_complet')
+            .from('std_v_lig_one_men')
             .select('*')
             .eq('nom_saison', 'Saison 2025-2026')
             .order('position', { ascending: true })
@@ -57,8 +58,11 @@ export default () => {
 
                 <TabContent value="classement">
                     <Standing
-                        nomSaison="Saison 2025-2026"
+                        title="Classement Ligue 1"
                         supabaseQuery={fetchLeague1Standing}
+                        caption_green="Champion / Ligue des Champions CAF"
+                        caption_yellow="Coupe de la Confédération CAF"
+                        caption_red="Relégation en Ligue 2"
                     />
                 </TabContent>
 
