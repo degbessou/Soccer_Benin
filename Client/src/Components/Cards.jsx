@@ -77,21 +77,20 @@ export default function Cards() {
                                 className="py-2 hover:bg-green-50 rounded-xl transition-colors"
                             >
                                 <div className="flex items-center gap-x-1">
-                                    <span className="text-sm w-28 font-semibold">{item.date}</span>
+                                    <span className="text-sm w-30 md:w-28 font-semibold">{item.date}</span>
                                     <h3 className="text-red-700 text-sm font-semibold">{`#${item.tag_un}`}</h3>
-                                    <h3 className="px-4 text-red-700 text-sm font-semibold">{`#${item.tag}`}</h3>
+                                    <h3 className="hidden md:block px-4 text-red-700 text-sm font-semibold">{`#${item.tag}`}</h3>
                                     {/*<h3 className="text-red-700 text-sm font-semibold">{item.tag_deux}</h3>*/}
                                 </div>
 
                                 {/* IMAGE */}
                                 {item.has_image ? (
-                                    <div className="px-4 flex items-center gap-4 pt-2">
-                                        <div className="w-[185px] h-[105px] flex items-center justify-center bg-gray-100 rounded-md overflow-hidden">
-                                            <img
-                                                src={getSupabaseImageUrl(item.image)}
-                                                alt="Image"
-                                                className="w-full h-full object-cover"
-                                            />
+                                    <div className="px-4 flex flex-col-reverse md:flex-row items-start md:items-center gap-4 pt-2">
+                                        <div className="w-[185px] md:w-[185px] h-[105px] flex items-center justify-center bg-gray-100 rounded-md overflow-hidden mx-auto md:mx-0"><img
+                                            src={getSupabaseImageUrl(item.image)}
+                                            alt="Image"
+                                            className="w-full h-full object-cover"
+                                        />
                                         </div>
                                         <p className="px-2 text-sm flex-1">
                                             {item.infos}

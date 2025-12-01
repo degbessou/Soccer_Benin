@@ -43,7 +43,7 @@ const HeroDynamiq = ({ images = [] }) => {
     const imageUrl = getSupabaseImageUrl(currentImage.src);
 
     return (
-        <section className="pt-8 pb-8">
+        <section className="pt-2 pb-8">
             <div className="max-w-screen-lg mx-auto px-4 md:px-8">
                 <div className="w-full">
                     {/* Conteneur d'image avec animation d'expansion */}
