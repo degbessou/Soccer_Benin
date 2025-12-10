@@ -1,4 +1,5 @@
 import React from "react";
+import { Analytics } from '@vercel/analytics/react';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
 import Home from "./Pages/Home";
 import Mercato from "./Pages/Mercato";
@@ -35,6 +36,7 @@ function App() {
                 <Route exact path="/Contact" Component={Contact} />
                 <Route exact path="/Credits" Component={Credits} />
             </Routes>
+            <Analytics />
         </Router>
     );
 }
