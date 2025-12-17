@@ -14,7 +14,7 @@ import Careers from "./Pages/Careers";
 import About from "./Pages/About";
 import Contact from "./Pages/Contact";
 import Credits from "./Pages/Credits";
-
+import PrivacyPolicy from "./Pages/PrivacyPolicy";
 
 
 
@@ -35,6 +35,7 @@ function App() {
                 <Route exact path="/About" Component={About} />
                 <Route exact path="/Contact" Component={Contact} />
                 <Route exact path="/Credits" Component={Credits} />
+                <Route exact path="/PrivacyPolicy" Component={PrivacyPolicy} />
             </Routes>
             <Analytics />
         </Router>
