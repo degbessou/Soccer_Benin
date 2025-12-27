@@ -6,9 +6,9 @@ export const getSupabaseImageUrl = (path) => {
     return `https://balpqdcvdoytjtkscgxx.supabase.co/storage/v1/object/public/${path}`;
 };
 
-// Fonction pour gérer "d'" ou "de" selon la première lettre du mois
 export const getPreposition = (month) => {
-    const vowels = ['a', 'e', 'i', 'o', 'u', 'y']
+    if (!month || month.length === 0) return "de "  // valeur par défaut
+    const vowels = ['a', 'e', 'i', 'o', 'u', 'y', 'à', 'é', 'è', 'ù'] // ajouter accents si besoin
     const firstLetter = month.charAt(0).toLowerCase()
     return vowels.includes(firstLetter) ? "d'" : "de "
 }
