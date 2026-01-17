@@ -1,0 +1,32 @@
+name: BencoFoot Monitoring
+
+on:
+  schedule:
+    # Exécute toutes les 4 heures
+    - cron: '0 */4 * * *'
+  workflow_dispatch: # Permet l'exécution manuelle
+
+jobs:
+  monitor:
+    runs-on: windows-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      
+      - name: Run monitoring script
+        shell: powershell
+        run: |
+          .\monitor-front.ps1 -SiteUrl "${{ secrets.SITE_URL }}"
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+          EMAIL_TO: ${{ secrets.EMAIL_TO }}
+      
+      - name: Upload monitoring logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: monitoring-logs
+          path: monitoring-log.txt
+          retention-days: 7
