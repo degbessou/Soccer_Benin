@@ -89,13 +89,11 @@ while ($attempt -lt $MaxRetries) {
         $logMessage = "[$timestamp] ✅ UP - Status: $($result.StatusCode) - Response: $($result.ResponseTime)ms"
         Add-Content -Path $logFile -Value $logMessage
         
-        # Notification de récupération si le site était down avant
-        if ($env:LAST_STATUS -eq "DOWN") {
-            $message = "Site de nouveau accessible: $SiteUrl`nTemps de réponse: $($result.ResponseTime)ms"
-            Send-DiscordNotification -Message $message -Status "UP"
-            Send-SlackNotification -Message $message -Status "UP"
-            Send-TelegramNotification -Message $message -Status "UP"
-        }
+        # Envoyer notification à chaque vérification
+        $message = "Site accessible: $SiteUrl`nStatus: $($result.StatusCode)`nTemps de réponse: $($result.ResponseTime)ms"
+        Send-DiscordNotification -Message $message -Status "UP"
+        Send-SlackNotification -Message $message -Status "UP"
+        Send-TelegramNotification -Message $message -Status "UP"
         
         exit 0
     } else {
