@@ -26,7 +26,8 @@ export default () => {
             submenu: [
                 { title: "Histoire", path: "/Championship" },
                 { title: "Ligue 1", path: "/LeagueOne" },
-                { title: "Ligue 2", path: "/LeagueTwo" }
+                { title: "Ligue 2", path: "/LeagueTwo" },
+                { title: "Ligue 3", path: "/LeagueThree" }
             ]
         },
         { title: "Mercato", path: "/mercato" },
