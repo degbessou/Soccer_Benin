@@ -2,8 +2,7 @@ name: BencoFoot Monitoring
 
 on:
   schedule:
-    # Exécute toutes les 4 heures
-    - cron: '0 */4 * * *'
+    - cron: '0 1,5,9,13,17,21 * * *'  # 6 fois par jour
   workflow_dispatch: # Permet l'exécution manuelle
 
 jobs:
