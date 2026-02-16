@@ -17,6 +17,8 @@
     "@tailwindcss/vite": "^4.1.12",
     "@vercel/analytics": "^1.6.1",
     "dom": "^0.0.3",
+    "html-to-image": "^1.11.13",
+    "i": "^0.3.7",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "react-image-file-resizer": "^0.4.8",
