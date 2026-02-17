@@ -1,62 +1,43 @@
 // components/ScheduleInstagramCapture.jsx
 import { forwardRef } from 'react';
 
-const cellStyle = {
-    padding: '8px 6px',
-    textAlign: 'left',
-    verticalAlign: 'middle',
-    fontSize: '14px',
-    borderBottom: '1px solid #e5e7eb',
-    whiteSpace: 'nowrap',
-    maxWidth: '150px',
-    overflow: 'hidden',
-    textOverflow: 'ellipsis'
-};
-
-const headerStyle = {
-    padding: '10px 6px',
-    textAlign: 'left',
-    fontSize: '15px',
-    fontWeight: '600',
-    backgroundColor: '#f3f4f6',
-    borderBottom: '2px solid #d1d5db',
-    whiteSpace: 'nowrap'
-};
+const backgroundUrl = '/background.svg';
 
 const getStatusStyle = (statut) => {
     const base = {
-        padding: '4px 8px',
-        borderRadius: '20px',
-        fontSize: '12px',
-        fontWeight: '500',
+        padding: '4px 10px',
+        borderRadius: '30px',
+        fontSize: '11px',
+        fontWeight: '600',
         display: 'inline-block',
-        whiteSpace: 'nowrap'
+        whiteSpace: 'nowrap',
+        textTransform: 'uppercase',
+        letterSpacing: '0.3px'
     };
 
     switch (statut) {
         case 'finished':
-            return { ...base, backgroundColor: '#dcfce7', color: '#166534' };
+            return { ...base, backgroundColor: '#d1fae5', color: '#065f46', border: '1px solid #a7f3d0' };
         case 'live':
-            return { ...base, backgroundColor: '#fee2e2', color: '#991b1b' };
+            return { ...base, backgroundColor: '#fee2e2', color: '#991b1b', border: '1px solid #fecaca', animation: 'pulse 2s infinite' };
         case 'postponed':
-            return { ...base, backgroundColor: '#ffedd5', color: '#9a3412' };
+            return { ...base, backgroundColor: '#ffedd5', color: '#9a3412', border: '1px solid #fed7aa' };
         case 'pending':
-            return { ...base, backgroundColor: '#f3f4f6', color: '#4b5563' };
+            return { ...base, backgroundColor: '#f3f4f6', color: '#4b5563', border: '1px solid #e5e7eb' };
         default:
-            return { ...base, backgroundColor: '#fef9c3', color: '#854d0e' };
+            return { ...base, backgroundColor: '#fef3c7', color: '#92400e', border: '1px solid #fde68a' };
     }
 };
 
 const getStatusText = (statut) => {
     switch (statut) {
         case 'finished': return 'Terminé';
-        case 'live': return 'En cours';
+        case 'live': return 'En direct';
         case 'postponed': return 'Reporté';
-        case 'pending': return 'En attente';
+        case 'pending': return 'Programmé';
         default: return 'À venir';
     }
 };
-
 
 const ScheduleInstagramCapture = forwardRef(({
     logoUrl,
@@ -71,156 +52,385 @@ const ScheduleInstagramCapture = forwardRef(({
     footerLeft = "BencoFoot",
     footerRight = new Date().toLocaleDateString('fr-FR')
 }, ref) => {
+    // Vérifier s'il y a des matchs en direct
+    const hasLiveMatches = Object.values(groupedMatches).some(matches =>
+        matches.some(m => m.statut === 'live')
+    );
+
+    const colors = {
+        primary: '#925c13',
+        secondary: '#f59e0b',
+        danger: '#ef4444',
+        text: {
+            primary: '#111827',
+            secondary: '#6b7280',
+            light: '#9ca3af'
+        },
+        border: '#e5e7eb',
+        light: '#f9fafb'
+    };
+
     return (
         <div
             ref={ref}
             style={{
                 position: 'fixed',
-                top: '-9999px',      // ✅ Hors écran
-                left: '-9999px',     // ✅ Hors écran
-                width: '1080px',
-                height: '1350px',
-                backgroundColor: 'white',
-                padding: '30px',
+                top: '-10000px',
+                left: '-10000px',
+                width: '940px',
+                height: '788px',
+                backgroundImage: `url('${backgroundUrl}')`,
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+                padding: '35px',
                 boxSizing: 'border-box',
                 display: 'flex',
                 flexDirection: 'column',
-                fontFamily: 'Arial, sans-serif',
-                overflow: 'visible'  // ✅ Garde visible pour la capture
+                fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
+                overflow: 'hidden'
             }}
         >
+
             {/* En-tête avec logo et titre */}
             <div style={{
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'space-between',
-                marginBottom: '20px',
-                flexShrink: 0
+                marginBottom: '15px',
+                position: 'relative',
+                zIndex: 2
             }}>
-                {logoUrl ? (
-                    <img
-                        src={logoUrl}
-                        alt="logo"
-                        style={{ width: '80px', height: 'auto' }}
-                    />
-                ) : <div style={{ width: '80px' }} />}
+                <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
+                    {logoUrl ? (
+                        <div style={{
+                            backgroundColor: 'white',
+                            borderRadius: '15px',
+                            padding: '8px'
+                        }}>
+                            <img
+                                src={logoUrl}
+                                alt="logo"
+                                style={{ width: '70px', height: 'auto', display: 'block' }}
+                            />
+                        </div>
+                    ) : (
+                        <div style={{ width: '70px' }} />
+                    )}
 
-                <h1 style={{
-                    fontSize: '32px',
-                    fontWeight: 'bold',
-                    textAlign: 'center',
-                    color: '#111',
-                    margin: '0 20px'
+                    {hasLiveMatches && (
+                        <div style={{
+                            backgroundColor: colors.danger,
+                            color: 'white',
+                            padding: '4px 12px',
+                            borderRadius: '30px',
+                            fontSize: '14px',
+                            fontWeight: '700',
+                            textTransform: 'uppercase',
+                            letterSpacing: '1px',
+                            animation: 'pulse 1.5s infinite'
+                        }}>
+                            🔴 Live
+                        </div>
+                    )}
+                </div>
+
+                <div style={{ textAlign: 'center' }}>
+                    <h1 style={{
+                        fontSize: '32px',
+                        fontWeight: '800',
+                        background: 'white',
+                        WebkitBackgroundClip: 'text',
+                        WebkitTextFillColor: 'transparent',
+                        margin: '0 0 5px 0',
+                        lineHeight: '1.2',
+                        letterSpacing: '-0.5px'
+                    }}>
+                        {title}
+                    </h1>
+                    {subtitle && (
+                        <p style={{
+                            fontSize: '18px',
+                            color: colors.text.secondary,
+                            margin: 0,
+                            fontWeight: '500'
+                        }}>
+                            {subtitle}
+                        </p>
+                    )}
+                </div>
+
+                <div style={{ width: '70px' }} />
+            </div>
+
+            {/* Filtres info */}
+            {filtersInfo && (
+                <div style={{
+                    backgroundColor: colors.light,
+                    borderRadius: '50px',
+                    padding: '8px 12px',
+                    marginBottom: '10px',
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '6px',
+                    alignSelf: 'center',
+                    border: `1px solid ${colors.border}`,
+                    boxShadow: '0 2px 5px rgba(0,0,0,0.03)'
                 }}>
-                    {title}
-                </h1>
+                    <span style={{ color: colors.primary, fontWeight: '600' }}>🌍</span>
+                    <span style={{ color: colors.text.primary, fontWeight: '500', fontSize: '16px' }}>
+                        www.bencofoot.com
+                    </span>
+                </div>
+            )}
 
-                <div style={{ width: '80px' }} />
-            </div>
-
-            {/* Sous-titre et infos */}
-            <div style={{
-                textAlign: 'center',
-                marginBottom: '20px',
-                flexShrink: 0
-            }}>
-                {subtitle && (
-                    <p style={{ fontSize: '20px', color: '#444', margin: '0 0 5px 0' }}>
-                        {subtitle}
-                    </p>
-                )}
-                {filtersInfo && (
-                    <p style={{ fontSize: '18px', color: '#666', margin: 0 }}>
-                        {filtersInfo}
-                    </p>
-                )}
-            </div>
-
-            {/* Tableau avec défilement */}
+            {/* Tableau des matchs */}
             <div style={{
                 flex: 1,
-                overflowY: 'visible',
-                border: '1px solid #e5e7eb',
-                borderRadius: '8px',
-                maxHeight: 'none'  // ✅ Ajouté
+                backgroundColor: 'white',
+                borderRadius: '20px',
+                overflow: 'hidden',
+                boxShadow: '0 10px 25px -5px rgba(0,0,0,0.05)',
+                marginBottom: '20px'
             }}>
-                {Object.entries(groupedMatches)
-                    .sort(([a], [b]) => Number(a) - Number(b))
-                    .map(([journee, journeeMatches]) => (
-                        journeeMatches.length > 0 && (
-                            <div key={journee} style={{ marginBottom: '20px' }}>
-                                <h2 style={{
-                                    fontSize: '20px',
-                                    fontWeight: '600',
-                                    margin: '0 0 10px 10px',
-                                    color: '#1f2937'
+                <div style={{
+                    height: '100%',
+                    overflowY: 'hidden',
+                    padding: '10px'
+                }}>
+                    {Object.entries(groupedMatches)
+                        .sort(([a], [b]) => Number(a) - Number(b))
+                        .map(([journee, journeeMatches], index) => (
+                            journeeMatches.length > 0 && (
+                                <div key={journee} style={{
+                                    marginBottom: index < Object.keys(groupedMatches).length - 1 ? '15px' : 0
                                 }}>
-                                    Journée {journee}
-                                    {journeeMatches[0]?.phase && ` - ${journeeMatches[0].phase}`}
-                                </h2>
-
-                                <div style={{ overflowX: 'auto' }}>
-                                    <table style={{
-                                        width: '100%',
-                                        borderCollapse: 'collapse',
-                                        fontSize: '14px',
-                                        minWidth: '800px'
+                                    <div style={{
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        gap: '8px',
+                                        marginBottom: '8px'
                                     }}>
-                                        <thead>
-                                            <tr>
-                                                <th style={headerStyle}>Date</th>
-                                                <th style={headerStyle}>Stade</th>
-                                                <th style={headerStyle}>Domicile</th>
-                                                <th style={headerStyle}>Score</th>
-                                                <th style={headerStyle}>Extérieur</th>
-                                                <th style={headerStyle}>Statut</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            {journeeMatches.map(match => (
-                                                <tr key={match.id_match}>
-                                                    <td style={cellStyle}>{dateFormatter(match.date_match)}</td>
-                                                    <td style={cellStyle}>{match.stade}</td>
-                                                    <td style={cellStyle}>{match.equipe_domicile}</td>
-                                                    <td style={cellStyle}>
-                                                        {match.statut === 'finished' ? (
-                                                            <span style={{ fontWeight: 'bold' }}>
-                                                                {match.buts_domicile} - {match.buts_exterieur}
-                                                            </span>
-                                                        ) : (
-                                                            <span style={{ color: '#9ca3af' }}>vs</span>
-                                                        )}
-                                                    </td>
-                                                    <td style={cellStyle}>{match.equipe_exterieur}</td>
-                                                    <td style={cellStyle}>
-                                                        <span style={getStatusStyle(match.statut)}>
-                                                            {getStatusText(match.statut)}
-                                                        </span>
-                                                    </td>
+                                        <div style={{
+                                            backgroundColor: colors.primary,
+                                            color: 'white',
+                                            padding: '4px 12px',
+                                            borderRadius: '30px',
+                                            fontSize: '16px',
+                                            fontWeight: '600',
+                                            display: 'inline-flex',
+                                            alignItems: 'center',
+                                            gap: '4px'
+                                        }}>
+                                            <span>📅</span>
+                                            <span>Journée {journee}</span>
+                                        </div>
+                                        {journeeMatches[0]?.phase && (
+                                            <span style={{
+                                                color: colors.text.primary,
+                                                fontSize: '14px',
+                                                fontWeight: '500',
+                                                textTransform: 'uppercase',
+                                                letterSpacing: '0.5px'
+                                            }}>
+                                                {journeeMatches[0].phase}
+                                            </span>
+                                        )}
+                                    </div>
+
+                                    <div style={{
+                                        backgroundColor: '#ffffff',
+                                        borderRadius: '16px',
+                                        border: `1px solid ${colors.border}`,
+                                        overflow: 'hidden'
+                                    }}>
+                                        <table style={{
+                                            width: '100%',
+                                            borderCollapse: 'collapse',
+                                            fontSize: '14px'
+                                        }}>
+                                            <thead>
+                                                <tr style={{
+                                                    //backgroundColor: '#f8fafc',
+                                                    //borderBottom: `2px solid ${colors.border}`
+                                                }}>
+                                                    <th style={{
+                                                        padding: '6px 8px',
+                                                        textAlign: 'left',
+                                                        fontSize: '13px',
+                                                        fontWeight: '600',
+                                                        color: colors.text.secondary,
+                                                        textTransform: 'uppercase',
+                                                        letterSpacing: '0.3px'
+                                                    }}>Date</th>
+                                                    <th style={{
+                                                        padding: '6px 8px',
+                                                        textAlign: 'left',
+                                                        fontSize: '13px',
+                                                        fontWeight: '600',
+                                                        color: colors.text.secondary,
+                                                        textTransform: 'uppercase',
+                                                        letterSpacing: '0.3px'
+                                                    }}>Stade</th>
+                                                    <th style={{
+                                                        padding: '6px 8px',
+                                                        textAlign: 'right',
+                                                        fontSize: '13px',
+                                                        fontWeight: '600',
+                                                        color: colors.text.secondary,
+                                                        textTransform: 'uppercase',
+                                                        letterSpacing: '0.3px',
+                                                        width: '25%'
+                                                    }}></th>
+                                                    <th style={{
+                                                        padding: '6px 8px',
+                                                        textAlign: 'center',
+                                                        fontSize: '14px',
+                                                        fontWeight: '700',
+                                                        color: colors.text.primary,
+                                                        width: '80px'
+                                                    }}></th>
+                                                    <th style={{
+                                                        padding: '6px 8px',
+                                                        textAlign: 'left',
+                                                        fontSize: '13px',
+                                                        fontWeight: '600',
+                                                        color: colors.text.secondary,
+                                                        textTransform: 'uppercase',
+                                                        letterSpacing: '0.3px',
+                                                        width: '25%'
+                                                    }}></th>
+                                                    <th style={{
+                                                        padding: '6px 8px',
+                                                        textAlign: 'center',
+                                                        fontSize: '13px',
+                                                        fontWeight: '600',
+                                                        color: colors.text.secondary,
+                                                        textTransform: 'uppercase',
+                                                        letterSpacing: '0.3px'
+                                                    }}></th>
                                                 </tr>
-                                            ))}
-                                        </tbody>
-                                    </table>
+                                            </thead>
+                                            <tbody>
+                                                {journeeMatches.map((match, idx) => (
+                                                    <tr key={match.id_match} style={{
+                                                        backgroundColor: idx % 2 === 0 ? '#ffffff' : '#fafafa',
+                                                        borderBottom: idx < journeeMatches.length - 1 ? `1px solid ${colors.border}` : 'none'
+                                                    }}>
+                                                        <td style={{
+                                                            padding: '6px 8px',
+                                                            color: colors.text.primary,
+                                                            fontWeight: '500',
+                                                            fontSize: '13px'
+                                                        }}>
+                                                            {dateFormatter(match.date_match)}
+                                                        </td>
+                                                        <td style={{
+                                                            padding: '6px 8px',
+                                                            color: colors.text.secondary,
+                                                            fontSize: '13px'
+                                                        }}>
+                                                            {match.stade}
+                                                        </td>
+                                                        <td style={{
+                                                            padding: '6px 8px',
+                                                            textAlign: 'right',
+                                                            fontWeight: '600',
+                                                            color: colors.text.primary
+                                                        }}>
+                                                            {match.equipe_domicile}
+                                                        </td>
+                                                        <td style={{
+                                                            padding: '6px 8px',
+                                                            textAlign: 'center',
+                                                            fontWeight: '700',
+                                                            fontSize: '16px'
+                                                        }}>
+                                                            {match.statut === 'finished' ? (
+                                                                <span style={{
+                                                                    backgroundColor: '#f3f4f6',
+                                                                    padding: '4px 8px',
+                                                                    borderRadius: '8px',
+                                                                    display: 'inline-block',
+                                                                    minWidth: '60px'
+                                                                }}>
+                                                                    {match.buts_domicile} - {match.buts_exterieur}
+                                                                </span>
+                                                            ) : match.statut === 'live' ? (
+                                                                <span style={{
+                                                                    backgroundColor: colors.danger,
+                                                                    color: 'white',
+                                                                    padding: '4px 8px',
+                                                                    borderRadius: '8px',
+                                                                    display: 'inline-block',
+                                                                    minWidth: '60px'
+                                                                }}>
+                                                                    {match.buts_domicile ?? 0} - {match.buts_exterieur ?? 0}
+                                                                </span>
+                                                            ) : (
+                                                                <span style={{
+                                                                    color: colors.text.light,
+                                                                    fontWeight: '400'
+                                                                }}>vs</span>
+                                                            )}
+                                                        </td>
+                                                        <td style={{
+                                                            padding: '6px 8px',
+                                                            textAlign: 'left',
+                                                            fontWeight: '600',
+                                                            color: colors.text.primary
+                                                        }}>
+                                                            {match.equipe_exterieur}
+                                                        </td>
+                                                        <td style={{
+                                                            padding: '6px 8px',
+                                                            textAlign: 'center'
+                                                        }}>
+                                                            <span style={getStatusStyle(match.statut)}>
+                                                                {getStatusText(match.statut)}
+                                                            </span>
+                                                        </td>
+                                                    </tr>
+                                                ))}
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
-                            </div>
-                        )
-                    ))}
+                            )
+                        ))}
+                </div>
             </div>
 
             {/* Pied de page */}
             <div style={{
-                marginTop: '15px',
-                paddingTop: '10px',
-                borderTop: '1px solid #e5e7eb',
                 display: 'flex',
                 justifyContent: 'space-between',
-                color: '#999',
-                fontSize: '14px',
-                flexShrink: 0
+                alignItems: 'center',
+                paddingTop: '15px',
+                borderTop: `2px dashed ${colors.border}`,
+                color: colors.text.light,
+                fontSize: '13px',
+                fontWeight: '500'
             }}>
-                <span>{footerLeft}</span>
-                <span>{footerRight}</span>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                    <span style={{ color: colors.primary, fontSize: '16px' }}>⚡</span>
+                    <span>{footerLeft}</span>
+                </div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                    <span>📸</span>
+                    <span>{footerRight}</span>
+                </div>
             </div>
+
+            {/* Style pour l'animation pulse */}
+            <style>
+                {`
+                    @keyframes pulse {
+                        0% { opacity: 1; }
+                        50% { opacity: 0.7; }
+                        100% { opacity: 1; }
+                    }
+                `}
+            </style>
         </div>
     );
 });
