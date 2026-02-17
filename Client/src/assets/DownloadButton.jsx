@@ -43,9 +43,8 @@ export default function DownloadButton({ refToCapture, filename, label, onCaptur
             const dataUrl = await htmlToImage.toPng(container, {
                 cacheBust: true,
                 pixelRatio: 2,
-                width: 1080,
-                height: 1350,
-                backgroundColor: "#ffffff",
+                width: 940,              // ✅ Changé
+                height: 788,             // ✅ Changé
                 skipAutoScale: true,
                 includeQueryParams: true
             });
