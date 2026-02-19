@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react'
 import * as Select from "@radix-ui/react-select"
 import React from "react"
 import DownloadButton from '../assets/DownloadButton'
-import ScheduleInstagramCapture from './ScheduleInstagramCapture'
+import ScheduleCapture from './ScheduleCapture'
 import CaptureOverlay from '../assets/CaptureOverlay'
 import { getSupabaseImageUrl } from '../assets/Helpers'
 
@@ -11,7 +11,7 @@ export default function LeagueCalendar({
     totalJournees = 34,
     showPhaseFilter = true,
     showTeamFilter = true,
-    logoUrl
+    logoUrl, title, subtitle
 }) {
     const [selectedJournee, setSelectedJournee] = useState(null) // null = calculée automatiquement
     const [showAllJournees, setShowAllJournees] = useState(false)
@@ -442,11 +442,11 @@ export default function LeagueCalendar({
                             ))}
                         </div>
                     )}
-                    <ScheduleInstagramCapture
+                    <ScheduleCapture
                         ref={captureRef}
                         logoUrl={logoUrl}
-                        title="Calendrier Celtiis Ligue 1"
-                        subtitle="Saison 2025-2026"
+                        title={title}
+                        subtitle={subtitle}
                         filtersInfo={`Journée ${selectedJournee} • ${selectedPhase === 'all' ? 'Toutes phases' : selectedPhase}${selectedTeam !== 'all' ? ` • ${selectedTeam}` : ''}`}
                         groupedMatches={groupedMatches}
                     />
