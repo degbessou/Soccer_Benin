@@ -32,7 +32,7 @@ const getStatusStyle = (statut) => {
 const getStatusText = (statut) => {
     switch (statut) {
         case 'finished': return 'Terminé';
-        case 'live': return 'En direct';
+        case 'live': return 'En cours';
         case 'postponed': return 'Reporté';
         case 'pending': return 'Programmé';
         default: return 'À venir';
@@ -114,22 +114,6 @@ const ScheduleCapture = forwardRef(({
                         </div>
                     ) : (
                         <div style={{ width: '70px' }} />
-                    )}
-
-                    {hasLiveMatches && (
-                        <div style={{
-                            backgroundColor: colors.danger,
-                            color: 'white',
-                            padding: '4px 12px',
-                            borderRadius: '30px',
-                            fontSize: '14px',
-                            fontWeight: '700',
-                            textTransform: 'uppercase',
-                            letterSpacing: '1px',
-                            animation: 'pulse 1.5s infinite'
-                        }}>
-                            🔴 Live
-                        </div>
                     )}
                 </div>
 
@@ -352,14 +336,14 @@ const ScheduleCapture = forwardRef(({
                                                                 </span>
                                                             ) : match.statut === 'live' ? (
                                                                 <span style={{
-                                                                    backgroundColor: colors.danger,
-                                                                    color: 'white',
+                                                                    backgroundColor: '#e5e7eb',
+                                                                    color: 'black',
                                                                     padding: '4px 8px',
                                                                     borderRadius: '8px',
                                                                     display: 'inline-block',
                                                                     minWidth: '60px'
                                                                 }}>
-                                                                    {match.buts_domicile ?? 0} - {match.buts_exterieur ?? 0}
+                                                                    vs
                                                                 </span>
                                                             ) : (
                                                                 <span style={{
