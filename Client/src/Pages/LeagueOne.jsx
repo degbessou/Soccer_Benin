@@ -59,7 +59,9 @@ export default () => {
                         showPhaseFilter={true}
                         showTeamFilter={true}
                         tableRef={scheduleTableRef}
-                        logoUrl={getSupabaseImageUrl('medias/icons/logo.png')}
+                        logoUrl={getSupabaseImageUrl('medias/icons/logo_no.png')}
+                        title="Celtiis Ligue 1 2025-2026"
+                        subtitle="www.bencofoot.com"
                     />
                 </TabContent>
                 <TabContent value="classement">
