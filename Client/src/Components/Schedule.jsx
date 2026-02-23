@@ -310,12 +310,14 @@ export default function LeagueCalendar({
                             </div>
                         )}
                         {/* Tableau des matchs */}
-                        <DownloadButton
-                            refToCapture={captureRef}
-                            filename="calendrier-ligue1.png"
-                            label="Télécharger"
-                            onCapturing={setIsCapturing}
-                        />
+                        <div className='flex-1 flex justify-end'>
+                            <DownloadButton
+                                refToCapture={captureRef}
+                                filename="calendrier-ligue1.png"
+                                label="Télécharger"
+                                onCapturing={setIsCapturing}
+                            />
+                        </div>
                     </div>
                 </div>
 

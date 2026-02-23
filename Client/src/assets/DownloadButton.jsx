@@ -76,9 +76,27 @@ export default function DownloadButton({ refToCapture, filename, label, onCaptur
     return (
         <button
             onClick={handleCapture}
-            className="flex items-center justify-center gap-x-1 py-2 px-4 text-white font-medium bg-yellow-800 hover:bg-yellow-700 active:bg-yellow-900 rounded-full inline-flex"
+            title="Télécharger"
+            className="hover:opacity-80 active:opacity-60 transition-opacity"
+            style={{
+                background: 'transparent',
+                border: 'none',
+                cursor: 'pointer',
+                padding: '8px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                lineHeight: 0 // Évite l'espace supplémentaire
+            }}
         >
-            {label}
+            <img
+                src="/download.svg"
+                alt={label}
+                style={{
+                    width: '36px', // Ajustez la taille selon vos besoins
+                    //height: '32px',
+                    display: 'block'
+                }} />
         </button>
     );
 }
