@@ -1,5 +1,6 @@
 // components/ScheduleCapture.jsx
 import { forwardRef } from 'react';
+import { getSupabaseImageUrl } from '../assets/Helpers';
 
 const backgroundUrl = '/background.svg';
 
@@ -70,6 +71,11 @@ const ScheduleCapture = forwardRef(({
         light: '#f9fafb'
     };
 
+    // calculez la taille de police globale
+    const allMatches = Object.values(groupedMatches).flat();
+    const hasNonFinishedMatch = allMatches.some(match => match.statut !== 'finished');
+    const globalFontSize = hasNonFinishedMatch ? '18px' : '16px';
+
     return (
         <div
             ref={ref}
@@ -98,9 +104,16 @@ const ScheduleCapture = forwardRef(({
                 justifyContent: 'space-between',
                 marginBottom: '5px',
                 position: 'relative',
-                zIndex: 2
+                zIndex: 2,
+                width: '100%'
             }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                {/* Logo gauche - dimensions fixes */}
+                <div style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'flex-start',
+                    width: '150px' // Largeur fixe pour équilibrer
+                }}>
                     {logoUrl ? (
                         <div style={{
                             borderRadius: '15px',
@@ -109,15 +122,20 @@ const ScheduleCapture = forwardRef(({
                             <img
                                 src={logoUrl}
                                 alt="logo"
-                                style={{ width: '120px', height: 'auto', display: 'block' }}
+                                style={{ width: '120px', height: '120px', objectFit: 'contain' }} // Dimensions fixes
                             />
                         </div>
                     ) : (
-                        <div style={{ width: '70px' }} />
+                        <div style={{ width: '120px', height: '70px' }} /> // Même espace même sans logo
                     )}
                 </div>
 
-                <div style={{ textAlign: 'center' }}>
+                {/* Titre centré */}
+                <div style={{
+                    textAlign: 'center',
+                    flex: 1, // Prend l'espace disponible
+                    padding: '0 20px' // Un peu d'espace autour
+                }}>
                     <h1 style={{
                         fontSize: '32px',
                         fontWeight: '800',
@@ -142,7 +160,25 @@ const ScheduleCapture = forwardRef(({
                         </p>
                     )}
                 </div>
-                <div style={{ width: '70px' }} />
+
+                {/* Logo droit - dimensions identiques au gauche */}
+                <div style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'flex-end',
+                    width: '150px' // Même largeur que le gauche
+                }}>
+                    <div style={{
+                        borderRadius: '15px',
+                        padding: '8px'
+                    }}>
+                        <img
+                            src={getSupabaseImageUrl('medias/icons/logo_fbf.png')}
+                            alt="logo_fbf"
+                            style={{ width: '120px', height: '70px', objectFit: 'contain' }} // Mêmes dimensions
+                        />
+                    </div>
+                </div>
             </div>
 
             {/* Filtres info */}
@@ -174,7 +210,8 @@ const ScheduleCapture = forwardRef(({
                 <div style={{
                     height: '100%',
                     overflowY: 'hidden',
-                    padding: '10px'
+                    padding: '10px',
+                    fontSize: globalFontSize,
                 }}>
                     {Object.entries(groupedMatches)
                         .sort(([a], [b]) => Number(a) - Number(b))
@@ -194,7 +231,7 @@ const ScheduleCapture = forwardRef(({
                                             color: 'white',
                                             padding: '6px 16px',
                                             borderRadius: '30px',
-                                            fontSize: '16px',
+                                            //fontSize: '16px',
                                             fontWeight: '600',
                                             display: 'inline-flex',
                                             alignItems: 'center',
@@ -206,7 +243,7 @@ const ScheduleCapture = forwardRef(({
                                         {journeeMatches[0]?.phase && (
                                             <span style={{
                                                 color: colors.text.primary,
-                                                fontSize: '16px',
+                                                //fontSize: '16px',
                                                 fontWeight: '500',
                                                 textTransform: 'uppercase',
                                                 letterSpacing: '0.5px'
@@ -225,7 +262,7 @@ const ScheduleCapture = forwardRef(({
                                         <table style={{
                                             width: '100%',
                                             borderCollapse: 'collapse',
-                                            fontSize: '14px'
+                                            //fontSize: '14px'
                                         }}>
                                             <thead>
                                                 <tr style={{
@@ -235,7 +272,7 @@ const ScheduleCapture = forwardRef(({
                                                     <th style={{
                                                         padding: '6px 8px',
                                                         textAlign: 'left',
-                                                        fontSize: '13px',
+                                                        //fontSize: '13px',
                                                         fontWeight: '600',
                                                         color: colors.text.secondary,
                                                         textTransform: 'uppercase',
@@ -244,7 +281,7 @@ const ScheduleCapture = forwardRef(({
                                                     <th style={{
                                                         padding: '6px 8px',
                                                         textAlign: 'left',
-                                                        fontSize: '13px',
+                                                        //fontSize: '13px',
                                                         fontWeight: '600',
                                                         color: colors.text.secondary,
                                                         textTransform: 'uppercase',
@@ -253,7 +290,7 @@ const ScheduleCapture = forwardRef(({
                                                     <th style={{
                                                         padding: '6px 8px',
                                                         textAlign: 'right',
-                                                        fontSize: '13px',
+                                                        //fontSize: '13px',
                                                         fontWeight: '600',
                                                         color: colors.text.secondary,
                                                         textTransform: 'uppercase',
@@ -263,7 +300,7 @@ const ScheduleCapture = forwardRef(({
                                                     <th style={{
                                                         padding: '6px 8px',
                                                         textAlign: 'center',
-                                                        fontSize: '14px',
+                                                        //fontSize: '14px',
                                                         fontWeight: '700',
                                                         color: colors.text.primary,
                                                         width: '80px'
@@ -271,7 +308,7 @@ const ScheduleCapture = forwardRef(({
                                                     <th style={{
                                                         padding: '6px 8px',
                                                         textAlign: 'left',
-                                                        fontSize: '13px',
+                                                        //fontSize: '13px',
                                                         fontWeight: '600',
                                                         color: colors.text.secondary,
                                                         textTransform: 'uppercase',
@@ -281,7 +318,7 @@ const ScheduleCapture = forwardRef(({
                                                     <th style={{
                                                         padding: '6px 8px',
                                                         textAlign: 'center',
-                                                        fontSize: '13px',
+                                                        //fontSize: '13px',
                                                         fontWeight: '600',
                                                         color: colors.text.secondary,
                                                         textTransform: 'uppercase',
@@ -299,14 +336,14 @@ const ScheduleCapture = forwardRef(({
                                                             padding: '6px 8px',
                                                             color: colors.text.primary,
                                                             fontWeight: '500',
-                                                            fontSize: '13px'
+                                                            //fontSize: '13px'
                                                         }}>
                                                             {dateFormatter(match.date_match)}
                                                         </td>
                                                         <td style={{
                                                             padding: '6px 8px',
                                                             color: colors.text.secondary,
-                                                            fontSize: '13px'
+                                                            //fontSize: '13px'
                                                         }}>
                                                             {match.stade}
                                                         </td>
@@ -322,7 +359,7 @@ const ScheduleCapture = forwardRef(({
                                                             padding: '6px 8px',
                                                             textAlign: 'center',
                                                             fontWeight: '700',
-                                                            fontSize: '16px'
+                                                            //fontSize: '16px'
                                                         }}>
                                                             {match.statut === 'finished' ? (
                                                                 <span style={{
