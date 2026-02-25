@@ -58,7 +58,7 @@ export default () => {
                         showTeamFilter={true}
                         tableRef={scheduleTableRef}
                         logoUrl={getSupabaseImageUrl('medias/icons/logo_no.png')}
-                        title="Celtiis Ligue 2 2025-2026"
+                        title="Celtiis Ligue 2 / 2025-2026"
                         subtitle="www.bencofoot.com"
                     />
                 </TabContent>
