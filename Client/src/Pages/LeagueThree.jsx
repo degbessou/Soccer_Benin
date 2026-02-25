@@ -151,16 +151,6 @@ export default function LeagueThree() {
                 <TabsList items={tabItems} />
 
                 <TabContent value="calendrier">
-                    {/* Bouton de téléchargement pour les 2 poules */}
-                    <div className="max-w-screen-lg mx-auto px-4 md:px-8 pt-6 flex justify-end">
-                        <DownloadButton
-                            refToCapture={captureRef}
-                            filename="calendrier-ligue3-poules.png"
-                            label="Télécharger les 2 poules"
-                            onCapturing={setIsCapturing}
-                        />
-                    </div>
-
                     <PouleTabs poules={poules} defaultPoule="A">
                         {poules.map(poule => (
                             <PouleContent key={poule.value} value={poule.value}>
@@ -172,6 +162,9 @@ export default function LeagueThree() {
                                     logoUrl={getSupabaseImageUrl('medias/icons/logo_no.png')}
                                     title={`Ligue 3 / Poule ${poule.value}`}
                                     subtitle="www.bencofoot.com"
+                                    externalDownloadRef={poule.value === 'A' ? captureRef : undefined}
+                                    externalOnCapturing={poule.value === 'A' ? setIsCapturing : undefined}
+                                    externalDownloadFilename={poule.value === 'A' ? "calendrier-ligue3-poules.png" : undefined}
                                 />
                             </PouleContent>
                         ))}
