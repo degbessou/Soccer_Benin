@@ -1,4 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.dev/svgjs" width="1440" height="560" preserveAspectRatio="none" viewBox="0 0 1440 560">
+            <rect width="1440" height="560" fill="#000000"></rect>
     <g mask="url(&quot;#SvgjsMask1051&quot;)" fill="none">
         <path d="M172.16 312.61 a117.28 117.28 0 1 0 234.56 0 a117.28 117.28 0 1 0 -234.56 0z" fill="rgba(146, 92, 19, 0.38)" class="triangle-float1"></path>
         <path d="M404.56 289.51 a177.27 177.27 0 1 0 354.54 0 a177.27 177.27 0 1 0 -354.54 0z" fill="rgba(146, 92, 19, 0.38)" class="triangle-float3"></path>
@@ -19,9 +20,6 @@
         <path d="M384.5 544.84 a176.07 176.07 0 1 0 352.14 0 a176.07 176.07 0 1 0 -352.14 0z" fill="rgba(146, 92, 19, 0.38)" class="triangle-float1"></path>
     </g>
     <defs>
-        <mask id="SvgjsMask1051">
-            <rect width="1440" height="560" fill="#ffffff"></rect>
-        </mask>
         <style>
             @keyframes float1 {
                     0%{transform: translate(0, 0)}
