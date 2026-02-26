@@ -87,7 +87,7 @@ const SchedulePoolCapture = forwardRef(({
         }}>
             {/* En-tête de la poule */}
             <div style={{
-                backgroundColor: poolColor,
+                //backgroundColor: poolColor,
                 padding: '8px 14px',
                 display: 'flex',
                 alignItems: 'center',
@@ -97,13 +97,13 @@ const SchedulePoolCapture = forwardRef(({
                     backgroundColor: colors.primary,
                     color: 'white',
                     margin: 0,
-                    padding: '6px 16px',
+                    padding: '6px 14px',
                     borderRadius: '30px',
                     display: 'inline-flex',
                     alignItems: 'center',
                     gap: '4px',
-                    fontSize: '15px',
-                    fontWeight: '700',
+                    fontSize: '13px',
+                    fontWeight: '500',
                     textTransform: 'uppercase',
                     letterSpacing: '0.5px'
                 }}>
@@ -114,7 +114,7 @@ const SchedulePoolCapture = forwardRef(({
                         color: '#925c13',
                         fontSize: '13px',
                         fontWeight: '600',
-                        letterSpacing: '0.3px'
+                        letterSpacing: '0.1px'
                     }}>
                         📅 Journée {journeeNum}{phase && phase !== 'all' ? ` — ${phase.charAt(0).toUpperCase() + phase.slice(1)}` : ''}
                     </span>
@@ -211,95 +211,110 @@ const SchedulePoolCapture = forwardRef(({
                 backgroundImage: `url('${backgroundUrl}')`,
                 backgroundSize: 'cover',
                 backgroundPosition: 'center',
-                padding: '25px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
+            }}
+        >
+            <div style={{
+                width: '860px',
+                height: '720px',
+                padding: '22px 25px',
                 boxSizing: 'border-box',
                 display: 'flex',
                 flexDirection: 'column',
-                fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
-                overflow: 'hidden'
-            }}
-        >
-            {/* En-tête */}
-            <div style={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-                marginBottom: '8px',
-                position: 'relative',
-                zIndex: 2,
-                width: '100%'
+                overflow: 'hidden',
+                borderRadius: '20px',
+                backgroundColor: 'rgba(255,255,255,0.04)',
             }}>
-                {/* Logo gauche */}
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-start', width: '130px' }}>
-                    {logoUrl ? (
-                        <img src={logoUrl} alt="logo" style={{ width: '100px', height: '100px', objectFit: 'contain' }} />
-                    ) : (
-                        <div style={{ width: '100px', height: '70px' }} />
-                    )}
+                {/* En-tête */}
+                <div style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                    marginBottom: '8px',
+                    position: 'relative',
+                    zIndex: 2,
+                    width: '100%'
+                }}>
+                    {/* Logo gauche */}
+                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-start', width: '130px' }}>
+                        {logoUrl ? (
+                            <img src={logoUrl} alt="logo" style={{ width: '100px', height: '100px', objectFit: 'contain' }} />
+                        ) : (
+                            <div style={{ width: '100px', height: '70px' }} />
+                        )}
+                    </div>
+
+                    {/* Titre centré */}
+                    <div style={{ textAlign: 'center', flex: 1, padding: '0 20px' }}>
+                        <h1 style={{
+                            fontSize: '28px',
+                            fontWeight: '800',
+                            background: 'white',
+                            WebkitBackgroundClip: 'text',
+                            WebkitTextFillColor: 'transparent',
+                            margin: '0 0 4px 0',
+                            lineHeight: '1',
+                            letterSpacing: '-0.5px'
+                        }}>
+                            {title}
+                        </h1>
+                        {subtitle && (
+                            <p style={{ fontSize: '14px', color: '#9ca3af', margin: '6px 0 0 0', fontWeight: '500' }}>
+                                {subtitle}
+                            </p>
+                        )}
+                        {filtersInfo && (
+                            <p style={{ fontSize: '13px', color: colors.primary, margin: '4px 0 0 0', fontWeight: '600' }}>
+                                {filtersInfo}
+                            </p>
+                        )}
+                    </div>
+
+                    {/* Logo droit */}
+                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end', width: '130px' }}>
+                        <img
+                            src={getSupabaseImageUrl('medias/icons/logo_fbf.png')}
+                            alt="logo_fbf"
+                            style={{ width: '100px', height: '60px', objectFit: 'contain' }}
+                        />
+                    </div>
                 </div>
 
-                {/* Titre centré */}
-                <div style={{ textAlign: 'center', flex: 1, padding: '0 20px' }}>
-                    <h1 style={{
-                        fontSize: '28px',
-                        fontWeight: '800',
-                        background: 'white',
-                        WebkitBackgroundClip: 'text',
-                        WebkitTextFillColor: 'transparent',
-                        margin: '0 0 4px 0',
-                        lineHeight: '1',
-                        letterSpacing: '-0.5px'
-                    }}>
-                        {title}
-                    </h1>
-                    {subtitle && (
-                        <p style={{ fontSize: '14px', color: '#9ca3af', margin: '6px 0 0 0', fontWeight: '500' }}>
-                            {subtitle}
-                        </p>
-                    )}
+                {/* Tables des 2 poules l'une au-dessus de l'autre */}
+                <div style={{
+                    flex: 1,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: '12px',
+                    marginBottom: '16px',
+                    minHeight: 0
+                }}>
+                    {renderPoolTable(pouleALabel, pouleALimited, '#3b82f6', pouleAJournee, pouleAPhase, pouleAMatches)}
+                    {renderPoolTable(pouleBLabel, pouleBLimited, '#10b981', pouleBJournee, pouleBPhase, pouleBMatches)}
                 </div>
 
-                {/* Logo droit */}
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end', width: '130px' }}>
-                    <img
-                        src={getSupabaseImageUrl('medias/icons/logo_fbf.png')}
-                        alt="logo_fbf"
-                        style={{ width: '100px', height: '60px', objectFit: 'contain' }}
-                    />
-                </div>
-            </div>
-
-            {/* Tables des 2 poules l'une au-dessus de l'autre */}
-            <div style={{
-                flex: 1,
-                display: 'flex',
-                flexDirection: 'column',
-                gap: '12px',
-                marginBottom: '16px',
-                minHeight: 0
-            }}>
-                {renderPoolTable(pouleALabel, pouleALimited, '#e5e7eb', pouleAJournee, pouleAPhase, pouleAMatches)}
-                {renderPoolTable(pouleBLabel, pouleBLimited, '#e5e7eb', pouleBJournee, pouleBPhase, pouleBMatches)}
-            </div>
-
-            {/* Pied de page */}
-            <div style={{
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-                paddingTop: '12px',
-                borderTop: `2px dashed ${colors.border}`,
-                color: colors.text.light,
-                fontSize: '13px',
-                fontWeight: '500'
-            }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                    <span style={{ color: colors.primary, fontSize: '16px' }}>🌍</span>
-                    <span>{footerLeft}</span>
-                </div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                    <span>📸</span>
-                    <span>{footerRight}</span>
+                {/* Pied de page */}
+                <div style={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                    paddingTop: '12px',
+                    borderTop: `2px dashed ${colors.border}`,
+                    color: colors.text.light,
+                    fontSize: '13px',
+                    fontWeight: '500'
+                }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                        <span style={{ color: colors.primary, fontSize: '16px' }}>🌍</span>
+                        <span>{footerLeft}</span>
+                    </div>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                        <span>📸</span>
+                        <span>{footerRight}</span>
+                    </div>
                 </div>
             </div>
         </div>
