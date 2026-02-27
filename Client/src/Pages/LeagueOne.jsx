@@ -62,17 +62,21 @@ export default () => {
                         logoUrl={getSupabaseImageUrl('medias/icons/logo_no.png')}
                         title="Celtiis Ligue 1 / 2025-2026"
                         subtitle="www.bencofoot.com"
+                        externalDownloadFilename="calendrier-ligue1-homme.png"
                     />
                 </TabContent>
                 <TabContent value="classement">
                     <div>
                         <Standing
                             title="Classement Ligue 1"
+                            titleCapture="Classement Celtiis Ligue 1 / 2025-2026"
                             supabaseQuery={fetchLeague1Standing}
+                            logoUrl={getSupabaseImageUrl('medias/icons/logo_no.png')}
+                            subtitle="www.bencofoot.com"
                             caption_green="Champion / Ligue des Champions CAF"
                             caption_yellow="Coupe de la Confédération CAF"
                             caption_red="Relégation en Ligue 2"
-
+                            externalDownloadFilename="classement-ligue1-homme.png"
                         />
                     </div>
                 </TabContent>
