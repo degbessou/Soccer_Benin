@@ -6,13 +6,13 @@ const backgroundUrl = '/background.svg';
 
 const StandingCapture = forwardRef(({
     logoUrl,
-    title,
+    titleCapture,
     subtitle,
     standing = [],
     captionGreen,
     captionYellow,
     captionRed,
-    footerLeft = "BencoFoot",
+    footerLeft = "Tout le classement détaillé est à retrouver sur notre site.",
     footerRight = new Date().toLocaleDateString('fr-FR')
 }, ref) => {
 
@@ -207,19 +207,19 @@ const StandingCapture = forwardRef(({
                     {/* Titre */}
                     <div style={{ textAlign: 'center', flex: 1, padding: '0 20px' }}>
                         <h1 style={{
-                            fontSize: '28px',
+                            fontSize: '26px',
                             fontWeight: '800',
                             background: 'white',
                             WebkitBackgroundClip: 'text',
                             WebkitTextFillColor: 'transparent',
                             margin: '0 0 4px 0',
-                            lineHeight: '1',
+                            lineHeight: '1.5',
                             letterSpacing: '-0.5px'
                         }}>
-                            {title}
+                            {titleCapture}
                         </h1>
                         {subtitle && (
-                            <p style={{ fontSize: '14px', color: '#9ca3af', margin: '6px 0 0 0', fontWeight: '500' }}>
+                            <p style={{ fontSize: '16px', color: '#9ca3af', margin: '6px 0 0 0', fontWeight: '700' }}>
                                 {subtitle}
                             </p>
                         )}
@@ -275,7 +275,7 @@ const StandingCapture = forwardRef(({
                     fontWeight: '500'
                 }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                        <span style={{ color: colors.primary, fontSize: '16px' }}>🌍</span>
+                        <span style={{ color: colors.primary, fontSize: '16px' }}>📊</span>
                         <span>{footerLeft}</span>
                     </div>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>

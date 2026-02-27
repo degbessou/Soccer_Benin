@@ -5,6 +5,7 @@ import StandingCapture from './StandingCapture'
 
 export default function Standing({
     title = 'Classement',
+    titleCapture,
     supabaseQuery,
     caption_green,
     caption_yellow,
@@ -211,7 +212,7 @@ export default function Standing({
                     <StandingCapture
                         ref={internalCaptureRef}
                         logoUrl={logoUrl}
-                        title={title}
+                        titleCapture={titleCapture}
                         subtitle={subtitle}
                         standing={standing}
                         captionGreen={caption_green}

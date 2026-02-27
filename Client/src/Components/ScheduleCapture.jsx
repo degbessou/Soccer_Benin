@@ -44,23 +44,22 @@ const ScheduleCapture = forwardRef(({
     logoUrl,
     title,
     subtitle,
-    filtersInfo,
     groupedMatches,
     dateFormatter = (date) => new Date(date).toLocaleDateString('fr-FR', {
         day: '2-digit',
         month: 'short'
     }),
-    footerLeft = "BencoFoot",
+    footerLeft = "Le calendrier et les résultats détaillés sont à retrouver sur notre site.",
     footerRight = new Date().toLocaleDateString('fr-FR')
 }, ref) => {
 
     const colors = {
-        primary: '#925c13',
+        primary: '#1C5937',
         secondary: '#f59e0b',
         text: {
             primary: '#000000',
-            secondary: '#000000',
-            light: '#9ca3af'
+            secondary: '#374151',
+            light: '#ffffff'
         },
         border: '#e5e7eb',
         light: '#f9fafb'
@@ -134,7 +133,7 @@ const ScheduleCapture = forwardRef(({
                             WebkitBackgroundClip: 'text',
                             WebkitTextFillColor: 'transparent',
                             margin: '0 0 2px 0',
-                            lineHeight: '1',
+                            lineHeight: '1.5',
                             letterSpacing: '-0.5px'
                         }}>
                             {title}
@@ -144,7 +143,7 @@ const ScheduleCapture = forwardRef(({
                                 fontSize: '16px',
                                 color: '#9ca3af',
                                 margin: '8px 0 4px 0',
-                                fontWeight: '500',
+                                fontWeight: '700',
                                 lineHeight: '1.2'
                             }}>
                                 {subtitle}
@@ -259,7 +258,7 @@ const ScheduleCapture = forwardRef(({
                                                                         {match.buts_domicile} - {match.buts_exterieur}
                                                                     </span>
                                                                 ) : (
-                                                                    <span style={{ color: colors.text.light, fontWeight: '400' }}>vs</span>
+                                                                    <span style={{ color: colors.text.secondary, fontWeight: '400' }}>vs</span>
                                                                 )}
                                                             </td>
                                                             <td style={{ padding: '6px 8px', textAlign: 'left', fontWeight: '600', color: colors.text.primary }}>
@@ -293,7 +292,7 @@ const ScheduleCapture = forwardRef(({
                     fontWeight: '500'
                 }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                        <span style={{ color: colors.primary, fontSize: '16px' }}>🌍</span>
+                        <span style={{ color: colors.primary, fontSize: '16px' }}>🏁</span>
                         <span>{footerLeft}</span>
                     </div>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>

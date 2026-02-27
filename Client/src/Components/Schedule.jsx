@@ -4,7 +4,6 @@ import React from "react"
 import DownloadButton from '../assets/DownloadButton'
 import ScheduleCapture from './ScheduleCapture'
 import CaptureOverlay from '../assets/CaptureOverlay'
-import { getSupabaseImageUrl } from '../assets/Helpers'
 
 export default function LeagueCalendar({
     supabaseQuery,
@@ -298,10 +297,10 @@ export default function LeagueCalendar({
                                                             <td className="hidden md:table-cell px-6 py-4 font-medium">{match.equipe_exterieur}</td>
                                                             <td className="hidden md:table-cell px-6 py-4 text-center">
                                                                 <span className={`px-3 py-1 rounded-full text-xs font-medium ${match.statut === 'finished' ? 'bg-green-100 text-green-700' :
-                                                                        match.statut === 'live' ? 'bg-red-100 text-red-700' :
-                                                                            match.statut === 'postponed' ? 'bg-orange-100 text-orange-700' :
-                                                                                match.statut === 'pending' ? 'bg-gray-100 text-gray-700' :
-                                                                                    'bg-yellow-100 text-yellow-700'
+                                                                    match.statut === 'live' ? 'bg-red-100 text-red-700' :
+                                                                        match.statut === 'postponed' ? 'bg-orange-100 text-orange-700' :
+                                                                            match.statut === 'pending' ? 'bg-gray-100 text-gray-700' :
+                                                                                'bg-yellow-100 text-yellow-700'
                                                                     }`}>
                                                                     {match.statut === 'finished' ? 'Terminé' :
                                                                         match.statut === 'live' ? 'En cours' :
@@ -326,10 +325,10 @@ export default function LeagueCalendar({
                                                                                 <span className="text-gray-400 text-sm">vs</span>
                                                                             )}
                                                                             <span className={`mt-1 px-2 py-0.5 rounded-full text-xs font-medium ${match.statut === 'finished' ? 'bg-green-100 text-green-700' :
-                                                                                    match.statut === 'live' ? 'bg-red-100 text-red-700' :
-                                                                                        match.statut === 'postponed' ? 'bg-orange-100 text-orange-700' :
-                                                                                            match.statut === 'pending' ? 'bg-gray-100 text-gray-700' :
-                                                                                                'bg-yellow-100 text-yellow-700'
+                                                                                match.statut === 'live' ? 'bg-red-100 text-red-700' :
+                                                                                    match.statut === 'postponed' ? 'bg-orange-100 text-orange-700' :
+                                                                                        match.statut === 'pending' ? 'bg-gray-100 text-gray-700' :
+                                                                                            'bg-yellow-100 text-yellow-700'
                                                                                 }`}>
                                                                                 {match.statut === 'finished' ? 'Terminé' :
                                                                                     match.statut === 'live' ? 'En cours' :
