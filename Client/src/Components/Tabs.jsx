@@ -27,4 +27,15 @@ export const TabsList = ({ items }) => (
     </Tabs.List>
 );
 
-export const TabContent = Tabs.Content;
+// forceMount garde le contenu dans le DOM même si l'onglet est inactif
+// hidden masque visuellement le contenu inactif
+export const TabContent = ({ value, children, ...props }) => (
+    <Tabs.Content
+        value={value}
+        forceMount
+        className="data-[state=inactive]:hidden"
+        {...props}
+    >
+        {children}
+    </Tabs.Content>
+);

@@ -1,16 +1,15 @@
-// DownloadButton simplifié
+// assets/DownloadButton.jsx
 import * as htmlToImage from "html-to-image";
 
-export default function DownloadButton({ refToCapture, filename, label, onCapturing }) {
-    // Dans DownloadButton.jsx
+export default function DownloadButton({ refToCapture, filename, label, onCapturing, disabled = false }) {
+
     const handleCapture = async () => {
-        if (!refToCapture?.current) return;
+        if (!refToCapture?.current || disabled) return;
 
         onCapturing?.(true);
 
         const container = refToCapture.current;
 
-        // Sauvegarder les styles originaux
         const originalStyles = {
             position: container.style.position,
             top: container.style.top,
@@ -22,7 +21,7 @@ export default function DownloadButton({ refToCapture, filename, label, onCaptur
             visibility: container.style.visibility
         };
 
-        // 1. Déplacer dans le viewport MAIS invisible pour l'utilisateur
+        // 1. Déplacer dans le viewport
         container.style.position = 'fixed';
         container.style.top = '0';
         container.style.left = '0';
@@ -34,22 +33,24 @@ export default function DownloadButton({ refToCapture, filename, label, onCaptur
         container.style.pointerEvents = 'none';
 
         // 2. Attendre que le DOM se stabilise
-        await new Promise(resolve => setTimeout(resolve, 500));
+        await new Promise(resolve => setTimeout(resolve, 600));
+
+        // 3. Si les données ne sont pas encore là, attendre un peu plus
+        const isEmpty = container.querySelector('td[colspan]') !== null;
+        if (isEmpty) {
+            await new Promise(resolve => setTimeout(resolve, 1000));
+        }
 
         try {
-            console.log("📸 Tentative de capture...");
-
-            // 3. Capturer (même si invisible, html2canvas peut capturer)
             const dataUrl = await htmlToImage.toPng(container, {
                 cacheBust: true,
                 pixelRatio: 2,
-                width: 940,              // ✅ Changé
-                height: 788,             // ✅ Changé
+                width: 940,
+                height: 788,
                 skipAutoScale: true,
                 includeQueryParams: true
             });
 
-            console.log("✅ Capture réussie, téléchargement...");
             const link = document.createElement("a");
             link.href = dataUrl;
             link.download = filename;
@@ -58,7 +59,6 @@ export default function DownloadButton({ refToCapture, filename, label, onCaptur
         } catch (err) {
             console.error("❌ Erreur capture :", err);
         } finally {
-            // 4. Remettre TOUS les styles originaux (hors écran)
             container.style.position = originalStyles.position || 'fixed';
             container.style.top = originalStyles.top || '-9999px';
             container.style.left = originalStyles.left || '-9999px';
@@ -76,27 +76,25 @@ export default function DownloadButton({ refToCapture, filename, label, onCaptur
     return (
         <button
             onClick={handleCapture}
-            title="Télécharger"
-            className="hover:opacity-80 active:opacity-60 transition-opacity"
+            title={disabled ? "Chargement..." : "Télécharger"}
+            disabled={disabled}
+            className="hover:opacity-80 active:opacity-60 transition-opacity disabled:opacity-30 disabled:cursor-wait"
             style={{
                 background: 'transparent',
                 border: 'none',
-                cursor: 'pointer',
+                cursor: disabled ? 'wait' : 'pointer',
                 padding: '8px',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                lineHeight: 0 // Évite l'espace supplémentaire
+                lineHeight: 0
             }}
         >
             <img
                 src="/download.svg"
                 alt={label}
-                style={{
-                    width: '36px', // Ajustez la taille selon vos besoins
-                    //height: '32px',
-                    display: 'block'
-                }} />
+                style={{ width: '36px', display: 'block' }}
+            />
         </button>
     );
 }
