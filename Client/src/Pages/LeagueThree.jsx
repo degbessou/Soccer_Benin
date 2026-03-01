@@ -5,14 +5,12 @@ import Footer from "../Components/Footer";
 import Tabs, { TabsList, TabContent } from "../Components/Tabs";
 import PouleTabs, { PouleContent } from "../Components/PouleTabs";
 import Schedule from "../Components/Schedule";
-import Standing from "../Components/Standing";
 import { supabase } from "../Functions/SupabaseClient";
 import HeroStatiq from "../Components/HeroStatiq";
 import { getSupabaseImageUrl } from '../assets/Helpers';
 import TitleBis from "../assets/TitleBis";
 import StandingPool from "../Components/StandingPool";
-import SchedulePoolCapture from "../Components/SchedulePoolCapture";
-import DownloadButton from "../assets/DownloadButton";
+import StandingPoolCapture from "../Components/StandingPoolCapture";
 import CaptureOverlay from "../assets/CaptureOverlay";
 
 export default function LeagueThree() {
@@ -27,101 +25,31 @@ export default function LeagueThree() {
         { value: "B", label: "Poule B" }
     ];
 
-    // ─── État pour les matchs des 2 poules (pour la capture) ───────────────────
-    const [matchesPouleA, setMatchesPouleA] = useState([]);
-    const [matchesPouleB, setMatchesPouleB] = useState([]);
-    const [selectedJourneeA, setSelectedJourneeA] = useState(null);
-    const [selectedJourneeB, setSelectedJourneeB] = useState(null);
+    // ─── Seulement le classement est centralisé (image unique 2 poules) ─────────
+    const [standingPouleA, setStandingPouleA] = useState([]);
+    const [standingPouleB, setStandingPouleB] = useState([]);
     const [isCapturing, setIsCapturing] = useState(false);
+    const [dataReady, setDataReady] = useState(false);
 
-    // Ref pour le composant de capture
-    const captureRef = useRef(null);
-
-    // ─── Fetches centralisés pour avoir les données dispo pour la capture ───────
-    // Note: on garde aussi les fetches dans <Schedule> pour son propre affichage.
-    // Ici on fetch séparément pour alimenter SchedulePoolCapture.
-
-    const processMatchStatuses = (data) => {
-        const now = new Date();
-        return data.map(match => {
-            if (match.statut === 'postponed') return match;
-            if (match.buts_domicile !== null && match.buts_exterieur !== null) {
-                return { ...match, statut: 'finished' };
-            }
-
-            const matchesSameJournee = data.filter(m =>
-                m.numero === match.numero && m.statut !== 'postponed'
-            );
-            const datesJournee = matchesSameJournee.map(m => new Date(m.date_match));
-            const minDate = new Date(Math.min(...datesJournee));
-            const maxDate = new Date(Math.max(...datesJournee));
-            const journeeStart = new Date(minDate); journeeStart.setHours(0, 0, 0, 0);
-            const journeeEnd = new Date(maxDate); journeeEnd.setHours(23, 59, 59, 999);
-
-            if (now >= journeeStart && now <= journeeEnd) return { ...match, statut: 'live' };
-            if (now < journeeStart) return { ...match, statut: 'upcoming' };
-            return { ...match, statut: 'pending' };
-        });
-    };
-
-    const getCurrentJournee = (matchesData) => {
-        const now = new Date();
-        const journeesUniques = [...new Set(matchesData.map(m => m.numero))].sort((a, b) => a - b);
-        for (let journee of journeesUniques) {
-            const matchsJournee = matchesData.filter(m => m.numero === journee);
-            const datesJournee = matchsJournee.map(m => new Date(m.date_match));
-            const maxDate = new Date(Math.max(...datesJournee));
-            maxDate.setDate(maxDate.getDate() + 2);
-            if (now <= maxDate) return journee;
-        }
-        return journeesUniques[journeesUniques.length - 1] || 1;
-    };
+    const standingCaptureRef = useRef(null);
 
     useEffect(() => {
-        const fetchAll = async () => {
-            const [{ data: dataA }, { data: dataB }] = await Promise.all([
-                supabase.from("matchs_poule").select("*")
-                    .eq("nom_saison", "Saison 2025-2026")
-                    .eq("ligue", "Ligue 3").eq("poule", "A")
-                    .order("numero", { ascending: true })
-                    .order("date_match", { ascending: true }),
-                supabase.from("matchs_poule").select("*")
-                    .eq("nom_saison", "Saison 2025-2026")
-                    .eq("ligue", "Ligue 3").eq("poule", "B")
-                    .order("numero", { ascending: true })
-                    .order("date_match", { ascending: true }),
+        const fetchStandings = async () => {
+            const [{ data: stdA }, { data: stdB }] = await Promise.all([
+                supabase.from("std_v_lig_three_men").select("*")
+                    .eq("nom_saison", "Saison 2025-2026").eq("poule", "A")
+                    .order("position", { ascending: true }),
+                supabase.from("std_v_lig_three_men").select("*")
+                    .eq("nom_saison", "Saison 2025-2026").eq("poule", "B")
+                    .order("position", { ascending: true }),
             ]);
-
-            if (dataA) {
-                const processed = processMatchStatuses(dataA);
-                setMatchesPouleA(processed);
-                setSelectedJourneeA(getCurrentJournee(processed));
-            }
-            if (dataB) {
-                const processed = processMatchStatuses(dataB);
-                setMatchesPouleB(processed);
-                setSelectedJourneeB(getCurrentJournee(processed));
-            }
+            if (stdA) setStandingPouleA(stdA);
+            if (stdB) setStandingPouleB(stdB);
+            setDataReady(true);
         };
-        fetchAll();
+        fetchStandings();
     }, []);
 
-    // ─── Matchs filtrés pour la capture (journée courante de chaque poule) ──────
-    // On affiche la journée "courante" de chaque poule dans l'image.
-    // Vous pouvez adapter cette logique selon vos besoins (ex: journée sélectionnée).
-    const captureMatchesA = selectedJourneeA
-        ? matchesPouleA.filter(m => m.numero === selectedJourneeA)
-        : matchesPouleA.slice(0, 6);
-
-    const captureMatchesB = selectedJourneeB
-        ? matchesPouleB.filter(m => m.numero === selectedJourneeB)
-        : matchesPouleB.slice(0, 6);
-
-    const filtersInfo = selectedJourneeA
-        ? `Journée ${selectedJourneeA}${selectedJourneeA !== selectedJourneeB ? ` (A) / Journée ${selectedJourneeB} (B)` : ''}`
-        : '';
-
-    // ─── Fetches pour les composants Schedule (inchangés) ───────────────────────
     const fetchMatchesByPoule = (poule) => async () => {
         const { data } = await supabase
             .from("matchs_poule").select("*")
@@ -154,36 +82,20 @@ export default function LeagueThree() {
                     <PouleTabs poules={poules} defaultPoule="A">
                         {poules.map(poule => (
                             <PouleContent key={poule.value} value={poule.value}>
+                                {/* Chaque Schedule gère sa propre capture — comme LeagueOne */}
                                 <Schedule
                                     supabaseQuery={fetchMatchesByPoule(poule.value)}
-                                    totalJournees={7}
+                                    totalJournees={poule.value === 'A' ? 9 : 7}
                                     showPhaseFilter={true}
                                     showTeamFilter={true}
                                     logoUrl={getSupabaseImageUrl('medias/icons/logo_no.png')}
-                                    title={`Ligue 3 / Poule ${poule.value}`}
+                                    title={`Ligue 3 Amateur - 2025-2025 Poule ${poule.value}`}
                                     subtitle="www.bencofoot.com"
-                                    externalDownloadRef={poule.value === 'A' ? captureRef : undefined}
-                                    externalOnCapturing={poule.value === 'A' ? setIsCapturing : undefined}
-                                    externalDownloadFilename={poule.value === 'A' ? "calendrier-ligue3-poules.png" : undefined}
+                                    externalDownloadFilename={`calendrier-ligue3-poule${poule.value}.png`}
                                 />
                             </PouleContent>
                         ))}
                     </PouleTabs>
-
-                    {/* Composant de capture caché — reçoit les matchs des 2 poules */}
-                    <SchedulePoolCapture
-                        ref={captureRef}
-                        logoUrl={getSupabaseImageUrl('medias/icons/logo_no.png')}
-                        title="Ligue 3 / 2025-2026"
-                        subtitle="www.bencofoot.com"
-                        filtersInfo={filtersInfo}
-                        pouleAMatches={captureMatchesA}
-                        pouleBMatches={captureMatchesB}
-                        pouleALabel="A"
-                        pouleBLabel="B"
-                        pouleAJournee={selectedJourneeA}
-                        pouleBJournee={selectedJourneeB}
-                    />
                 </TabContent>
 
                 <TabContent value="classement">
@@ -195,12 +107,30 @@ export default function LeagueThree() {
                                     supabaseQuery={fetchStandingByPoule(poule.value)}
                                     caption_green="Promu en Ligue 2"
                                     caption_red="Relégation en division départementale"
+                                    externalDownloadRef={poule.value === 'A' ? standingCaptureRef : undefined}
+                                    externalOnCapturing={poule.value === 'A' ? setIsCapturing : undefined}
+                                    externalDownloadFilename={poule.value === 'A' ? "classement-ligue3-poules.png" : undefined}
+                                    externalDataReady={poule.value === 'A' ? dataReady : undefined}
                                 />
                             </PouleContent>
                         ))}
                     </PouleTabs>
                 </TabContent>
             </Tabs>
+
+            {/* StandingPoolCapture hors des tabs — toujours dans le DOM */}
+            <StandingPoolCapture
+                ref={standingCaptureRef}
+                logoUrl={getSupabaseImageUrl('medias/icons/logo_no.png')}
+                title="Classement Ligue 3 / 2025-2026"
+                subtitle="www.bencofoot.com"
+                pouleAStanding={standingPouleA}
+                pouleBStanding={standingPouleB}
+                pouleALabel="A"
+                pouleBLabel="B"
+                captionGreen="Promu en Ligue 2"
+                captionRed="Relégation en division départementale"
+            />
 
             <Footer />
         </>
