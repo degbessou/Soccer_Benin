@@ -35,7 +35,7 @@ const getStatusText = (statut) => {
         case 'finished': return 'Terminé';
         case 'live': return 'En cours';
         case 'postponed': return 'Reporté';
-        case 'pending': return 'Programmé';
+        case 'pending': return 'En attente';
         default: return 'À venir';
     }
 };

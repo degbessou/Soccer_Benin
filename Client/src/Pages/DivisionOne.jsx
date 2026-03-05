@@ -85,7 +85,7 @@ export default function DivisionOne() {
                                 {/* Chaque Schedule gère sa propre capture — comme LeagueOne */}
                                 <Schedule
                                     supabaseQuery={fetchMatchesByPoule(poule.value)}
-                                    totalJournees={poule.value === 'A' ? 9 : 7}
+                                    totalJournees={poule.value === 'A' ? 18 : 14}
                                     showPhaseFilter={true}
                                     showTeamFilter={true}
                                     logoUrl={getSupabaseImageUrl('medias/icons/logo_no.png')}
