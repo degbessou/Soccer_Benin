@@ -6,8 +6,8 @@ import CaptureOverlay from '../assets/CaptureOverlay'
 export default function StandingPool({
     title = 'Classement',
     supabaseQuery,
-    caption_green,
-    caption_red,
+    captionGreen,
+    captionRed,
     // Props mode externe (2 poules)
     externalDownloadRef,
     externalOnCapturing,
@@ -171,16 +171,16 @@ export default function StandingPool({
 
                 {/* Légende */}
                 <div className="mt-6 flex flex-col gap-2 text-sm md:flex-row md:gap-4">
-                    {caption_green && (
+                    {captionGreen && (
                         <div className="flex items-center gap-2">
                             <div className="w-4 h-4 bg-green-100 border border-green-300 rounded"></div>
-                            <span>{caption_green}</span>
+                            <span>{captionGreen}</span>
                         </div>
                     )}
-                    {caption_red && (
+                    {captionRed && (
                         <div className="flex items-center gap-2">
                             <div className="w-4 h-4 bg-red-100 border border-red-300 rounded"></div>
-                            <span>{caption_red}</span>
+                            <span>{captionRed}</span>
                         </div>
                     )}
                 </div>

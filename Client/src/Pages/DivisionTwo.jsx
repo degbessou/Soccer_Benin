@@ -105,7 +105,7 @@ export default function DivisionTwo() {
                                 <StandingPool
                                     title={`Classement - Poule ${poule.value}`}
                                     supabaseQuery={fetchStandingByPoule(poule.value)}
-                                    captionGreen="Finaliste"
+                                    captionGreen="Finaliste D2 / Promu en D1 Féminine"
                                     captionRed="Relégation en Division départementale"
                                     externalDownloadRef={poule.value === 'A' ? standingCaptureRef : undefined}
                                     externalOnCapturing={poule.value === 'A' ? setIsCapturing : undefined}
@@ -128,7 +128,7 @@ export default function DivisionTwo() {
                 pouleBStanding={standingPouleB}
                 pouleALabel="A"
                 pouleBLabel="B"
-                captionGreen="Finaliste"
+                captionGreen="Finaliste D2 / Promu en D1 Féminine"
                 captionRed="Relégation en Division départementale"
             />
 

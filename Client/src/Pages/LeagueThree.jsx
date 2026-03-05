@@ -105,8 +105,8 @@ export default function LeagueThree() {
                                 <StandingPool
                                     title={`Classement - Poule ${poule.value}`}
                                     supabaseQuery={fetchStandingByPoule(poule.value)}
-                                    caption_green="Promu en Ligue 2"
-                                    caption_red="Relégation en division départementale"
+                                    captionGreen="Promu en Ligue 2"
+                                    captionRed="Relégation en division départementale"
                                     externalDownloadRef={poule.value === 'A' ? standingCaptureRef : undefined}
                                     externalOnCapturing={poule.value === 'A' ? setIsCapturing : undefined}
                                     externalDownloadFilename={poule.value === 'A' ? "classement-ligue3-poules.png" : undefined}
