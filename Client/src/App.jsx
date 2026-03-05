@@ -16,6 +16,8 @@ import About from "./Pages/About";
 import Contact from "./Pages/Contact";
 import Credits from "./Pages/Credits";
 import PrivacyPolicy from "./Pages/PrivacyPolicy";
+import DivisionOne from "./Pages/DivisionOne";
+import DivisionTwo from "./Pages/DivisionTwo";
 
 
 
@@ -38,6 +40,8 @@ function App() {
                 <Route exact path="/Contact" Component={Contact} />
                 <Route exact path="/Credits" Component={Credits} />
                 <Route exact path="/PrivacyPolicy" Component={PrivacyPolicy} />
+                <Route exact path="/DivisionOne" Component={DivisionOne} />
+                <Route exact path="/DivisionTwo" Component={DivisionTwo} />
             </Routes>
             <Analytics />
         </Router>

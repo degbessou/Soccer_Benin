@@ -8,6 +8,8 @@ import Schedule from "../Components/Schedule";
 import { supabase } from "../Functions/SupabaseClient"
 import Standing from "../Components/Standing";
 import Section404 from "../Components/Section404";
+import { useRef } from "react";
+
 
 export default () => {
     const tabItems = [
@@ -15,6 +17,10 @@ export default () => {
         { value: "classement", label: "CLASSEMENT" },
         { value: "stats", label: "STATS" }
     ];
+
+    // Créer des refs distinctes pour chaque composant
+    const scheduleTableRef = useRef(null);
+    //const standingTableRef = useRef(null);
 
     const fetchLeague1Matches = async () => {
         const { data, error } = await supabase
@@ -46,26 +52,34 @@ export default () => {
             <TitleBis title="Tout savoir sur la Celtiis Ligue 1 2025-2026" />
             <Tabs defaultTab="calendrier">
                 <TabsList items={tabItems} />
-
                 <TabContent value="calendrier">
                     <Schedule
                         supabaseQuery={fetchLeague1Matches}
                         totalJournees={34}
                         showPhaseFilter={true}
                         showTeamFilter={true}
+                        tableRef={scheduleTableRef}
+                        logoUrl={getSupabaseImageUrl('medias/icons/logo_no.png')}
+                        title="Celtiis Ligue 1 / 2025-2026"
+                        subtitle="www.bencofoot.com"
+                        externalDownloadFilename="calendrier-ligue1-homme.png"
                     />
                 </TabContent>
-
                 <TabContent value="classement">
-                    <Standing
-                        title="Classement Ligue 1"
-                        supabaseQuery={fetchLeague1Standing}
-                        caption_green="Champion / Ligue des Champions CAF"
-                        caption_yellow="Coupe de la Confédération CAF"
-                        caption_red="Relégation en Ligue 2"
-                    />
+                    <div>
+                        <Standing
+                            title="Classement Ligue 1"
+                            titleCapture="Classement Celtiis Ligue 1 / 2025-2026"
+                            supabaseQuery={fetchLeague1Standing}
+                            logoUrl={getSupabaseImageUrl('medias/icons/logo_no.png')}
+                            subtitle="www.bencofoot.com"
+                            caption_green="Champion / Ligue des Champions CAF"
+                            caption_yellow="Coupe de la Confédération CAF"
+                            caption_red="Relégation en Ligue 2"
+                            externalDownloadFilename="classement-ligue1-homme.png"
+                        />
+                    </div>
                 </TabContent>
-
                 <TabContent value="stats">
                     <Section404 />
                 </TabContent>

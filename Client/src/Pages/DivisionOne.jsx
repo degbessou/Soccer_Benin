@@ -13,7 +13,7 @@ import StandingPool from "../Components/StandingPool";
 import StandingPoolCapture from "../Components/StandingPoolCapture";
 import CaptureOverlay from "../assets/CaptureOverlay";
 
-export default function LeagueThree() {
+export default function DivisionOne() {
 
     const tabItems = [
         { value: "calendrier", label: "CALENDRIER" },
@@ -36,10 +36,10 @@ export default function LeagueThree() {
     useEffect(() => {
         const fetchStandings = async () => {
             const [{ data: stdA }, { data: stdB }] = await Promise.all([
-                supabase.from("std_v_lig_three_men").select("*")
+                supabase.from("std_v_div_one_wmen").select("*")
                     .eq("nom_saison", "Saison 2025-2026").eq("poule", "A")
                     .order("position", { ascending: true }),
-                supabase.from("std_v_lig_three_men").select("*")
+                supabase.from("std_v_div_one_wmen").select("*")
                     .eq("nom_saison", "Saison 2025-2026").eq("poule", "B")
                     .order("position", { ascending: true }),
             ]);
@@ -54,7 +54,7 @@ export default function LeagueThree() {
         const { data } = await supabase
             .from("matchs_poule").select("*")
             .eq("nom_saison", "Saison 2025-2026")
-            .eq("ligue", "Ligue 3").eq("poule", poule)
+            .eq("ligue", "D1 Féminine").eq("poule", poule)
             .order("numero", { ascending: true })
             .order("date_match", { ascending: true });
         return data;
@@ -62,7 +62,7 @@ export default function LeagueThree() {
 
     const fetchStandingByPoule = (poule) => async () => {
         const { data } = await supabase
-            .from("std_v_lig_three_men").select("*")
+            .from("std_v_div_one_wmen").select("*")
             .eq("nom_saison", "Saison 2025-2026").eq("poule", poule)
             .order("position", { ascending: true });
         return data;
@@ -73,7 +73,7 @@ export default function LeagueThree() {
             <Navbar />
             <CaptureOverlay isCapturing={isCapturing} />
             <HeroStatiq src={getSupabaseImageUrl('medias/banner/sobemap_un.jpg')} alt="banner" />
-            <TitleBis title="Tout savoir sur la Ligue Amateur, 2025-2026" />
+            <TitleBis title="Tout savoir sur la D1 Féminine, 2025-2026" />
 
             <Tabs defaultTab="calendrier">
                 <TabsList items={tabItems} />
@@ -85,13 +85,13 @@ export default function LeagueThree() {
                                 {/* Chaque Schedule gère sa propre capture — comme LeagueOne */}
                                 <Schedule
                                     supabaseQuery={fetchMatchesByPoule(poule.value)}
-                                    totalJournees={poule.value === 'A' ? 9 : 7}
+                                    totalJournees={poule.value === 'A' ? 18 : 14}
                                     showPhaseFilter={true}
                                     showTeamFilter={true}
                                     logoUrl={getSupabaseImageUrl('medias/icons/logo_no.png')}
-                                    title={`Ligue 3 Amateur - 2025-2025 Poule ${poule.value}`}
+                                    title={`D1 Féminine - 2025-2025 / Poule ${poule.value}`}
                                     subtitle="www.bencofoot.com"
-                                    externalDownloadFilename={`calendrier-ligue3-poule${poule.value}.png`}
+                                    externalDownloadFilename={`calendrier-D1Féminine-poule${poule.value}.png`}
                                 />
                             </PouleContent>
                         ))}
@@ -105,11 +105,11 @@ export default function LeagueThree() {
                                 <StandingPool
                                     title={`Classement - Poule ${poule.value}`}
                                     supabaseQuery={fetchStandingByPoule(poule.value)}
-                                    captionGreen="Promu en Ligue 2"
-                                    captionRed="Relégation en division départementale"
+                                    captionGreen="Finaliste D1"
+                                    captionRed="Relégation en D2 Féminine"
                                     externalDownloadRef={poule.value === 'A' ? standingCaptureRef : undefined}
                                     externalOnCapturing={poule.value === 'A' ? setIsCapturing : undefined}
-                                    externalDownloadFilename={poule.value === 'A' ? "classement-ligue3-poules.png" : undefined}
+                                    externalDownloadFilename={poule.value === 'A' ? "classement-D1Féminine-poules.png" : undefined}
                                     externalDataReady={poule.value === 'A' ? dataReady : undefined}
                                 />
                             </PouleContent>
@@ -122,14 +122,14 @@ export default function LeagueThree() {
             <StandingPoolCapture
                 ref={standingCaptureRef}
                 logoUrl={getSupabaseImageUrl('medias/icons/logo_no.png')}
-                title="Classement Ligue 3 / 2025-2026"
+                title="Classement D1 Féminine / 2025-2026"
                 subtitle="www.bencofoot.com"
                 pouleAStanding={standingPouleA}
                 pouleBStanding={standingPouleB}
                 pouleALabel="A"
                 pouleBLabel="B"
-                captionGreen="Promu en Ligue 2"
-                captionRed="Relégation en division départementale"
+                captionGreen="Finaliste D1"
+                captionRed="Relégation en D2 Féminine"
             />
 
             <Footer />

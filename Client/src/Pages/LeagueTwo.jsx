@@ -8,6 +8,7 @@ import Schedule from "../Components/Schedule";
 import { supabase } from "../Functions/SupabaseClient"
 import Standing from "../Components/Standing";
 import Section404 from "../Components/Section404";
+import { useRef } from "react";
 
 export default () => {
     const tabItems = [
@@ -15,6 +16,8 @@ export default () => {
         { value: "classement", label: "CLASSEMENT" },
         { value: "stats", label: "STATS" }
     ];
+
+    const scheduleTableRef = useRef(null);
 
     const fetchLeague2Matches = async () => {
         const { data, error } = await supabase
@@ -53,16 +56,25 @@ export default () => {
                         totalJournees={34}
                         showPhaseFilter={true}
                         showTeamFilter={true}
+                        tableRef={scheduleTableRef}
+                        logoUrl={getSupabaseImageUrl('medias/icons/logo_no.png')}
+                        title="Celtiis Ligue 2 / 2025-2026"
+                        subtitle="www.bencofoot.com"
+                        externalDownloadFilename="calendrier-ligue2-homme.png"
                     />
                 </TabContent>
 
                 <TabContent value="classement">
                     <Standing
                         title="Classement Ligue 2"
+                        titleCapture="Classement Celtiis Ligue 2 / 2025-2026"
                         supabaseQuery={fetchLeague2Standing}
+                        logoUrl={getSupabaseImageUrl('medias/icons/logo_no.png')}
+                        subtitle="www.bencofoot.com"
                         caption_green="Champion / Promu en Ligue 1"
                         caption_yellow="Promu en Ligue 1"
                         caption_red="Relégation en Ligue 3"
+                        externalDownloadFilename="classement-ligue2-homme.png"
                     />
                 </TabContent>
 
