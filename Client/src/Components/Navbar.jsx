@@ -28,7 +28,8 @@ export default () => {
                 { title: "Ligue 1", path: "/LeagueOne" },
                 { title: "Ligue 2", path: "/LeagueTwo" },
                 { title: "Ligue 3", path: "/LeagueThree" },
-                { title: "D1 Féminine", path: "/DivisionOne" }
+                { title: "D1 Féminine", path: "/DivisionOne" },
+                { title: "D2 Féminine", path: "/DivisionTwo" }
             ]
         },
         { title: "Mercato", path: "/mercato" },
