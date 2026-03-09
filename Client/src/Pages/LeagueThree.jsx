@@ -12,6 +12,7 @@ import TitleBis from "../assets/TitleBis";
 import StandingPool from "../Components/StandingPool";
 import StandingPoolCapture from "../Components/StandingPoolCapture";
 import CaptureOverlay from "../assets/CaptureOverlay";
+import { Helmet } from "react-helmet-async";
 
 export default function LeagueThree() {
 
@@ -68,8 +69,17 @@ export default function LeagueThree() {
         return data;
     };
 
+    const journeesJoueesA = standingPouleA.length > 0 ? standingPouleA[0].matchs_joues : 0;
+
     return (
         <>
+            <Helmet>
+                <title>Ligue 3 Amateur: calendrier, résultats et classement | BencoFoot</title>
+                <meta
+                    name="description"
+                    content="Retrouvez le calendrier, les résultats, le classement et le calendrier de la Ligue 3 Amateur du Bénin sur Bencofoot."
+                />
+            </Helmet>
             <Navbar />
             <CaptureOverlay isCapturing={isCapturing} />
             <HeroStatiq src={getSupabaseImageUrl('medias/banner/sobemap_un.jpg')} alt="banner" />
@@ -85,7 +95,7 @@ export default function LeagueThree() {
                                 {/* Chaque Schedule gère sa propre capture — comme LeagueOne */}
                                 <Schedule
                                     supabaseQuery={fetchMatchesByPoule(poule.value)}
-                                    totalJournees={poule.value === 'A' ? 9 : 7}
+                                    totalJournees={poule.value === 'A' ? 18 : 14}
                                     showPhaseFilter={true}
                                     showTeamFilter={true}
                                     logoUrl={getSupabaseImageUrl('medias/icons/logo_no.png')}
@@ -109,7 +119,7 @@ export default function LeagueThree() {
                                     captionRed="Relégation en division départementale"
                                     externalDownloadRef={poule.value === 'A' ? standingCaptureRef : undefined}
                                     externalOnCapturing={poule.value === 'A' ? setIsCapturing : undefined}
-                                    externalDownloadFilename={poule.value === 'A' ? "classement-ligue3-poules.png" : undefined}
+                                    externalDownloadFilename={poule.value === 'A' ? `classement-ligue3-j${journeesJoueesA}.png` : undefined}
                                     externalDataReady={poule.value === 'A' ? dataReady : undefined}
                                 />
                             </PouleContent>

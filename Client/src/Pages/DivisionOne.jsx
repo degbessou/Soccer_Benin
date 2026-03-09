@@ -12,6 +12,7 @@ import TitleBis from "../assets/TitleBis";
 import StandingPool from "../Components/StandingPool";
 import StandingPoolCapture from "../Components/StandingPoolCapture";
 import CaptureOverlay from "../assets/CaptureOverlay";
+import { Helmet } from "react-helmet-async";
 
 export default function DivisionOne() {
 
@@ -68,8 +69,18 @@ export default function DivisionOne() {
         return data;
     };
 
+
+    const journeesJoueesA = standingPouleA.length > 0 ? standingPouleA[0].matchs_joues : 0;
+
     return (
         <>
+            <Helmet>
+                <title>D1 Féminine : calendrier, résultats et classement | BencoFoot</title>
+                <meta
+                    name="description"
+                    content="Retrouvez le calendrier, les résultats, le classement et le calendrier de la D1 Féminine du Bénin sur Bencofoot."
+                />
+            </Helmet>
             <Navbar />
             <CaptureOverlay isCapturing={isCapturing} />
             <HeroStatiq src={getSupabaseImageUrl('medias/banner/sobemap_un.jpg')} alt="banner" />
@@ -109,7 +120,7 @@ export default function DivisionOne() {
                                     captionRed="Relégation en D2 Féminine"
                                     externalDownloadRef={poule.value === 'A' ? standingCaptureRef : undefined}
                                     externalOnCapturing={poule.value === 'A' ? setIsCapturing : undefined}
-                                    externalDownloadFilename={poule.value === 'A' ? "classement-D1Féminine-poules.png" : undefined}
+                                    externalDownloadFilename={poule.value === 'A' ? `classement-ligue3-j${journeesJoueesA}.png` : undefined}
                                     externalDataReady={poule.value === 'A' ? dataReady : undefined}
                                 />
                             </PouleContent>

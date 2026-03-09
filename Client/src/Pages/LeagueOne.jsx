@@ -8,7 +8,8 @@ import Schedule from "../Components/Schedule";
 import { supabase } from "../Functions/SupabaseClient"
 import Standing from "../Components/Standing";
 import Section404 from "../Components/Section404";
-import { useRef } from "react";
+import { useRef, useState } from "react";
+import { Helmet } from "react-helmet-async";
 
 
 export default () => {
@@ -21,6 +22,8 @@ export default () => {
     // Créer des refs distinctes pour chaque composant
     const scheduleTableRef = useRef(null);
     //const standingTableRef = useRef(null);
+
+    const [journeesJouees, setJourneesJouees] = useState(0)
 
     const fetchLeague1Matches = async () => {
         const { data, error } = await supabase
@@ -47,6 +50,13 @@ export default () => {
 
     return (
         <>
+            <Helmet>
+                <title>Celtiis Ligue 1 : calendrier, résultats et classement | Bencofoot</title>
+                <meta
+                    name="description"
+                    content="Suivez la Celtiis Ligue 1 sur BencoFoot : calendrier des matchs, résultats, classement et statistiques de la première ligue béninoise."
+                />
+            </Helmet>
             <Navbar />
             <HeroStatiq src={getSupabaseImageUrl('medias/banner/cotonfc_banner.jpg')} alt="banner" />
             <TitleBis title="Tout savoir sur la Celtiis Ligue 1 2025-2026" />
@@ -62,7 +72,7 @@ export default () => {
                         logoUrl={getSupabaseImageUrl('medias/icons/logo_no.png')}
                         title="Celtiis Ligue 1 / 2025-2026"
                         subtitle="www.bencofoot.com"
-                        externalDownloadFilename="calendrier-ligue1-homme.png"
+                        externalDownloadFilename="calendrier-ligue1.png"
                     />
                 </TabContent>
                 <TabContent value="classement">
@@ -76,7 +86,8 @@ export default () => {
                             caption_green="Champion / Ligue des Champions CAF"
                             caption_yellow="Coupe de la Confédération CAF"
                             caption_red="Relégation en Ligue 2"
-                            externalDownloadFilename="classement-ligue1-homme.png"
+                            onDataLoaded={(data) => setJourneesJouees(data[0]?.matchs_joues ?? 0)}
+                            externalDownloadFilename={`classement-ligue1-j${journeesJouees}.png`}
                         />
                     </div>
                 </TabContent>

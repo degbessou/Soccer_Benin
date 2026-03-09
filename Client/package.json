@@ -21,6 +21,7 @@
     "i": "^0.3.7",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
+    "react-helmet-async": "^3.0.0",
     "react-image-file-resizer": "^0.4.8",
     "react-router-dom": "^7.9.1",
     "router": "^2.2.0",
