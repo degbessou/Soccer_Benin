@@ -12,6 +12,7 @@ import TitleBis from "../assets/TitleBis";
 import StandingPool from "../Components/StandingPool";
 import StandingPoolCapture from "../Components/StandingPoolCapture";
 import CaptureOverlay from "../assets/CaptureOverlay";
+import { Helmet } from "react-helmet-async";
 
 export default function LeagueThree() {
 
@@ -70,6 +71,13 @@ export default function LeagueThree() {
 
     return (
         <>
+            <Helmet>
+                <title>Ligue 3 Amateur: calendrier, résultats et classement | BencoFoot</title>
+                <meta
+                    name="description"
+                    content="Retrouvez le calendrier, les résultats, le classement et le calendrier de la Ligue 3 Amateur du Bénin sur Bencofoot."
+                />
+            </Helmet>
             <Navbar />
             <CaptureOverlay isCapturing={isCapturing} />
             <HeroStatiq src={getSupabaseImageUrl('medias/banner/sobemap_un.jpg')} alt="banner" />

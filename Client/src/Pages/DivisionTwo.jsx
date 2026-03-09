@@ -12,6 +12,7 @@ import TitleBis from "../assets/TitleBis";
 import StandingPool from "../Components/StandingPool";
 import StandingPoolCapture from "../Components/StandingPoolCapture";
 import CaptureOverlay from "../assets/CaptureOverlay";
+import { Helmet } from "react-helmet-async";
 
 export default function DivisionTwo() {
 
@@ -70,6 +71,13 @@ export default function DivisionTwo() {
 
     return (
         <>
+            <Helmet>
+                <title>D2 Féminine : calendrier, résultats et classement | BencoFoot</title>
+                <meta
+                    name="description"
+                    content="Retrouvez le calendrier, les résultats, le classement et le calendrier de la D2 Féminine du Bénin sur Bencofoot."
+                />
+            </Helmet>
             <Navbar />
             <CaptureOverlay isCapturing={isCapturing} />
             <HeroStatiq src={getSupabaseImageUrl('medias/banner/sobemap_un.jpg')} alt="banner" />

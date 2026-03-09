@@ -9,6 +9,7 @@ import { supabase } from "../Functions/SupabaseClient"
 import Standing from "../Components/Standing";
 import Section404 from "../Components/Section404";
 import { useRef } from "react";
+import { Helmet } from "react-helmet-async";
 
 export default () => {
     const tabItems = [
@@ -44,6 +45,13 @@ export default () => {
 
     return (
         <>
+            <Helmet>
+                <title>Celtiis Ligue 2 : calendrier, résultats et classement | Bencofoot</title>
+                <meta
+                    name="description"
+                    content="Retrouvez le calendrier, les résultats, le classement et le calendrier de la Celtiis Ligue 2 du Bénin sur Bencofoot."
+                />
+            </Helmet>
             <Navbar />
             <HeroStatiq src={getSupabaseImageUrl('medias/banner/cotonfc_banner.jpg')} alt="banner" />
             <TitleBis title="Tout savoir sur la Celtiis Ligue 2 2025-2026" />
