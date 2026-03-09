@@ -69,6 +69,9 @@ export default function DivisionTwo() {
         return data;
     };
 
+
+    const journeesJoueesA = standingPouleA.length > 0 ? standingPouleA[0].matchs_joues : 0;
+
     return (
         <>
             <Helmet>
@@ -117,7 +120,7 @@ export default function DivisionTwo() {
                                     captionRed="Relégation en Division départementale"
                                     externalDownloadRef={poule.value === 'A' ? standingCaptureRef : undefined}
                                     externalOnCapturing={poule.value === 'A' ? setIsCapturing : undefined}
-                                    externalDownloadFilename={poule.value === 'A' ? "classement-D2Féminine-poules.png" : undefined}
+                                    externalDownloadFilename={poule.value === 'A' ? `classement-ligue3-j${journeesJoueesA}.png` : undefined}
                                     externalDataReady={poule.value === 'A' ? dataReady : undefined}
                                 />
                             </PouleContent>

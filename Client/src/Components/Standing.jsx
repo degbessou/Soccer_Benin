@@ -12,6 +12,7 @@ export default function Standing({
     caption_red,
     logoUrl,
     subtitle,
+    onDataLoaded,
     // Props mode externe (2 poules) — non utilisées ici mais prêtes pour StandingPool
     externalDownloadRef,
     externalOnCapturing,
@@ -31,11 +32,13 @@ export default function Standing({
             if (supabaseQuery) {
                 const data = await supabaseQuery()
                 setStanding(data || [])
+                onDataLoaded?.(data || [])
             }
             setLoading(false)
         }
         fetchStanding()
     }, [supabaseQuery])
+
 
     if (loading) {
         return (

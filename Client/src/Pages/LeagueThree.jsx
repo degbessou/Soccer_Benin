@@ -69,6 +69,8 @@ export default function LeagueThree() {
         return data;
     };
 
+    const journeesJoueesA = standingPouleA.length > 0 ? standingPouleA[0].matchs_joues : 0;
+
     return (
         <>
             <Helmet>
@@ -93,7 +95,7 @@ export default function LeagueThree() {
                                 {/* Chaque Schedule gère sa propre capture — comme LeagueOne */}
                                 <Schedule
                                     supabaseQuery={fetchMatchesByPoule(poule.value)}
-                                    totalJournees={poule.value === 'A' ? 9 : 7}
+                                    totalJournees={poule.value === 'A' ? 18 : 14}
                                     showPhaseFilter={true}
                                     showTeamFilter={true}
                                     logoUrl={getSupabaseImageUrl('medias/icons/logo_no.png')}
@@ -117,7 +119,7 @@ export default function LeagueThree() {
                                     captionRed="Relégation en division départementale"
                                     externalDownloadRef={poule.value === 'A' ? standingCaptureRef : undefined}
                                     externalOnCapturing={poule.value === 'A' ? setIsCapturing : undefined}
-                                    externalDownloadFilename={poule.value === 'A' ? "classement-ligue3-poules.png" : undefined}
+                                    externalDownloadFilename={poule.value === 'A' ? `classement-ligue3-j${journeesJoueesA}.png` : undefined}
                                     externalDataReady={poule.value === 'A' ? dataReady : undefined}
                                 />
                             </PouleContent>

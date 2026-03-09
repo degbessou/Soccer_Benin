@@ -8,7 +8,7 @@ import Schedule from "../Components/Schedule";
 import { supabase } from "../Functions/SupabaseClient"
 import Standing from "../Components/Standing";
 import Section404 from "../Components/Section404";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { Helmet } from "react-helmet-async";
 
 
@@ -22,6 +22,8 @@ export default () => {
     // Créer des refs distinctes pour chaque composant
     const scheduleTableRef = useRef(null);
     //const standingTableRef = useRef(null);
+
+    const [journeesJouees, setJourneesJouees] = useState(0)
 
     const fetchLeague1Matches = async () => {
         const { data, error } = await supabase
@@ -70,7 +72,7 @@ export default () => {
                         logoUrl={getSupabaseImageUrl('medias/icons/logo_no.png')}
                         title="Celtiis Ligue 1 / 2025-2026"
                         subtitle="www.bencofoot.com"
-                        externalDownloadFilename="calendrier-ligue1-homme.png"
+                        externalDownloadFilename="calendrier-ligue1.png"
                     />
                 </TabContent>
                 <TabContent value="classement">
@@ -84,7 +86,8 @@ export default () => {
                             caption_green="Champion / Ligue des Champions CAF"
                             caption_yellow="Coupe de la Confédération CAF"
                             caption_red="Relégation en Ligue 2"
-                            externalDownloadFilename="classement-ligue1-homme.png"
+                            onDataLoaded={(data) => setJourneesJouees(data[0]?.matchs_joues ?? 0)}
+                            externalDownloadFilename={`classement-ligue1-j${journeesJouees}.png`}
                         />
                     </div>
                 </TabContent>
