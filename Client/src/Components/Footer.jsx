@@ -26,7 +26,7 @@ export default () => {
                         © {new Date().getFullYear()} BencoFoot.
                         <span className="hidden md:inline"> • All rights reserved. </span>
                         <span className="ml-1 px-2 py-0.5 text-[10px] bg-yellow-700 text-white rounded align-top -translate-y-1">
-                            v2.0.0 Zidane
+                            v2.0.0
                         </span>
                     </p>
                     <ul className="flex flex-wrap items-center gap-4 mt-2 sm:mt-0">
