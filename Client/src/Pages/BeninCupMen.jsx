@@ -7,31 +7,20 @@ import Tabs, { TabsList, TabContent } from '../Components/Tabs'
 import ScheduleTournament from "../Components/ScheduleTournament";
 import { supabase } from "../Functions/SupabaseClient"
 import Section404 from "../Components/Section404";
-import { useRef, useState } from "react";
 import { Helmet } from "react-helmet-async";
 
-
-export default () => {
+export default function CoupeDuBenin() {
     const tabItems = [
         { value: "calendrier", label: "CALENDRIER" },
         { value: "stats", label: "STATS" }
     ];
 
-    // Créer des refs distinctes pour chaque composant
-    const scheduleTableRef = useRef(null);
-    //const standingTableRef = useRef(null);
-
-    const [journeesJouees, setJourneesJouees] = useState(0)
-
-    const fetchLeague1Matches = async () => {
-        const { data, error } = await supabase
-            .from('matchs')
+    const fetchCoupeMatches = async () => {
+        const { data } = await supabase
+            .from('matchs_coupe')
             .select('*')
-            .eq('nom_saison', 'Saison 2025-2026')
-            .eq('ligue', 'Celtiis Ligue 1')
-            .order('numero', { ascending: true })
+            .eq('nom_saison', 'Coupe 2025-2026')
             .order('date_match', { ascending: true })
-
         return data
     }
 
@@ -51,21 +40,18 @@ export default () => {
                 <TabsList items={tabItems} />
                 <TabContent value="calendrier">
                     <ScheduleTournament
-                        supabaseQuery={fetchLeague1Matches}
-                        tableRef={scheduleTableRef}
+                        supabaseQuery={fetchCoupeMatches}
                         logoUrl={getSupabaseImageUrl('medias/icons/logo_no.png')}
                         title="Coupe du Bénin / 2025-2026"
                         subtitle="www.bencofoot.com"
-                        externalDownloadFilename="calendrier-ligue1.png"
+                        externalDownloadFilename="coupe-benin-25-26.png"
                     />
                 </TabContent>
-
                 <TabContent value="stats">
                     <Section404 />
                 </TabContent>
             </Tabs>
             <Footer />
-
         </>
     )
 }

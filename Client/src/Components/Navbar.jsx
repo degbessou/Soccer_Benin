@@ -29,7 +29,8 @@ export default () => {
                 { title: "Ligue 2", path: "/LeagueTwo" },
                 { title: "Ligue 3", path: "/LeagueThree" },
                 { title: "D1 Féminine", path: "/DivisionOne" },
-                { title: "D2 Féminine", path: "/DivisionTwo" }
+                { title: "D2 Féminine", path: "/DivisionTwo" },
+                { title: "Coupe du Bénin", path: "/BeninCupMen" }
             ]
         },
         { title: "Mercato", path: "/mercato" },
