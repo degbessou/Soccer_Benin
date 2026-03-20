@@ -19,8 +19,9 @@ export default function CoupeDuBenin() {
         const { data } = await supabase
             .from('matchs_coupe')
             .select('*')
-            .eq('nom_saison', 'Coupe 2025-2026')
+            .eq('nom_saison', 'Saison 2025-2026')
             .order('date_match', { ascending: true })
+
         return data
     }
 
