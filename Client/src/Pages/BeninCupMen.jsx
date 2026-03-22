@@ -39,6 +39,39 @@ export default function CoupeDuBenin() {
             <TitleBis title="Tout savoir sur la Coupe du Bénin 2025-2026" />
             <Tabs defaultTab="calendrier">
                 <TabsList items={tabItems} />
+                <div> <h2 class="py-2 text-lg underline underline-offset-3">
+                    Déroulement de la <a class="font-semibold">Coupe du Bénin</a> 2025-2026:
+                </h2>
+
+                    <p className="py-2">
+                        <ul className="space-y-2">
+                            <li className="grid grid-cols-[130px_1fr] gap-2">
+                                <span className="font-semibold text-right italic">1er tour :</span>
+                                <span>28 équipes s’affrontent en match unique à élimination directe ; 14 sont éliminées tandis que 14 se qualifient.</span>
+                            </li>
+
+                            <li className="grid grid-cols-[130px_1fr] gap-2">
+                                <span className="font-semibold text-right italic">2e tour :</span>
+                                <span>14 équipes disputent un match unique à élimination directe ; 7 obtiennent leur qualification et un meilleur perdant est repêché.</span>
+                            </li>
+
+                            <li className="grid grid-cols-[130px_1fr] gap-2">
+                                <span className="font-semibold text-right italic">Quart de finale :</span>
+                                <span>Place aux quarts de finale avec la participation de 8 équipes.</span>
+                            </li>
+
+                            <li className="grid grid-cols-[130px_1fr] gap-2">
+                                <span className="font-semibold text-right italic">Demi-finale :</span>
+                                <span>Les demi-finales réunissent les 4 équipes restantes.</span>
+                            </li>
+
+                            <li className="grid grid-cols-[130px_1fr] gap-2">
+                                <span className="font-semibold text-right italic">Finale :</span>
+                                <span>Les deux équipes victorieuses des demi-finales s’affrontent pour remporter le titre de champion.</span>
+                            </li>
+                        </ul>
+                    </p>
+                </div>
                 <TabContent value="calendrier">
                     <ScheduleTournament
                         supabaseQuery={fetchCoupeMatches}
