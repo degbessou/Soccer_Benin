@@ -21,6 +21,7 @@ export default function CoupeDuBenin() {
             .select('*')
             .eq('nom_saison', 'Saison 2025-2026')
             .order('date_match', { ascending: true })
+            .order('id_match', { ascending: true })
 
         return data
     }

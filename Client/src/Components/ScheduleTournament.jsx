@@ -2,8 +2,8 @@ import { useState, useEffect, useRef } from 'react'
 import * as Select from "@radix-ui/react-select"
 import React from "react"
 import DownloadButton from '../assets/DownloadButton'
-import ScheduleCapture from './ScheduleCapture'
 import CaptureOverlay from '../assets/CaptureOverlay'
+import ScheduleCaptureTournament from './ScheduleCaptureTournament'
 
 const TOURS = [
     { value: 'all', label: 'Tous les tours', order: 0 },
@@ -55,10 +55,7 @@ export default function ScheduleTournament({
                 })
 
                 setMatches(matchesWithStatus)
-
-                // Sélectionner automatiquement le tour en cours
-                const currentTour = getCurrentTour(matchesWithStatus)
-                if (currentTour) setSelectedTour(currentTour)
+                setSelectedTour(getCurrentTour(matchesWithStatus))
             }
             setLoading(false)
         }
@@ -66,29 +63,24 @@ export default function ScheduleTournament({
     }, [supabaseQuery])
 
     const getCurrentTour = (matchesData) => {
-        // Ordre des tours pour trouver le tour en cours
         const orderedTours = TOURS.filter(t => t.value !== 'all').sort((a, b) => a.order - b.order)
         for (let tour of orderedTours) {
             const matchsTour = matchesData.filter(m => m.phase === tour.value)
             if (matchsTour.length === 0) continue
-            // Si au moins un match du tour n'est pas terminé → c'est le tour en cours
             const hasUnfinished = matchsTour.some(m => m.statut !== 'finished' && m.statut !== 'postponed')
             if (hasUnfinished) return tour.value
         }
-        // Tous les matchs sont terminés → afficher la Finale
         return 'Finale'
     }
 
-    // Tours disponibles dans les données (pour ne pas afficher des tours vides)
     const toursDisponibles = TOURS.filter(t =>
         t.value === 'all' || matches.some(m => m.phase === t.value)
     )
 
-    const filteredMatches = matches.filter(match => {
-        return selectedTour === 'all' || match.phase === selectedTour
-    })
+    const filteredMatches = matches.filter(match =>
+        selectedTour === 'all' || match.phase === selectedTour
+    )
 
-    // Grouper par tour pour l'affichage
     const groupedByTour = filteredMatches.reduce((acc, match) => {
         const key = match.phase || 'Inconnu'
         if (!acc[key]) acc[key] = []
@@ -96,23 +88,26 @@ export default function ScheduleTournament({
         return acc
     }, {})
 
-    // Ordre d'affichage des tours
-    // Trier les tours via TOURS.order — source unique de vérité
     const sortedTourEntries = Object.entries(groupedByTour).sort(([a], [b]) => {
         const orderA = TOURS.find(t => t.value === a)?.order ?? 99
         const orderB = TOURS.find(t => t.value === b)?.order ?? 99
         return orderA - orderB
     })
 
-    // Pour ScheduleCapture : groupedMatches avec numéro fictif (index du tour)
-    const groupedMatchesForCapture = filteredMatches.reduce((acc, match) => {
-        const key = match.phase || 'Inconnu'
-        if (!acc[key]) acc[key] = []
-        acc[key].push(match)
-        return acc
-    }, {})
-
     const filtersInfo = selectedTour === 'all' ? 'Tous les tours' : selectedTour
+
+    const statutLabel = (statut) =>
+        statut === 'finished' ? 'Terminé' :
+            statut === 'live' ? 'En cours' :
+                statut === 'postponed' ? 'Reporté' :
+                    statut === 'pending' ? 'En attente' : 'À venir'
+
+    const statutClass = (statut) =>
+        statut === 'finished' ? 'bg-green-100 text-green-700' :
+            statut === 'live' ? 'bg-red-100 text-red-700' :
+                statut === 'postponed' ? 'bg-orange-100 text-orange-700' :
+                    statut === 'pending' ? 'bg-gray-100 text-gray-700' :
+                        'bg-yellow-100 text-yellow-700'
 
     return (
         <>
@@ -122,8 +117,6 @@ export default function ScheduleTournament({
                 {/* Filtres */}
                 <div className="mb-8">
                     <div className="flex flex-wrap items-center gap-4">
-
-                        {/* Filtre Tour */}
                         <div className="flex items-center gap-2">
                             <Select.Root value={selectedTour} onValueChange={setSelectedTour}>
                                 <Select.Trigger className="w-48 inline-flex items-center justify-between px-3 py-2 text-sm text-yellow-600 bg-white border border-gray-300 rounded-lg shadow-sm outline-none focus:ring-offset-2 focus:ring-yellow-600 focus:ring-2">
@@ -149,7 +142,6 @@ export default function ScheduleTournament({
                             </Select.Root>
                         </div>
 
-                        {/* Bouton téléchargement */}
                         <div className='flex-1 flex justify-end'>
                             <DownloadButton
                                 refToCapture={captureRef}
@@ -184,12 +176,17 @@ export default function ScheduleTournament({
                                                 <tbody className="divide-y divide-gray-300">
                                                     {tourMatches.map(match => (
                                                         <tr key={match.id_match} className="hover:bg-gray-50">
+
                                                             {/* Desktop */}
                                                             <td className="hidden md:table-cell text-gray-500 px-6 py-4 whitespace-nowrap">
                                                                 {new Date(match.date_match).toLocaleDateString('fr-FR', { weekday: 'short', day: '2-digit', month: 'short' })}
                                                             </td>
-                                                            <td className="hidden md:table-cell text-gray-500 px-6 py-4 whitespace-nowrap">{match.stade}</td>
-                                                            <td className="hidden md:table-cell px-6 py-4 text-right font-medium">{match.equipe_domicile}</td>
+                                                            <td className="hidden md:table-cell text-gray-500 px-6 py-4 whitespace-nowrap">
+                                                                {match.stade}
+                                                            </td>
+                                                            <td className="hidden md:table-cell px-6 py-4 text-right font-medium">
+                                                                {match.equipe_domicile}
+                                                            </td>
                                                             <td className="hidden md:table-cell px-6 py-4 text-center">
                                                                 {match.statut === 'finished' ? (
                                                                     <div className="flex flex-col items-center">
@@ -206,18 +203,12 @@ export default function ScheduleTournament({
                                                                     <span className="text-gray-400">vs</span>
                                                                 )}
                                                             </td>
-                                                            <td className="hidden md:table-cell px-6 py-4 font-medium">{match.equipe_exterieur}</td>
+                                                            <td className="hidden md:table-cell px-6 py-4 font-medium">
+                                                                {match.equipe_exterieur}
+                                                            </td>
                                                             <td className="hidden md:table-cell px-6 py-4 text-center">
-                                                                <span className={`px-3 py-1 rounded-full text-xs font-medium ${match.statut === 'finished' ? 'bg-green-100 text-green-700' :
-                                                                    match.statut === 'live' ? 'bg-red-100 text-red-700' :
-                                                                        match.statut === 'postponed' ? 'bg-orange-100 text-orange-700' :
-                                                                            match.statut === 'pending' ? 'bg-gray-100 text-gray-700' :
-                                                                                'bg-yellow-100 text-yellow-700'
-                                                                    }`}>
-                                                                    {match.statut === 'finished' ? 'Terminé' :
-                                                                        match.statut === 'live' ? 'En cours' :
-                                                                            match.statut === 'postponed' ? 'Reporté' :
-                                                                                match.statut === 'pending' ? 'En attente' : 'À venir'}
+                                                                <span className={`px-3 py-1 rounded-full text-xs font-medium ${statutClass(match.statut)}`}>
+                                                                    {statutLabel(match.statut)}
                                                                 </span>
                                                             </td>
 
@@ -245,22 +236,15 @@ export default function ScheduleTournament({
                                                                             ) : (
                                                                                 <span className="text-gray-400 text-sm">vs</span>
                                                                             )}
-                                                                            <span className={`mt-1 px-2 py-0.5 rounded-full text-xs font-medium ${match.statut === 'finished' ? 'bg-green-100 text-green-700' :
-                                                                                match.statut === 'live' ? 'bg-red-100 text-red-700' :
-                                                                                    match.statut === 'postponed' ? 'bg-orange-100 text-orange-700' :
-                                                                                        match.statut === 'pending' ? 'bg-gray-100 text-gray-700' :
-                                                                                            'bg-yellow-100 text-yellow-700'
-                                                                                }`}>
-                                                                                {match.statut === 'finished' ? 'Terminé' :
-                                                                                    match.statut === 'live' ? 'En cours' :
-                                                                                        match.statut === 'postponed' ? 'Reporté' :
-                                                                                            match.statut === 'pending' ? 'En attente' : 'À venir'}
+                                                                            <span className={`mt-1 px-2 py-0.5 rounded-full text-xs font-medium ${statutClass(match.statut)}`}>
+                                                                                {statutLabel(match.statut)}
                                                                             </span>
                                                                         </div>
                                                                         <div className="text-sm font-medium flex-1">{match.equipe_exterieur}</div>
                                                                     </div>
                                                                 </div>
                                                             </td>
+
                                                         </tr>
                                                     ))}
                                                 </tbody>
@@ -272,15 +256,14 @@ export default function ScheduleTournament({
                         </div>
                     )}
 
-                    {/* ScheduleCapture interne */}
                     {showInternalCapture && (
-                        <ScheduleCapture
+                        <ScheduleCaptureTournament
                             ref={internalCaptureRef}
                             logoUrl={logoUrl}
                             title={title}
                             subtitle={subtitle}
                             filtersInfo={filtersInfo}
-                            groupedMatches={groupedMatchesForCapture}
+                            groupedMatches={groupedByTour}
                         />
                     )}
                 </div>
