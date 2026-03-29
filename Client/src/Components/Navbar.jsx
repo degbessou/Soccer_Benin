@@ -1,12 +1,13 @@
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { getSupabaseImageUrl } from '../assets/Helpers'
+import { MovingBorderDemo } from './MovingBorder'
 import Newsletter from './Newsletter'
 
 export default () => {
     const [state, setState] = useState(false)
     const [openDropdown, setOpenDropdown] = useState(null)
-    const [isNewsletterOpen, setIsNewsletterOpen] = useState(false)
+    //const [isNewsletterOpen, setIsNewsletterOpen] = useState(false)
     const navigate = useNavigate();
 
     const navigation = [
@@ -44,6 +45,7 @@ export default () => {
             ]
         },
         { title: "Mercato", path: "/mercato" },
+        //{ title: "Match en direct", path: "/live" },
         { title: "Archives", path: "/page404" }
     ]
 
@@ -73,7 +75,7 @@ export default () => {
     return (
         <>
             <nav className={`bg-white pb-5 md:text-sm ${state ? "shadow-lg rounded-xl border mx-2 mt-2 md:shadow-none md:border-none md:mx-2 md:mt-0" : ""}`}>
-                <div className="gap-x-14 items-center max-w-screen-lg mx-auto px-4 md:flex md:px-8">
+                <div className="gap-x-4 items-center max-w-screen-lg mx-auto px-4 md:flex md:px-8">
                     <div className="flex items-center justify-between py-5 md:block">
                         <div className="w-32 h-32">
                             <a href="/" onClick={(e) => { e.preventDefault(); handleNavigation("/"); }}>
@@ -193,7 +195,7 @@ export default () => {
                             ))}
                         </ul >
 
-                        <div className="flex-1 gap-x-6 items-center justify-end mt-6 space-y-6 md:flex md:space-y-0 md:mt-0">
+                        {/*                        <div className="flex-1 gap-x-6 items-center justify-end mt-6 space-y-6 md:flex md:space-y-0 md:mt-0">
                             <button
                                 onClick={() => setIsNewsletterOpen(true)}
                                 className="flex items-center justify-center gap-x-1 py-2 px-4 text-white font-medium bg-yellow-800 hover:bg-yellow-700 active:bg-yellow-900 rounded-full md:inline-flex"
@@ -203,12 +205,15 @@ export default () => {
                                     <path fillRule="evenodd" d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z" clipRule="evenodd" />
                                 </svg>
                             </button>
+                        </div>*/}
+                        <div className="mt-4 px-2 md:mt-0 md:ml-auto">
+                            <MovingBorderDemo text="Match en direct" />
                         </div>
                     </div >
                 </div >
             </nav >
 
-            <Newsletter isOpen={isNewsletterOpen} setIsOpen={setIsNewsletterOpen} />
+            {/*<Newsletter isOpen={isNewsletterOpen} setIsOpen={setIsNewsletterOpen} />*/}
         </>
     )
 }
