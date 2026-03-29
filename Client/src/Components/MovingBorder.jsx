@@ -7,7 +7,7 @@ export function MovingBorderDemo({ text, className, onClick }) {
             <Button
                 borderRadius="1.75rem"
                 className="bg-white text-red-700 font-bold text-sm"
-            //onClick={onClick}
+                onClick={onClick}
             >
                 {text}
             </Button>

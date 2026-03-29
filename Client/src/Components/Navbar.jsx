@@ -45,7 +45,6 @@ export default () => {
             ]
         },
         { title: "Mercato", path: "/mercato" },
-        //{ title: "Match en direct", path: "/live" },
         { title: "Archives", path: "/page404" }
     ]
 
@@ -75,7 +74,7 @@ export default () => {
     return (
         <>
             <nav className={`bg-white pb-5 md:text-sm ${state ? "shadow-lg rounded-xl border mx-2 mt-2 md:shadow-none md:border-none md:mx-2 md:mt-0" : ""}`}>
-                <div className="gap-x-4 items-center max-w-screen-lg mx-auto px-4 md:flex md:px-8">
+                <div className="gap-x-6 items-center max-w-screen-lg mx-auto px-4 md:flex md:px-8">
                     <div className="flex items-center justify-between py-5 md:block">
                         <div className="w-32 h-32">
                             <a href="/" onClick={(e) => { e.preventDefault(); handleNavigation("/"); }}>
@@ -102,7 +101,7 @@ export default () => {
                     </div>
 
                     <div className={`flex-1 items-center mt-8 md:mt-0 md:flex ${state ? 'block' : 'hidden'}`}>
-                        <ul className="justify-center items-center space-y-6 px-2 md:flex md:space-x-6 md:space-y-0">
+                        <ul className="justify-center items-center gap-x-4 space-y-6 px-2 md:flex md:space-x-6 md:space-y-0">
                             {navigation.map((item, idx) => (
                                 <li key={idx} className="relative dropdown-item z-50">
                                     {item.submenu ? (
@@ -207,7 +206,10 @@ export default () => {
                             </button>
                         </div>*/}
                         <div className="mt-4 px-2 md:mt-0 md:ml-auto">
-                            <MovingBorderDemo text="Match en direct" />
+                            <MovingBorderDemo
+                                text="Match en direct"
+                                onClick={() => handleNavigation("/live")}
+                            />
                         </div>
                     </div >
                 </div >
