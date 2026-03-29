@@ -19,6 +19,7 @@ import PrivacyPolicy from "./Pages/PrivacyPolicy";
 import DivisionOne from "./Pages/DivisionOne";
 import DivisionTwo from "./Pages/DivisionTwo";
 import BeninCupMen from "./Pages/BeninCupMen";
+import Live from "./Pages/Live";
 
 
 
@@ -44,6 +45,7 @@ function App() {
                 <Route exact path="/DivisionOne" Component={DivisionOne} />
                 <Route exact path="/DivisionTwo" Component={DivisionTwo} />
                 <Route exact path="/BeninCupMen" Component={BeninCupMen} />
+                <Route exact path="/Live" Component={Live} />
             </Routes>
             <Analytics />
         </Router>
