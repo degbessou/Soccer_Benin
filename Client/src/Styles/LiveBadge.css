@@ -1,0 +1,66 @@
+/* LiveBadge.css */
+@keyframes pulse-dot {
+
+    0%,
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 0.3;
+        transform: scale(0.7);
+    }
+}
+
+@keyframes pulse-bg {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.75;
+    }
+}
+
+@keyframes glow-ring {
+
+    0%,
+    100% {
+        box-shadow: 0 0 0 0px rgba(220, 38, 38, 0.5);
+    }
+
+    50% {
+        box-shadow: 0 0 0 5px rgba(220, 38, 38, 0);
+    }
+}
+
+.live-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    background: #cc1f1f;
+    border-radius: 5px;
+    padding: 5px 12px 5px 9px;
+    animation: pulse-bg 1.8s ease-in-out infinite, glow-ring 1.8s ease-in-out infinite;
+    user-select: none;
+}
+
+.live-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #fff;
+    flex-shrink: 0;
+    animation: pulse-dot 1.8s ease-in-out infinite;
+}
+
+.live-text {
+    font-weight: 800;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    color: #fff;
+    line-height: 1;
+}
