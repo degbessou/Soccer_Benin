@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 const goalkeepersData = [
   {
@@ -113,29 +113,34 @@ const goalkeepersData = [
   },
 ];
 
-const Goalkeepers = () => {
-  const [ongletActif, setOngletActif] = useState("Arrêts");
+const Goalkeepers = ({ title }) => {
+  const [ongletActif, setOngletActif] = useState("Clean Sheets");
+  const [gardienSelectionne, setGardienSelectionne] = useState(null);
 
-  const getValeurStat = (player) => {
-    if (ongletActif === "Arrêts") return player.arrets;
-    if (ongletActif === "Clean Sheets") return player.clean_sheets;
-    return player.arrets;
+  const getValeurStat = (goalkeeper) => {
+    if (ongletActif === "Arrêts") return goalkeeper.arrets;
+    if (ongletActif === "Clean Sheets") return goalkeeper.clean_sheets;
+    return goalkeeper.arrets;
   };
 
   // trier par stat décroissante
-  const playersTries = [...goalkeepersData].sort(
+  const goalkeeperTries = [...goalkeepersData].sort(
     (a, b) => getValeurStat(b) - getValeurStat(a),
   );
 
-  const leader = playersTries[0];
+  useEffect(() => {
+    setGardienSelectionne(null);
+  }, [ongletActif]);
 
-  const onglets = ["Arrêts", "Clean Sheets"];
+  const leaderAffiche = gardienSelectionne || goalkeeperTries[0];
+
+  const onglets = ["Clean Sheets", "Arrêts"];
 
   return (
     <div className="overflow-hidden">
       <div className="pb-3">
         <h2 className="flex items-center text-black text-3xl font-bold tracking-tight">
-          Gardiens{" "}
+          {title}
           <img src="chevron-right.svg" className="h-7 w-7 mt-2" alt="" />
         </h2>
       </div>
@@ -159,58 +164,73 @@ const Goalkeepers = () => {
       <div className="flex flex-col lg:flex-row lg:gap-40 gap-5 mt-10 w-full">
         <div className="lg:w-full flex flex-col items-center text-center">
           <img
-            src={leader.avatar}
-            alt={leader.nom}
+            src={leaderAffiche.avatar}
+            alt={leaderAffiche.nom}
             className="h-40 w-40 object-cover rounded-full"
           />
-          <h1 className="text-4xl font-bold mt-4">{leader.nom}</h1>
+          <h1 className="text-4xl font-bold mt-4">{leaderAffiche.nom}</h1>
           <div className="flex items-center gap-2 font-semibold text-gray-600 text-lg mt-4">
             <img
-              src={leader.teams_logo}
-              alt={leader.nom}
+              src={leaderAffiche.teams_logo}
+              alt={leaderAffiche.nom}
               className="h-7 w-7 object-cover"
             />
-            <p>{leader.equipe}</p>
+            <p>{leaderAffiche.equipe}</p>
             <div className="w-1 h-1 bg-gray-600 rounded-full"></div> #
-            {leader.numero}
+            {leaderAffiche.numero}
             <div className="w-1 h-1 bg-gray-600 rounded-full"></div>
-            <p>{leader.position}</p>
+            <p>{leaderAffiche.position}</p>
           </div>
           <div className="mt-8 pt-4 w-full">
             <h2 className="text-xl font-semibold text-gray-500 uppercase tracking-wide">
               {ongletActif}
             </h2>
-            <span className="text-7xl font-extrabold text-gray-900">
-              {getValeurStat(leader)}
+            <span className="text-7xl font-extrabold text-gray-900 transition-all duration-300">
+              {getValeurStat(leaderAffiche)}
             </span>
           </div>
         </div>
+
         <div className="lg:w-full">
-          {playersTries.map((player, index) => (
-            <div
-              key={player.id}
-              className="flex justify-between items-center px-3 py-1 mb-2 w-100 bg-white border border-gray-300 hover:bg-yellow-700 hover:text-white transition-colors duration-500 rounded-lg"
-            >
-              <div className="flex items-center gap-2">
-                <span className="w-6 text-sm">{index + 1}.</span>
-                <div>
-                  <span className="font-medium">{player.nom}</span>
+          {goalkeeperTries.map((goalkeeper, index) => {
+            const isSelected = leaderAffiche.id === goalkeeper.id;
+            return (
+              <div
+                key={goalkeeper.id}
+                onMouseEnter={() => setGardienSelectionne(goalkeeper)}
+                className={`flex justify-between items-center px-4 py-1 mb-2 w-full border border-gray-300 cursor-pointer transition-all duration-300 rounded-lg ${
+                  isSelected
+                    ? "bg-yellow-700 text-white"
+                    : "bg-white text-black hover:bg-gray-50"
+                }`}
+              >
+                <div className="flex items-center gap-3">
+                  <span
+                    className={`w-6 text-sm font-bold ${isSelected ? "text-yellow-200" : "text-gray-400"}`}
+                  >
+                    {index + 1}.
+                  </span>
+                  <div>
+                    <span className="font-semibold">{goalkeeper.nom}</span>
+                  </div>
+                </div>
+                <div className="text-right">
+                  <span className="font-bold text-lg">
+                    {getValeurStat(goalkeeper)}
+                  </span>
                 </div>
               </div>
-              <div className="text-right">
-                <span className="">{getValeurStat(player)}</span>
-              </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
 
-      <div className="px-6 py-4 text-right">
+      <div className="px-6 py-4 text-right hidden">
         <a
           href="#"
           className="text-blue-500 text-lg font-semibold hover:underline"
         >
-          Tous les Gardiens
+          Tous les {title}
         </a>
       </div>
     </div>

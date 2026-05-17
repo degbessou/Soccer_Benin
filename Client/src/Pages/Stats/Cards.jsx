@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
 
-const playersData = [
+const cardsData = [
   {
     id: 1,
     nom: "Steve Mounié",
     equipe: "FC Augsburg",
     numero: 9,
     position: "BU",
-    passes_decisives: 4,
-    buts: 12,
+    cartons_jaunes: 4,
+    cartons_rouges: 1,
     avatar: "steeve_mounie.jpg",
     teams_logo: "benin_fbf_logo.png",
   },
@@ -18,8 +18,8 @@ const playersData = [
     equipe: "Burnley",
     numero: 19,
     position: "BU",
-    passes_decisives: 5,
-    buts: 10,
+    cartons_jaunes: 5,
+    cartons_rouges: 0,
     avatar: "A_Hountondji.jpg",
     teams_logo: "benin_fbf_logo.png",
   },
@@ -29,8 +29,8 @@ const playersData = [
     equipe: "Bénin",
     numero: 20,
     position: "AiD",
-    passes_decisives: 8,
-    buts: 6,
+    cartons_jaunes: 8,
+    cartons_rouges: 0,
     avatar: "A_Hountondji.jpg",
     teams_logo: "benin_fbf_logo.png",
   },
@@ -40,8 +40,8 @@ const playersData = [
     equipe: "Troyes",
     numero: 10,
     position: "MO",
-    passes_decisives: 7,
-    buts: 5,
+    cartons_jaunes: 7,
+    cartons_rouges: 1,
     avatar: "A_Hountondji.jpg",
     teams_logo: "benin_fbf_logo.png",
   },
@@ -51,8 +51,8 @@ const playersData = [
     equipe: "Lorient",
     numero: 15,
     position: "BU",
-    passes_decisives: 3,
-    buts: 8,
+    cartons_jaunes: 3,
+    cartons_rouges: 2,
     avatar: "A_Hountondji.jpg",
     teams_logo: "benin_fbf_logo.png",
   },
@@ -62,8 +62,8 @@ const playersData = [
     equipe: "Lotto Popo",
     numero: 8,
     position: "MC",
-    passes_decisives: 6,
-    buts: 2,
+    cartons_jaunes: 6,
+    cartons_rouges: 0,
     avatar: "A_Hountondji.jpg",
     teams_logo: "benin_fbf_logo.png",
   },
@@ -73,8 +73,8 @@ const playersData = [
     equipe: "Smouha SC",
     numero: 6,
     position: "MDef",
-    passes_decisives: 4,
-    buts: 1,
+    cartons_jaunes: 4,
+    cartons_rouges: 0,
     avatar: "A_Hountondji.jpg",
     teams_logo: "benin_fbf_logo.png",
   },
@@ -84,8 +84,8 @@ const playersData = [
     equipe: "Bénin F",
     numero: 11,
     position: "BU",
-    passes_decisives: 2,
-    buts: 15,
+    cartons_jaunes: 2,
+    cartons_rouges: 0,
     avatar: "yol_gnanmi.jpeg",
     teams_logo: "benin_fbf_logo.png",
   },
@@ -95,8 +95,8 @@ const playersData = [
     equipe: "Bénin",
     numero: 7,
     position: "AiG",
-    passes_decisives: 9,
-    buts: 4,
+    cartons_jaunes: 9,
+    cartons_rouges: 0,
     avatar: "A_Hountondji.jpg",
     teams_logo: "benin_fbf_logo.png",
   },
@@ -106,25 +106,25 @@ const playersData = [
     equipe: "Yverdon",
     numero: 4,
     position: "DC",
-    passes_decisives: 1,
-    buts: 2,
+    cartons_jaunes: 1,
+    cartons_rouges: 3,
     avatar: "A_Hountondji.jpg",
     teams_logo: "benin_fbf_logo.png",
   },
 ];
 
-const Players = ({ title }) => {
-  const [ongletActif, setOngletActif] = useState("Buts");
+const Cards = () => {
+  const [ongletActif, setOngletActif] = useState("Cartons Jaunes");
   const [joueurSelectionne, setJoueurSelectionne] = useState(null);
 
   const getValeurStat = (player) => {
-    if (ongletActif === "Passes") return player.passes_decisives;
-    if (ongletActif === "Buts") return player.buts;
-    return player.passes_decisives;
+    if (ongletActif === "Cartons Jaunes") return player.cartons_jaunes;
+    if (ongletActif === "Cartons Rouges") return player.cartons_rouges;
+    return player.cartons_jaunes;
   };
 
   // trier par stat décroissante
-  const playersTries = [...playersData].sort(
+  const playersTries = [...cardsData].sort(
     (a, b) => getValeurStat(b) - getValeurStat(a),
   );
 
@@ -134,13 +134,13 @@ const Players = ({ title }) => {
 
   const leaderAffiche = joueurSelectionne || playersTries[0];
 
-  const onglets = ["Buts", "Passes"];
+  const onglets = ["Cartons Jaunes", "Cartons Rouges"];
 
   return (
     <div className="overflow-hidden">
       <div className="pb-3">
         <h2 className="flex items-center text-black text-3xl font-bold tracking-tight">
-          {title}
+          Cartons
           <img src="chevron-right.svg" className="h-7 w-7 mt-2" alt="" />
         </h2>
       </div>
@@ -230,11 +230,11 @@ const Players = ({ title }) => {
           href="#"
           className="text-blue-500 text-lg font-semibold hover:underline"
         >
-          Tous les {title}
+          Tous les Cartons
         </a>
       </div>
     </div>
   );
 };
 
-export default Players;
+export default Cards;

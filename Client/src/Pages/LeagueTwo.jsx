@@ -90,7 +90,7 @@ export default () => {
                 </TabContent>
 
                 <TabContent value="stats">
-                    <Statistics />
+                    <Statistics playerTitle="Joueurs" goalkeeperTitle="Gardiens"/>
                 </TabContent>
             </Tabs>
             <Footer />

@@ -13,12 +13,14 @@ import StandingPool from "../Components/StandingPool";
 import StandingPoolCapture from "../Components/StandingPoolCapture";
 import CaptureOverlay from "../assets/CaptureOverlay";
 import { Helmet } from "react-helmet-async";
+import Statistics from "./Stats/Statistics";
 
 export default function DivisionOne() {
 
     const tabItems = [
         { value: "calendrier", label: "CALENDRIER" },
-        { value: "classement", label: "CLASSEMENT" }
+        { value: "classement", label: "CLASSEMENT" },
+        { value: "stats", label: "STATS" }
     ];
 
     const poules = [
@@ -127,6 +129,11 @@ export default function DivisionOne() {
                         ))}
                     </PouleTabs>
                 </TabContent>
+
+                <TabContent value="stats">
+                    <Statistics playerTitle="Joueuses" goalkeeperTitle="Gardiennes" />
+                </TabContent>
+            
             </Tabs>
 
             {/* StandingPoolCapture hors des tabs — toujours dans le DOM */}
