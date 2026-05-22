@@ -120,7 +120,7 @@ export default function DivisionTwo() {
                                     captionRed="Relégation en Division départementale"
                                     externalDownloadRef={poule.value === 'A' ? standingCaptureRef : undefined}
                                     externalOnCapturing={poule.value === 'A' ? setIsCapturing : undefined}
-                                    externalDownloadFilename={poule.value === 'A' ? `classement-ligue3-j${journeesJoueesA}.png` : undefined}
+                                    externalDownloadFilename={poule.value === 'A' ? `classement-d2f-j${journeesJoueesA}.png` : undefined}
                                     externalDataReady={poule.value === 'A' ? dataReady : undefined}
                                 />
                             </PouleContent>
