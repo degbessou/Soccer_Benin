@@ -20,12 +20,13 @@ export default function DivisionOne() {
     const tabItems = [
         { value: "calendrier", label: "CALENDRIER" },
         { value: "classement", label: "CLASSEMENT" },
-        { value: "playoffs", label: "PLAY-OFFS" }
+        //{ value: "playoffs", label: "PLAY-OFFS" }
     ];
 
     const poules = [
         { value: "A", label: "Poule A" },
-        { value: "B", label: "Poule B" }
+        { value: "B", label: "Poule B" },
+        { value: "Play-offs", label: "Play-Offs" }
     ];
 
     // ─── Seulement le classement est centralisé (image unique 2 poules) ─────────
@@ -109,8 +110,8 @@ export default function DivisionOne() {
                                 {/* Chaque Schedule gère sa propre capture — comme LeagueOne */}
                                 <Schedule
                                     supabaseQuery={fetchMatchesByPoule(poule.value)}
-                                    totalJournees={poule.value === 'A' ? 18 : 14}
-                                    showPhaseFilter={true}
+                                    totalJournees={poule.value === 'A' ? 18 : poule.value === 'B' ? 14 : 3}
+                                    showPhaseFilter={poule.value !== 'Play-offs'}
                                     showTeamFilter={true}
                                     logoUrl={getSupabaseImageUrl('medias/icons/logo_no.png')}
                                     title={`D1 Féminine - 2025-2025 / Poule ${poule.value}`}
@@ -141,11 +142,11 @@ export default function DivisionOne() {
                     </PouleTabs>
                 </TabContent>
 
-                <TabContent value="playoff">
+                {/*                <TabContent value="playoffs">
                     <Playoffs
                         supabaseQuery={fetchPlayoffsMatches}
                     />
-                </TabContent>
+                </TabContent> */}
             </Tabs>
 
             {/* StandingPoolCapture hors des tabs — toujours dans le DOM */}
