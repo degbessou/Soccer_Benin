@@ -13,17 +13,20 @@ import StandingPool from "../Components/StandingPool";
 import StandingPoolCapture from "../Components/StandingPoolCapture";
 import CaptureOverlay from "../assets/CaptureOverlay";
 import { Helmet } from "react-helmet-async";
+import Playoffs from "../Components/Playoffs";
 
 export default function DivisionOne() {
 
     const tabItems = [
         { value: "calendrier", label: "CALENDRIER" },
-        { value: "classement", label: "CLASSEMENT" }
+        { value: "classement", label: "CLASSEMENT" },
+        //{ value: "playoffs", label: "PLAY-OFFS" }
     ];
 
     const poules = [
         { value: "A", label: "Poule A" },
-        { value: "B", label: "Poule B" }
+        { value: "B", label: "Poule B" },
+        { value: "Play-offs", label: "Play-Offs" }
     ];
 
     // ─── Seulement le classement est centralisé (image unique 2 poules) ─────────
@@ -69,6 +72,17 @@ export default function DivisionOne() {
         return data;
     };
 
+    const fetchPlayoffsMatches = async () => {
+        const { data } = await supabase
+            .from('matchs_playoff')
+            .select('*')
+            .eq('nom_saison', 'Saison 2025-2026')
+            .order('date_match', { ascending: true })
+            .order('id_match', { ascending: true })
+
+        return data
+    }
+
 
     const journeesJoueesA = standingPouleA.length > 0 ? standingPouleA[0].matchs_joues : 0;
 
@@ -96,8 +110,8 @@ export default function DivisionOne() {
                                 {/* Chaque Schedule gère sa propre capture — comme LeagueOne */}
                                 <Schedule
                                     supabaseQuery={fetchMatchesByPoule(poule.value)}
-                                    totalJournees={poule.value === 'A' ? 18 : 14}
-                                    showPhaseFilter={true}
+                                    totalJournees={poule.value === 'A' ? 18 : poule.value === 'B' ? 14 : 3}
+                                    showPhaseFilter={poule.value !== 'Play-offs'}
                                     showTeamFilter={true}
                                     logoUrl={getSupabaseImageUrl('medias/icons/logo_no.png')}
                                     title={`D1 Féminine - 2025-2025 / Poule ${poule.value}`}
@@ -120,13 +134,19 @@ export default function DivisionOne() {
                                     captionRed="Relégation en D2 Féminine"
                                     externalDownloadRef={poule.value === 'A' ? standingCaptureRef : undefined}
                                     externalOnCapturing={poule.value === 'A' ? setIsCapturing : undefined}
-                                    externalDownloadFilename={poule.value === 'A' ? `classement-ligue3-j${journeesJoueesA}.png` : undefined}
+                                    externalDownloadFilename={poule.value === 'A' ? `classement-d1f-j${journeesJoueesA}.png` : undefined}
                                     externalDataReady={poule.value === 'A' ? dataReady : undefined}
                                 />
                             </PouleContent>
                         ))}
                     </PouleTabs>
                 </TabContent>
+
+                {/*                <TabContent value="playoffs">
+                    <Playoffs
+                        supabaseQuery={fetchPlayoffsMatches}
+                    />
+                </TabContent> */}
             </Tabs>
 
             {/* StandingPoolCapture hors des tabs — toujours dans le DOM */}

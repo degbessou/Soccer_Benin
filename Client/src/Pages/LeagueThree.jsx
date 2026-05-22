@@ -23,7 +23,8 @@ export default function LeagueThree() {
 
     const poules = [
         { value: "A", label: "Poule A" },
-        { value: "B", label: "Poule B" }
+        { value: "B", label: "Poule B" },
+        { value: "Finale", label: "Finale" }
     ];
 
     // ─── Seulement le classement est centralisé (image unique 2 poules) ─────────
@@ -95,9 +96,9 @@ export default function LeagueThree() {
                                 {/* Chaque Schedule gère sa propre capture — comme LeagueOne */}
                                 <Schedule
                                     supabaseQuery={fetchMatchesByPoule(poule.value)}
-                                    totalJournees={poule.value === 'A' ? 18 : 14}
-                                    showPhaseFilter={true}
-                                    showTeamFilter={true}
+                                    totalJournees={poule.value === 'A' ? 18 : poule.value === 'B' ? 14 : 1}
+                                    showPhaseFilter={poule.value !== 'Finale'}
+                                    showTeamFilter={poule.value !== 'Finale'}
                                     logoUrl={getSupabaseImageUrl('medias/icons/logo_no.png')}
                                     title={`Ligue 3 Amateur - 2025-2025 Poule ${poule.value}`}
                                     subtitle="www.bencofoot.com"
