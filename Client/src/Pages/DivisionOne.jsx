@@ -13,12 +13,14 @@ import StandingPool from "../Components/StandingPool";
 import StandingPoolCapture from "../Components/StandingPoolCapture";
 import CaptureOverlay from "../assets/CaptureOverlay";
 import { Helmet } from "react-helmet-async";
+import Playoffs from "../Components/Playoffs";
 
 export default function DivisionOne() {
 
     const tabItems = [
         { value: "calendrier", label: "CALENDRIER" },
-        { value: "classement", label: "CLASSEMENT" }
+        { value: "classement", label: "CLASSEMENT" },
+        { value: "playoffs", label: "PLAY-OFFS" }
     ];
 
     const poules = [
@@ -68,6 +70,17 @@ export default function DivisionOne() {
             .order("position", { ascending: true });
         return data;
     };
+
+    const fetchPlayoffsMatches = async () => {
+        const { data } = await supabase
+            .from('matchs_playoff')
+            .select('*')
+            .eq('nom_saison', 'Saison 2025-2026')
+            .order('date_match', { ascending: true })
+            .order('id_match', { ascending: true })
+
+        return data
+    }
 
 
     const journeesJoueesA = standingPouleA.length > 0 ? standingPouleA[0].matchs_joues : 0;
@@ -126,6 +139,12 @@ export default function DivisionOne() {
                             </PouleContent>
                         ))}
                     </PouleTabs>
+                </TabContent>
+
+                <TabContent value="playoff">
+                    <Playoffs
+                        supabaseQuery={fetchPlayoffsMatches}
+                    />
                 </TabContent>
             </Tabs>
 
