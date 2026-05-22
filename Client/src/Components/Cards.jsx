@@ -101,7 +101,7 @@ export default function Cards() {
                                 <div className="flex items-center gap-x-1">
                                     <span className="text-sm w-30 md:w-28 font-semibold">{item.date}</span>
                                     <h3 className="text-red-700 text-sm font-semibold">{`#${item.tag_un}`}</h3>
-                                    <h3 className="hidden md:block px-4 text-red-700 text-sm font-semibold">{`#${item.tag}`}</h3>
+                                    {/*<h3 className="hidden md:block px-4 text-red-700 text-sm font-semibold">{`#${item.tag}`}</h3>*/}
                                 </div>
 
                                 {/* IMAGE */}
