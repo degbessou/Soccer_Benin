@@ -289,7 +289,14 @@ export default function LeagueCalendar({
                                                             <td className="hidden md:table-cell px-6 py-4 text-right font-medium">{match.equipe_domicile}</td>
                                                             <td className="hidden md:table-cell px-6 py-4 text-center">
                                                                 {match.statut === 'finished' ? (
-                                                                    <span className="font-bold text-gray-800">{match.buts_domicile} - {match.buts_exterieur}</span>
+                                                                    <div className="flex flex-col items-center gap-0.5">
+                                                                        <span className="font-bold text-gray-800">{match.buts_domicile} - {match.buts_exterieur}</span>
+                                                                        {match.buts_peno_domicile !== null && match.buts_peno_exterieur !== null && (
+                                                                            <span className="text-xs text-gray-500 text-center mt-0.5">
+                                                                                TAB {match.buts_peno_domicile}-{match.buts_peno_exterieur}
+                                                                            </span>
+                                                                        )}
+                                                                    </div>
                                                                 ) : (
                                                                     <span className="text-gray-400">vs</span>
                                                                 )}
@@ -320,7 +327,14 @@ export default function LeagueCalendar({
                                                                         <div className="flex flex-col items-center mx-4 min-w-[80px]">
                                                                             <div className="text-xs text-gray-500 mb-1">{match.stade}</div>
                                                                             {match.statut === 'finished' ? (
-                                                                                <span className="font-bold text-gray-800 text-base">{match.buts_domicile} - {match.buts_exterieur}</span>
+                                                                                <div className="flex flex-col items-center">
+                                                                                    <span className="font-bold text-gray-800 text-base">{match.buts_domicile} - {match.buts_exterieur}</span>
+                                                                                    {match.buts_peno_domicile !== null && match.buts_peno_exterieur !== null && (
+                                                                                        <span className="text-xs text-gray-500">
+                                                                                            TAB {match.buts_peno_domicile}-{match.buts_peno_exterieur}
+                                                                                        </span>
+                                                                                    )}
+                                                                                </div>
                                                                             ) : (
                                                                                 <span className="text-gray-400 text-sm">vs</span>
                                                                             )}
