@@ -9,14 +9,18 @@ const StandingPoolCapture = forwardRef(({
     title,
     subtitle,
     pouleAStanding = [],
-    pouleBStanding = [],
+    pouleBStanding = null,
     pouleALabel = 'A',
     pouleBLabel = 'B',
     captionGreen,
     captionRed,
+    greenRows = 1,   // nouvelle prop
+    redRows = 1,     // nouvelle prop
     footerLeft = "Tout le classement détaillé est à retrouver sur notre site.",
     footerRight = new Date().toLocaleDateString('fr-FR')
 }, ref) => {
+
+    const singlePool = pouleBStanding === null  // mode 1 table
 
     const colors = {
         primary: '#1C5937',
@@ -31,16 +35,16 @@ const StandingPoolCapture = forwardRef(({
     };
 
     const getRowBg = (idx, total) => {
-        if (idx === 0) return '#f0fdf4';
-        if (idx === total - 1) return '#fef2f2';
-        return idx % 2 === 0 ? '#ffffff' : '#fafafa';
-    };
+        if (idx < greenRows) return '#f0fdf4'
+        if (redRows > 0 && idx >= total - redRows) return '#fef2f2'
+        return idx % 2 === 0 ? '#ffffff' : '#fafafa'
+    }
 
     const getRankColor = (idx, total) => {
-        if (idx === 0) return '#16a34a';
-        if (idx === total - 1) return '#dc2626';
-        return colors.text.primary;
-    };
+        if (idx < greenRows) return '#16a34a'
+        if (redRows > 0 && idx >= total - redRows) return '#dc2626'
+        return colors.text.primary
+    }
 
     const renderPoolTable = (poolLabel, standing, poolColor) => (
         <div style={{
@@ -257,16 +261,19 @@ const StandingPoolCapture = forwardRef(({
                     </div>
                 </div>
 
-                {/* 2 tables côte à côte */}
+                {/* 2 tables côte à côte OU 1 table centrée */}
                 <div style={{
                     flex: 1,
                     display: 'flex',
                     gap: '15px',
                     marginBottom: '10px',
-                    minHeight: 0
+                    minHeight: 0,
+                    justifyContent: singlePool ? 'center' : 'flex-start'
                 }}>
-                    {renderPoolTable(pouleALabel, pouleAStanding, '#ffffff')}
-                    {renderPoolTable(pouleBLabel, pouleBStanding, '#ffffff')}
+                    <div style={{ width: singlePool ? '520px' : '100%', flex: singlePool ? 'none' : 1 }}>
+                        {renderPoolTable(pouleALabel, pouleAStanding, '#ffffff')}
+                    </div>
+                    {!singlePool && renderPoolTable(pouleBLabel, pouleBStanding, '#ffffff')}
                 </div>
 
                 {/* Légendes */}

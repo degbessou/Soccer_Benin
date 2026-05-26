@@ -8,6 +8,8 @@ export default function StandingPool({
     supabaseQuery,
     captionGreen,
     captionRed,
+    greenRows = 1,      // nouvelle prop : nb de lignes vertes (défaut 1)
+    redRows = 1,        // nouvelle prop : nb de lignes rouges (défaut 1)
     // Props mode externe (2 poules)
     externalDownloadRef,
     externalOnCapturing,
@@ -90,8 +92,8 @@ export default function StandingPool({
                             </thead>
                             <tbody className="divide-y divide-gray-300">
                                 {standing.map((team, idx) => {
-                                    const isPromoted = idx === 0
-                                    const isRelegated = idx === lastIndex
+                                    const isPromoted = idx < greenRows
+                                    const isRelegated = redRows > 0 && idx >= standing.length - redRows
                                     return (
                                         <tr key={team.id_standing || team.abreviation}
                                             className={isPromoted ? 'bg-green-50' : isRelegated ? 'bg-red-50' : ''}
