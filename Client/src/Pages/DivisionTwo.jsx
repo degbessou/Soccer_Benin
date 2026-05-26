@@ -27,6 +27,9 @@ export default function DivisionTwo() {
         { value: "Finale", label: "Finale" }
     ];
 
+    // Poules sans Finale pour l'onglet classement
+    const poulesClassement = poules.filter(p => p.value !== 'Finale')
+
     // ─── Seulement le classement est centralisé (image unique 2 poules) ─────────
     const [standingPouleA, setStandingPouleA] = useState([]);
     const [standingPouleB, setStandingPouleB] = useState([]);
@@ -111,8 +114,8 @@ export default function DivisionTwo() {
                 </TabContent>
 
                 <TabContent value="classement">
-                    <PouleTabs poules={poules} defaultPoule="A">
-                        {poules.map(poule => (
+                    <PouleTabs poules={poulesClassement} defaultPoule="A">
+                        {poulesClassement.map(poule => (
                             <PouleContent key={poule.value} value={poule.value}>
                                 <StandingPool
                                     title={`Classement - Poule ${poule.value}`}
