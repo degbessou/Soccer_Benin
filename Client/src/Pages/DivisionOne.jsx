@@ -13,13 +13,14 @@ import StandingPool from "../Components/StandingPool";
 import StandingPoolCapture from "../Components/StandingPoolCapture";
 import CaptureOverlay from "../assets/CaptureOverlay";
 import { Helmet } from "react-helmet-async";
-import Playoffs from "../Components/Playoffs";
+import Statistics from "./Stats/Statistics";
 
 export default function DivisionOne() {
 
     const tabItems = [
         { value: "calendrier", label: "CALENDRIER" },
         { value: "classement", label: "CLASSEMENT" },
+        { value: "stats", label: "STATS" }
         //{ value: "playoffs", label: "PLAY-OFFS" }
     ];
 
@@ -194,11 +195,10 @@ export default function DivisionOne() {
                     </PouleTabs>
                 </TabContent>
 
-                {/*                <TabContent value="playoffs">
-                    <Playoffs
-                        supabaseQuery={fetchPlayoffsMatches}
-                    />
-                </TabContent> */}
+                <TabContent value="stats">
+                    <Statistics playerTitle="Joueuses" goalkeeperTitle="Gardiennes" />
+                </TabContent>
+            
             </Tabs>
 
             {/* Overlay playoff */}

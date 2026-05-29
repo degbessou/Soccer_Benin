@@ -10,6 +10,7 @@ import Standing from "../Components/Standing";
 import Section404 from "../Components/Section404";
 import { useRef, useState } from "react";
 import { Helmet } from "react-helmet-async";
+import Statistics from "./Stats/Statistics";
 import FormStats from "../Components/FormStats";
 
 
@@ -108,6 +109,7 @@ export default () => {
                     </div>
                 </TabContent>
                 <TabContent value="stats">
+                    <Statistics playerTitle="Joueurs" goalkeeperTitle="Gardiens"/>
                     <FormStats
                         supabaseQuery={fetchLeague1Form}
                     />
