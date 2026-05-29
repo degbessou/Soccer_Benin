@@ -23,8 +23,12 @@ export default function LeagueThree() {
 
     const poules = [
         { value: "A", label: "Poule A" },
-        { value: "B", label: "Poule B" }
+        { value: "B", label: "Poule B" },
+        { value: "Finale", label: "Finale" }
     ];
+
+    // Poules sans Finale pour l'onglet classement
+    const poulesClassement = poules.filter(p => p.value !== 'Finale')
 
     // ─── Seulement le classement est centralisé (image unique 2 poules) ─────────
     const [standingPouleA, setStandingPouleA] = useState([]);
@@ -95,9 +99,9 @@ export default function LeagueThree() {
                                 {/* Chaque Schedule gère sa propre capture — comme LeagueOne */}
                                 <Schedule
                                     supabaseQuery={fetchMatchesByPoule(poule.value)}
-                                    totalJournees={poule.value === 'A' ? 18 : 14}
-                                    showPhaseFilter={true}
-                                    showTeamFilter={true}
+                                    totalJournees={poule.value === 'A' ? 18 : poule.value === 'B' ? 14 : 1}
+                                    showPhaseFilter={poule.value !== 'Finale'}
+                                    showTeamFilter={poule.value !== 'Finale'}
                                     logoUrl={getSupabaseImageUrl('medias/icons/logo_no.png')}
                                     title={`Ligue 3 Amateur - 2025-2025 Poule ${poule.value}`}
                                     subtitle="www.bencofoot.com"
@@ -109,8 +113,8 @@ export default function LeagueThree() {
                 </TabContent>
 
                 <TabContent value="classement">
-                    <PouleTabs poules={poules} defaultPoule="A">
-                        {poules.map(poule => (
+                    <PouleTabs poules={poulesClassement} defaultPoule="A">
+                        {poulesClassement.map(poule => (
                             <PouleContent key={poule.value} value={poule.value}>
                                 <StandingPool
                                     title={`Classement - Poule ${poule.value}`}

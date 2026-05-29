@@ -23,8 +23,12 @@ export default function DivisionTwo() {
 
     const poules = [
         { value: "A", label: "Poule A" },
-        { value: "B", label: "Poule B" }
+        { value: "B", label: "Poule B" },
+        { value: "Finale", label: "Finale" }
     ];
+
+    // Poules sans Finale pour l'onglet classement
+    const poulesClassement = poules.filter(p => p.value !== 'Finale')
 
     // ─── Seulement le classement est centralisé (image unique 2 poules) ─────────
     const [standingPouleA, setStandingPouleA] = useState([]);
@@ -96,9 +100,9 @@ export default function DivisionTwo() {
                                 {/* Chaque Schedule gère sa propre capture — comme LeagueOne */}
                                 <Schedule
                                     supabaseQuery={fetchMatchesByPoule(poule.value)}
-                                    totalJournees={18}
-                                    showPhaseFilter={true}
-                                    showTeamFilter={true}
+                                    totalJournees={poule.value === 'A' ? 18 : 1}
+                                    showPhaseFilter={poule.value !== 'Finale'}
+                                    showTeamFilter={poule.value !== 'Finale'}
                                     logoUrl={getSupabaseImageUrl('medias/icons/logo_no.png')}
                                     title={`D2 Féminine - 2025-2025 / Poule ${poule.value}`}
                                     subtitle="www.bencofoot.com"
@@ -110,8 +114,8 @@ export default function DivisionTwo() {
                 </TabContent>
 
                 <TabContent value="classement">
-                    <PouleTabs poules={poules} defaultPoule="A">
-                        {poules.map(poule => (
+                    <PouleTabs poules={poulesClassement} defaultPoule="A">
+                        {poulesClassement.map(poule => (
                             <PouleContent key={poule.value} value={poule.value}>
                                 <StandingPool
                                     title={`Classement - Poule ${poule.value}`}
@@ -120,7 +124,7 @@ export default function DivisionTwo() {
                                     captionRed="Relégation en Division départementale"
                                     externalDownloadRef={poule.value === 'A' ? standingCaptureRef : undefined}
                                     externalOnCapturing={poule.value === 'A' ? setIsCapturing : undefined}
-                                    externalDownloadFilename={poule.value === 'A' ? `classement-ligue3-j${journeesJoueesA}.png` : undefined}
+                                    externalDownloadFilename={poule.value === 'A' ? `classement-d2f-j${journeesJoueesA}.png` : undefined}
                                     externalDataReady={poule.value === 'A' ? dataReady : undefined}
                                 />
                             </PouleContent>

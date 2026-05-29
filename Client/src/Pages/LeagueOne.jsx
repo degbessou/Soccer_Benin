@@ -11,6 +11,7 @@ import Section404 from "../Components/Section404";
 import { useRef, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import Statistics from "./Stats/Statistics";
+import FormStats from "../Components/FormStats";
 
 
 export default () => {
@@ -48,6 +49,21 @@ export default () => {
         //console.log('Classement:', data, error)
         return data
     }
+
+    const fetchLeague1Form = async (phase) => {
+        let query = supabase
+            .from('equipe_forme_total')
+            .select('*')
+            .eq('nom_saison', 'Saison 2025-2026')
+            .eq('ligue', 'Celtiis Ligue 1')
+            .order('position', { ascending: true })
+
+        if (phase) query = query.eq('phase', phase) // 👈 vérifie le nom exact de la colonne dans Supabase
+
+        const { data, error } = await query
+        return data
+    }
+
 
     return (
         <>
@@ -94,6 +110,9 @@ export default () => {
                 </TabContent>
                 <TabContent value="stats">
                     <Statistics playerTitle="Joueurs" goalkeeperTitle="Gardiens"/>
+                    <FormStats
+                        supabaseQuery={fetchLeague1Form}
+                    />
                 </TabContent>
             </Tabs>
             <Footer />

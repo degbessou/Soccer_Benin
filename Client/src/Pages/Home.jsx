@@ -19,9 +19,9 @@ export default function Home() {
             caption: "Cover : Équipe nationale féminine du Bénin 2025"
         },
         {
-            src: "medias/mjnt/u20_douze.jpg",
-            alt: "espoirs Misserete",
-            caption: "Cover : Jeunes espoirs du centre de formation national de Misserete"
+            src: "medias/news/can_scolaire_26_un.jpg",
+            alt: "espoirs scolaire",
+            caption: "Cover : Équipe nationale scolaire du Bénin 2026"
         },
         {
             src: "medias/banner/dadje_deux.jpg",
