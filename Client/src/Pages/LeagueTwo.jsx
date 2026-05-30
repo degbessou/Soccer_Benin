@@ -10,6 +10,7 @@ import Standing from "../Components/Standing";
 import Section404 from "../Components/Section404";
 import { useRef, useState } from "react";
 import { Helmet } from "react-helmet-async";
+//import Statistics from "./Stats/Statistics";
 
 export default () => {
     const tabItems = [
@@ -87,10 +88,12 @@ export default () => {
                         externalDownloadFilename={`classement-ligue2-j${journeesJouees}.png`}
                     />
                 </TabContent>
+                {/*
 
                 <TabContent value="stats">
-                    <Section404 />
+                    <Statistics playerTitle="Joueurs" goalkeeperTitle="Gardiens"/>
                 </TabContent>
+*/}
             </Tabs>
             <Footer />
 
