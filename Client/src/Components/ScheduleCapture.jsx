@@ -258,7 +258,7 @@ const ScheduleCapture = forwardRef(({
                                                                         <span style={{ backgroundColor: '#e5e7eb', padding: '4px 8px', borderRadius: '8px', display: 'inline-block', minWidth: '60px' }}>
                                                                             {match.buts_domicile} - {match.buts_exterieur}
                                                                         </span>
-                                                                        {match.buts_peno_domicile !== null && match.buts_peno_exterieur !== null && (
+                                                                        {match.buts_peno_domicile != null && match.buts_peno_exterieur != null && (
                                                                             <span style={{ fontSize: '12px', color: '#000000', fontWeight: '500' }}>
                                                                                 TAB {match.buts_peno_domicile}-{match.buts_peno_exterieur}
                                                                             </span>
