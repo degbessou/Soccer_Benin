@@ -13,7 +13,7 @@ import StandingPool from "../Components/StandingPool";
 import StandingPoolCapture from "../Components/StandingPoolCapture";
 import CaptureOverlay from "../assets/CaptureOverlay";
 import { Helmet } from "react-helmet-async";
-import Statistics from "./Stats/Statistics";
+//import Statistics from "./Stats/Statistics";
 
 export default function DivisionOne() {
 
@@ -195,10 +195,11 @@ export default function DivisionOne() {
                     </PouleTabs>
                 </TabContent>
 
-                <TabContent value="stats">
+                {/*                <TabContent value="stats">
                     <Statistics playerTitle="Joueuses" goalkeeperTitle="Gardiennes" />
                 </TabContent>
-            
+                */}
+
             </Tabs>
 
             {/* Overlay playoff */}
