@@ -1,125 +1,165 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from 'react'
+import { getSupabaseImageUrl } from '../assets/Helpers'
 
-/**
- * Composant générique pour afficher des listes de statistiques (Joueurs, Gardiens et Cartons)
- *
- * @param {string} title
- * @param {Array} items
- * @param {Array} config
- * @param {string} defaultTab
- */
-const StatList = ({ title, items, config, defaultTab }) => {
-  const [ongletActif, setOngletActif] = useState(defaultTab || config[0].label);
-  const [itemSelectionne, setItemSelectionne] = useState(null);
+export default function StatList({ title, supabaseQuery, config }) {
 
-  const activeConfig = config.find((c) => c.label === ongletActif) || config[0];
-  const statKey = activeConfig.key;
+  const [ongletActif, setOngletActif] = useState(config[0].label)
+  const [items, setItems] = useState([])
+  const [loading, setLoading] = useState(true)
+  const [itemSelectionne, setItemSelectionne] = useState(null)
 
-  const getValeurStat = (item) => item[statKey];
+  const activeConfig = config.find(c => c.label === ongletActif) || config[0]
 
-  // trier les éléments par statistique décroissante
-  const itemsTries = [...items].sort(
-    (a, b) => getValeurStat(b) - getValeurStat(a),
-  );
-
+  // Refetch à chaque changement d'onglet
   useEffect(() => {
-    setItemSelectionne(null);
-  }, [ongletActif]);
+    const fetch = async () => {
+      setLoading(true)
+      setItemSelectionne(null)
+      if (supabaseQuery) {
+        const data = await supabaseQuery(activeConfig.type_stats)
+        setItems(data || [])
+      }
+      setLoading(false)
+    }
+    fetch()
+  }, [ongletActif])
 
-  const leaderAffiche = itemSelectionne || itemsTries[0];
+  const leader = itemSelectionne || items[0]
 
   return (
-    <div className="overflow-hidden">
-      <div className="pb-3">
-        <h2 className="flex items-center text-black text-3xl font-bold tracking-tight">
+    <div className="max-w-screen-lg mx-auto px-4 md:px-8 py-8">
+
+      {/* Titre */}
+      <div className="mb-6">
+        <h2 className="text-2xl font-bold text-gray-800 flex items-center gap-2">
           {title}
-          <img src="chevron-right.svg" className="h-7 w-7 mt-2" alt="" />
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-gray-400 mt-0.5" viewBox="0 0 20 20" fill="currentColor">
+            <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
+          </svg>
         </h2>
       </div>
 
-      <div className="flex border-b border-gray-300">
-        {config.map((tab) => (
+      {/* Onglets */}
+      <div className="flex border-b border-gray-300 mb-8">
+        {config.map(tab => (
           <button
             key={tab.label}
             onClick={() => setOngletActif(tab.label)}
-            className={`px-10 py-3 text-md font-semibold transition-all duration-200 cursor-pointer ${
-              ongletActif === tab.label
-                ? "text-black border-b-5 border-black -mb-px font-bold"
-                : "text-gray-600 hover:text-gray-200"
-            }`}
+            className={`px-6 py-3 text-sm font-semibold transition-all duration-200 border-b-2 -mb-px ${ongletActif === tab.label
+              ? 'text-yellow-600 border-yellow-600'
+              : 'text-gray-500 border-transparent hover:text-gray-700'
+              }`}
           >
             {tab.label}
           </button>
         ))}
       </div>
 
-      <div className="flex flex-col lg:flex-row lg:gap-40 gap-5 mt-10 w-full">
-        <div className="lg:w-full flex flex-col items-center text-center">
-          <img
-            src={leaderAffiche.avatar}
-            alt={leaderAffiche.nom}
-            className="h-40 w-40 object-cover rounded-full shadow-lg"
-          />
-          <h1 className="text-4xl font-bold mt-4">{leaderAffiche.nom}</h1>
-          <div className="flex items-center gap-2 text-gray-600 font-semibold text-lg mt-4">
-            <img
-              src={leaderAffiche.teams_logo}
-              alt={leaderAffiche.equipe}
-              className="h-7 w-7 object-cover"
-            />
-            <p>{leaderAffiche.equipe}</p>
-            <div className="w-1 h-1 bg-gray-600 rounded-full"></div> #
-            {leaderAffiche.numero}
-            <div className="w-1 h-1 bg-gray-600 rounded-full"></div>
-            <p>{leaderAffiche.position}</p>
-          </div>
-          <div className="mt-8 pt-4 w-full">
-            <h2 className="text-xl font-semibold text-gray-500 uppercase tracking-wide">
-              {ongletActif}
-            </h2>
-            <span className="text-7xl font-extrabold text-gray-900 transition-all duration-300">
-              {getValeurStat(leaderAffiche)}
-            </span>
-          </div>
+      {loading ? (
+        <div className="text-center py-12">
+          <p className="text-gray-500">Chargement...</p>
         </div>
+      ) : items.length === 0 ? (
+        <div className="text-center py-12 bg-gray-50 rounded-lg">
+          <p className="text-gray-500">Aucune statistique disponible</p>
+        </div>
+      ) : (
+        <div className="flex flex-col lg:flex-row gap-10">
 
-        <div className="lg:w-full">
-          {itemsTries.map((item, index) => {
-            const isSelected = leaderAffiche.id === item.id;
-            return (
-              <div
-                key={item.id}
-                onMouseEnter={() => setItemSelectionne(item)}
-                className={`flex justify-between items-center px-4 py-1 mb-2 w-full border border-gray-300 cursor-pointer transition-all duration-300 rounded-lg ${
-                  isSelected
-                    ? "bg-yellow-700 text-white"
-                    : "bg-white text-black hover:bg-gray-50"
-                }`}
-              >
-                <div className="flex items-center gap-3">
-                  <span
-                    className={`w-6 text-sm font-bold ${
-                      isSelected ? "text-yellow-200" : "text-gray-400"
-                    }`}
-                  >
-                    {index + 1}.
-                  </span>
-                  <div>
-                    <span className="font-semibold">{item.nom}</span>
-                  </div>
-                </div>
-                <div className="text-right">
-                  <span className="font-bold text-lg">
-                    {getValeurStat(item)}
-                  </span>
-                </div>
+          {/* Leader affiché à gauche */}
+          <div className="lg:w-1/3 flex flex-col items-center text-center">
+            {leader.photo ? (
+              <img
+                src={getSupabaseImageUrl(leader.photo)}
+                alt={leader.nom}
+                className="w-32 h-32 object-cover rounded-full shadow-md border-4 border-yellow-100"
+                onError={e => e.target.style.display = 'none'}
+              />
+            ) : (
+              <div className="w-32 h-32 rounded-full bg-gray-100 flex items-center justify-center border-4 border-yellow-100">
+                <svg xmlns="http://www.w3.org/2000/svg" className="w-16 h-16 text-gray-300" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z" />
+                </svg>
               </div>
-            );
-          })}
-        </div>
-      </div>
-    </div>
-  );
-};
+            )}
 
-export default StatList;
+            <h3 className="text-2xl font-bold text-gray-900 mt-4">{leader.nom}</h3>
+
+            <div className="flex items-center gap-2 text-gray-500 text-sm mt-2 flex-wrap justify-center">
+              {leader.logo_club && (
+                <img
+                  src={getSupabaseImageUrl(leader.logo_club)}
+                  alt={leader.club}
+                  className="w-5 h-5 object-contain"
+                  onError={e => e.target.style.display = 'none'}
+                />
+              )}
+              <span className="font-medium text-gray-700">{leader.club}</span>
+              {leader.numero_joueur && (
+                <>
+                  <span className="w-1 h-1 bg-gray-400 rounded-full"></span>
+                  <span>#{leader.numero_joueur}</span>
+                </>
+              )}
+              {leader.poste && (
+                <>
+                  <span className="w-1 h-1 bg-gray-400 rounded-full"></span>
+                  <span>{leader.poste}</span>
+                </>
+              )}
+            </div>
+
+            <div className="mt-6">
+              <p className="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-1">
+                {ongletActif}
+              </p>
+              <span className="text-7xl font-extrabold text-gray-900">
+                {leader.nombre}
+              </span>
+            </div>
+          </div>
+
+          {/* Liste à droite */}
+          <div className="lg:w-2/3 flex flex-col gap-2">
+            {items.map((item, index) => {
+              const isSelected = leader.id_stat === item.id_stat
+              return (
+                <div
+                  key={item.id_stat}
+                  onMouseEnter={() => setItemSelectionne(item)}
+                  onMouseLeave={() => setItemSelectionne(null)}
+                  className={`flex justify-between items-center px-4 py-3 rounded-lg border cursor-pointer transition-all duration-200 ${isSelected
+                    ? 'bg-yellow-600 border-yellow-600 text-white'
+                    : 'bg-white border-gray-200 text-gray-800 hover:bg-gray-50'
+                    }`}
+                >
+                  <div className="flex items-center gap-3">
+                    <span className={`w-6 text-sm font-bold ${isSelected ? 'text-yellow-200' : 'text-gray-400'}`}>
+                      {index + 1}.
+                    </span>
+                    {item.logo_club && (
+                      <img
+                        src={getSupabaseImageUrl(item.logo_club)}
+                        alt={item.club}
+                        className="w-6 h-6 object-contain"
+                        onError={e => e.target.style.display = 'none'}
+                      />
+                    )}
+                    <div>
+                      <span className="font-semibold text-sm">{item.nom}</span>
+                      <span className={`text-xs ml-2 ${isSelected ? 'text-yellow-200' : 'text-gray-400'}`}>
+                        {item.club}
+                      </span>
+                    </div>
+                  </div>
+                  <span className="font-bold text-lg">{item.nombre}</span>
+                </div>
+              )
+            })}
+          </div>
+
+        </div>
+      )}
+    </div>
+  )
+}
