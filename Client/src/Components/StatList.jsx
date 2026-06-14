@@ -1,28 +1,56 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { getSupabaseImageUrl } from '../assets/Helpers'
 
 export default function StatList({ title, supabaseQuery, config }) {
 
   const [ongletActif, setOngletActif] = useState(config[0].label)
-  const [items, setItems] = useState([])
+  const [cache, setCache] = useState({})
   const [loading, setLoading] = useState(true)
   const [itemSelectionne, setItemSelectionne] = useState(null)
 
   const activeConfig = config.find(c => c.label === ongletActif) || config[0]
 
-  // Refetch à chaque changement d'onglet
+  // Évite les setState après démontage
+  const montéRef = useRef(true)
   useEffect(() => {
+    montéRef.current = true
+    return () => { montéRef.current = false }
+  }, [])
+
+  // Items de l'onglet actif (depuis le cache)
+  const items = cache[ongletActif] || []
+
+  // Fetch une seule fois par onglet, puis on sert depuis le cache
+  useEffect(() => {
+    setItemSelectionne(null)
+
+    // Déjà en cache → affichage instantané, aucun appel réseau
+    if (cache[ongletActif]) {
+      setLoading(false)
+      return
+    }
+
     const fetch = async () => {
       setLoading(true)
-      setItemSelectionne(null)
       if (supabaseQuery) {
         const data = await supabaseQuery(activeConfig.type_stats)
-        setItems(data || [])
+        if (!montéRef.current) return
+        setCache(prev => ({ ...prev, [ongletActif]: data || [] }))
       }
-      setLoading(false)
+      if (montéRef.current) setLoading(false)
     }
     fetch()
   }, [ongletActif])
+
+  // Précharge toutes les photos dès que la liste est disponible
+  useEffect(() => {
+    items.forEach(item => {
+      if (item.photo) {
+        const img = new Image()
+        img.src = getSupabaseImageUrl(item.photo)
+      }
+    })
+  }, [items])
 
   const leader = itemSelectionne || items[0]
 
@@ -67,13 +95,19 @@ export default function StatList({ title, supabaseQuery, config }) {
         <div className="flex flex-col lg:flex-row gap-10">
 
           {/* Leader affiché à gauche */}
-          <div className="lg:w-1/3 flex flex-col items-center text-center">
+          <div
+            key={leader.id_stat}
+            className="lg:w-1/3 flex flex-col items-center text-center transition-opacity duration-200"
+          >
             {leader.photo ? (
               <img
+                key={leader.photo}
                 src={getSupabaseImageUrl(leader.photo)}
                 alt={leader.nom}
-                className="w-32 h-32 object-cover rounded-full shadow-md border-4 border-yellow-100"
-                onError={e => e.target.style.display = 'none'}
+                className="w-32 h-32 object-cover rounded-full shadow-md border-4 border-yellow-100 transition-opacity duration-200"
+                style={{ opacity: 0 }}
+                onLoad={e => { e.target.style.opacity = 1 }}
+                onError={e => { e.target.style.display = 'none' }}
               />
             ) : (
               <div className="w-32 h-32 rounded-full bg-gray-100 flex items-center justify-center border-4 border-yellow-100">
@@ -127,7 +161,6 @@ export default function StatList({ title, supabaseQuery, config }) {
                 <div
                   key={item.id_stat}
                   onMouseEnter={() => setItemSelectionne(item)}
-                  onMouseLeave={() => setItemSelectionne(null)}
                   className={`flex justify-between items-center px-4 py-3 rounded-lg border cursor-pointer transition-all duration-200 ${isSelected
                     ? 'bg-yellow-600 border-yellow-600 text-white'
                     : 'bg-white border-gray-200 text-gray-800 hover:bg-gray-50'
