@@ -48,7 +48,10 @@ export default function DownloadButton({ refToCapture, filename, label, onCaptur
                 width: 940,
                 height: 788,
                 skipAutoScale: true,
-                includeQueryParams: true
+                includeQueryParams: true,
+                // Charge les images cross-origin (Supabase) avec CORS pour éviter
+                // le "tainted canvas" et l'erreur de capture
+                fetchRequestInit: { mode: 'cors', credentials: 'omit' }
             });
 
             const link = document.createElement("a");
