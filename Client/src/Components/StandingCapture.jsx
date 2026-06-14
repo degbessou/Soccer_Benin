@@ -82,13 +82,6 @@ const StandingCapture = forwardRef(({
                                 {/* Équipe */}
                                 <td style={{ padding: '7px 10px' }}>
                                     <div style={{ display: 'flex', alignItems: 'center', gap: '7px' }}>
-                                        {team.logo_url && (
-                                            <img
-                                                src={team.logo_url}
-                                                alt={team.nom_equipe}
-                                                style={{ width: '22px', height: '22px', objectFit: 'contain', flexShrink: 0 }}
-                                            />
-                                        )}
                                         <span style={{
                                             fontWeight: '500',
                                             color: colors.text.primary,
@@ -198,7 +191,7 @@ const StandingCapture = forwardRef(({
                     {/* Logo gauche */}
                     <div style={{ width: '130px', display: 'flex', alignItems: 'center', justifyContent: 'flex-start' }}>
                         {logoUrl ? (
-                            <img src={logoUrl} alt="logo" style={{ width: '100px', height: '100px', objectFit: 'contain' }} />
+                            <img src={logoUrl} alt="logo" crossOrigin="anonymous" style={{ width: '100px', height: '100px', objectFit: 'contain' }} />
                         ) : (
                             <div style={{ width: '100px', height: '70px' }} />
                         )}
@@ -230,6 +223,7 @@ const StandingCapture = forwardRef(({
                         <img
                             src={getSupabaseImageUrl('medias/icons/logo_fbf.png')}
                             alt="logo_fbf"
+                            crossOrigin="anonymous"
                             style={{ width: '100px', height: '60px', objectFit: 'contain' }}
                         />
                     </div>
