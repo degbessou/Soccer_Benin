@@ -7,9 +7,11 @@ import Tabs, { TabsList, TabContent } from '../Components/Tabs'
 import Schedule from "../Components/Schedule";
 import { supabase } from "../Functions/SupabaseClient"
 import Standing from "../Components/Standing";
-import Section404 from "../Components/Section404";
+//import Section404 from "../Components/Section404";
 import { useRef, useState } from "react";
 import { Helmet } from "react-helmet-async";
+import StatList from "../Components/StatList";
+import StatTeam from "../Components/StatTeam"
 //import Statistics from "./Stats/Statistics";
 
 export default () => {
@@ -42,6 +44,31 @@ export default () => {
             .select('*')
             .eq('nom_saison', 'Saison 2025-2026')
             .order('position', { ascending: true })
+        return data
+    }
+
+    // classement des buteurs, passeurs, etc.
+    const fetchStats = (typeStats, type) => async () => {
+        const { data } = await supabase
+            .from('statistiques_joueurs')
+            .select('*')
+            .eq('nom_saison', 'Saison 2025-2026')
+            .eq('ligue', 'Celtiis Ligue 2')
+            .eq('type', type)
+            .eq('type_stats', typeStats)
+            .eq('phase', 'saison')
+            .order('nombre', { ascending: false })
+        return data
+    }
+
+    // statistiques des buts par équipe (domicile / extérieur, totaux, rangs)
+    const fetchLeague2TeamStats = async () => {
+        const { data } = await supabase
+            .from('equipe_buts_rang')
+            .select('*')
+            .eq('nom_saison', 'Saison 2025-2026')
+            .eq('ligue', 'Celtiis Ligue 2')
+            .order('total_buts_marques', { ascending: false })
         return data
     }
 
@@ -87,6 +114,22 @@ export default () => {
                         onDataLoaded={(data) => setJourneesJouees(data[0]?.matchs_joues ?? 0)}
                         externalDownloadFilename={`classement-ligue2-j${journeesJouees}.png`}
                     />
+                </TabContent>
+
+                <TabContent value="stats">
+                    <div className="divide-y divide-gray-200">
+                        <StatList
+                            title="Joueurs"
+                            supabaseQuery={(typeStats) => fetchStats(typeStats, 'joueur')()}
+                            config={[
+                                { label: 'Buts', type_stats: 'buts' },
+                            ]}
+                        />
+                        <StatTeam
+                            title="Équipes"
+                            supabaseQuery={fetchLeague2TeamStats}
+                        />
+                    </div>
                 </TabContent>
                 {/*
 

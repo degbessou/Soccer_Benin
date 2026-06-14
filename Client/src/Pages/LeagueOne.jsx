@@ -7,10 +7,11 @@ import Tabs, { TabsList, TabContent } from '../Components/Tabs'
 import Schedule from "../Components/Schedule";
 import { supabase } from "../Functions/SupabaseClient"
 import Standing from "../Components/Standing";
-import Section404 from "../Components/Section404";
+//import Section404 from "../Components/Section404";
 import { useRef, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import StatList from "../Components/StatList"
+import StatTeam from "../Components/StatTeam"
 // import Statistics from "./Stats/Statistics";
 //import FormStats from "../Components/FormStats";
 
@@ -53,6 +54,7 @@ export default () => {
         return data
     }
 
+    /*
     const fetchLeague1Form = async (phase) => {
         let query = supabase
             .from('equipe_forme_total')
@@ -64,6 +66,18 @@ export default () => {
         if (phase) query = query.eq('phase', phase) // 👈 vérifie le nom exact de la colonne dans Supabase
 
         const { data, error } = await query
+        return data
+    }
+    */
+
+    // statistiques des buts par équipe (domicile / extérieur, totaux, rangs)
+    const fetchLeague1TeamStats = async () => {
+        const { data } = await supabase
+            .from('equipe_buts_rang')
+            .select('*')
+            .eq('nom_saison', 'Saison 2025-2026')
+            .eq('ligue', 'Celtiis Ligue 1')
+            .order('total_buts_marques', { ascending: false })
         return data
     }
 
@@ -133,6 +147,10 @@ export default () => {
                             config={[
                                 { label: 'Buts', type_stats: 'buts' },
                             ]}
+                        />
+                        <StatTeam
+                            title="Équipes"
+                            supabaseQuery={fetchLeague1TeamStats}
                         />
                     </div>
                 </TabContent>
