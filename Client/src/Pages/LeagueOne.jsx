@@ -12,6 +12,7 @@ import { useRef, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import StatList from "../Components/StatList"
 import StatTeam from "../Components/StatTeam"
+import ClassementEvolution from "../Components/stats/ClassementEvolution"
 // import Statistics from "./Stats/Statistics";
 //import FormStats from "../Components/FormStats";
 
@@ -141,6 +142,15 @@ export default () => {
                 </TabContent>
                 <TabContent value="stats">
                     <div className="divide-y divide-gray-200">
+                        <div className="py-6">
+                            <h3 className="mb-4 text-center text-lg font-semibold text-gray-800">
+                                Évolution du classement par journée
+                            </h3>
+                            <ClassementEvolution
+                                ligue="Celtiis Ligue 1"
+                                saison="Saison 2025-2026"
+                            />
+                        </div>
                         <StatList
                             title="Joueurs"
                             supabaseQuery={(typeStats) => fetchStats(typeStats, 'joueur')()}
