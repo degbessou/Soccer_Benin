@@ -20,7 +20,32 @@ const COLOR_PALETTE = [
     "#dfe6e9", "#b2bec3",
 ]
 
-const colorForIndex = (index) => COLOR_PALETTE[index % COLOR_PALETTE.length]
+// Per-club colors based on each team's logo. Clubs sharing colors (e.g. the
+// many green/white sides) get distinct shades so every line stays readable.
+const TEAM_COLORS = {
+    "AS Cotonou": "#f59e0b",     // jaune et noir (amber)
+    "ASPAC": "#facc15",          // jaune et bleu (yellow)
+    "ASVO": "#14532d",           // vert et noir (dark green)
+    "Ayema": "#16a34a",          // vert et blanc (green)
+    "Bani Gansè": "#22c55e",     // vert et blanc (bright green)
+    "Buffles": "#15803d",        // vert et blanc (forest green)
+    "Cavaliers": "#1f2937",      // blanc et noir (near-black)
+    "Coton": "#38bdf8",          // bleu clair et blanc (light blue)
+    "Dadjè": "#1e3a8a",          // bleu marine et blanc (navy)
+    "Damissa": "#84cc16",        // jaune et vert (yellow-green)
+    "Dragons": "#ea580c",        // orange et noir (orange)
+    "Dynamo Abomey": "#4d7c0f",  // vert et blanc (olive green)
+    "Espoir": "#172554",         // bleu nuit (midnight blue)
+    "Hodio": "#2563eb",          // bleu et blanc (blue)
+    "JSP": "#a3e635",            // jaune et vert (light lime)
+    "Loto Popo": "#65a30d",      // vert et blanc (lime green)
+    "Sobemap": "#047857",        // vert et blanc (emerald)
+    "USS Kraké": "#0ea5e9",      // bleu clair et blanc (sky blue)
+}
+
+// Resolve a team's color: club color if known, otherwise cycle the palette.
+const colorForTeam = (team, index) =>
+    TEAM_COLORS[team] || COLOR_PALETTE[index % COLOR_PALETTE.length]
 
 // API base URL: configurable via Vite env, falls back to local FastAPI.
 const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:8000"
@@ -306,7 +331,7 @@ export default function ClassementEvolution({ ligue, saison }) {
                                 key={serie.equipe}
                                 dataKey={serie.equipe}
                                 name={serie.equipe}
-                                stroke={colorForIndex(index)}
+                                stroke={colorForTeam(serie.equipe, index)}
                                 strokeWidth={2}
                                 type="monotone"
                                 connectNulls
@@ -341,7 +366,7 @@ export default function ClassementEvolution({ ligue, saison }) {
                                 style={{
                                     backgroundColor: isHidden
                                         ? "#cbd5e1"
-                                        : colorForIndex(index),
+                                        : colorForTeam(serie.equipe, index),
                                 }}
                             />
                             <span className={isHidden ? "line-through" : ""}>
