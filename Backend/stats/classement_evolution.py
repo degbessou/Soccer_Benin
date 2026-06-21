@@ -34,9 +34,9 @@ def _get_engine() -> Engine:
 def _build_ranking(matches: pd.DataFrame, teams: list[str]) -> dict[str, int]:
     """Rank every team from a slice of finished matches.
 
-    Returns a mapping ``team -> rank`` where rank 1 is the best. Teams that are
-    perfectly tied (same points, goal difference and goals scored) share the
-    same rank, and the following rank is skipped (standard competition ranking).
+    Returns a mapping ``team -> rank`` where rank 1 is the best. Ties are broken
+    by goal difference, then goals scored, then team name (alphabetical), so the
+    ranking is strict: every team gets a unique position from 1 to N.
     """
     stats = {team: {"points": 0, "gf": 0, "ga": 0} for team in teams}
 
@@ -66,21 +66,17 @@ def _build_ranking(matches: pd.DataFrame, teams: list[str]) -> dict[str, int]:
         goal_diff = stats[team]["gf"] - stats[team]["ga"]
         rows.append((team, stats[team]["points"], goal_diff, stats[team]["gf"]))
 
-    # Sort by points, then goal difference, then goals scored (all descending).
-    # Team name is a final, stable tiebreaker for deterministic ordering only;
-    # it does not influence the rank value below.
+    # Sort by points, then goal difference, then goals scored (all descending),
+    # and finally by team name (alphabetical) to break perfect ties. This last
+    # criterion guarantees every team gets a unique, sequential position instead
+    # of many teams piling up on the same rank when they are still tied at 0
+    # (e.g. teams that have not played yet on matchday 1).
     rows.sort(key=lambda r: (-r[1], -r[2], -r[3], r[0]))
 
+    # Strict ranking: 1..N, one distinct position per team.
     ranking: dict[str, int] = {}
-    previous_key = None
-    current_rank = 0
-    for index, (team, points, goal_diff, goals_for) in enumerate(rows):
-        key = (points, goal_diff, goals_for)
-        if key != previous_key:
-            # New (worse) tier: rank jumps to the current absolute position.
-            current_rank = index + 1
-            previous_key = key
-        ranking[team] = current_rank
+    for index, (team, _points, _goal_diff, _goals_for) in enumerate(rows):
+        ranking[team] = index + 1
 
     return ranking
 
