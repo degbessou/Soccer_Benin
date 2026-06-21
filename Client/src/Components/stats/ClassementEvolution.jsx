@@ -11,6 +11,7 @@ import {
     Label,
 } from "recharts"
 import { supabase } from "../../Functions/SupabaseClient"
+import { API_BASE_URL } from "../../Functions/Api"
 
 // Base palette of well-contrasted colors. Cycled if there are more teams.
 const COLOR_PALETTE = [
@@ -46,9 +47,6 @@ const TEAM_COLORS = {
 // Resolve a team's color: club color if known, otherwise cycle the palette.
 const colorForTeam = (team, index) =>
     TEAM_COLORS[team] || COLOR_PALETTE[index % COLOR_PALETTE.length]
-
-// API base URL: configurable via Vite env, falls back to local FastAPI.
-const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:8000"
 
 /**
  * Custom tooltip: lists every team ranked by position for the hovered matchday,
@@ -228,7 +226,15 @@ export default function ClassementEvolution({ ligue, saison }) {
 
     return (
         <div className="mx-auto w-full max-w-screen-lg">
-            <div className="aspect-[2/1] w-full">
+            <div className="relative aspect-[2/1] w-full">
+                {/* Single centered "BENCOFOOT" watermark behind the chart. Sits
+                    under the lines but is captured by any screenshot of the graph. */}
+                <div className="pointer-events-none absolute inset-0 z-0 flex items-center justify-center overflow-hidden select-none">
+                    <span className="rotate-[-30deg] whitespace-nowrap text-5xl font-extrabold tracking-widest text-gray-400/15 sm:text-7xl">
+                        BENCOFOOT
+                    </span>
+                </div>
+                <div className="relative z-10 h-full w-full">
                 <ResponsiveContainer width="100%" height="100%">
                     <LineChart
                         data={chartData}
@@ -345,6 +351,7 @@ export default function ClassementEvolution({ ligue, saison }) {
                         ))}
                     </LineChart>
                 </ResponsiveContainer>
+                </div>
             </div>
 
             {/* Clickable legend (toggle visibility). */}
