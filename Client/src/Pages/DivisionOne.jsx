@@ -12,7 +12,7 @@ import TitleBis from "../assets/TitleBis";
 import StandingPool from "../Components/StandingPool";
 import StandingPoolCapture from "../Components/StandingPoolCapture";
 import CaptureOverlay from "../assets/CaptureOverlay";
-import { Helmet } from "react-helmet-async";
+import { Head } from "vite-react-ssg";
 //import Statistics from "./Stats/Statistics";
 
 export default function DivisionOne() {
@@ -108,13 +108,13 @@ export default function DivisionOne() {
 
     return (
         <>
-            <Helmet>
+            <Head>
                 <title>D1 Féminine : calendrier, résultats et classement | BencoFoot</title>
                 <meta
                     name="description"
                     content="Retrouvez le calendrier, les résultats, le classement et le calendrier de la D1 Féminine du Bénin sur Bencofoot."
                 />
-            </Helmet>
+            </Head>
             <Navbar />
             <CaptureOverlay isCapturing={isCapturing} />
             <HeroStatiq src={getSupabaseImageUrl('medias/banner/sobemap_un.jpg')} alt="banner" />

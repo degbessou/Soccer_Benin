@@ -1,6 +1,7 @@
 import React from "react";
+import { Outlet } from "react-router-dom";
+import { Head } from "vite-react-ssg";
 import { Analytics } from '@vercel/analytics/react';
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
 import Home from "./Pages/Home";
 import Mercato from "./Pages/Mercato";
 import Page404 from "./Pages/Page404";
@@ -22,36 +23,57 @@ import BeninCupMen from "./Pages/BeninCupMen";
 import Live from "./Pages/Live";
 import WatchPage from "./Pages/WatchPage";
 
-
-
-function App() {
+function Layout() {
     return (
-        <Router>
-            <Routes>
-                <Route exact path="/" Component={Home} />
-                <Route exact path="/Mercato" Component={Mercato} />
-                <Route exact path="/Page404" Component={Page404} />
-                <Route exact path="/Championship" Component={Championship} />
-                <Route exact path="/NationalTeam" Component={NationalTeam} />
-                <Route exact path="/WomenNationalTeam" Component={WomenNationalTeam} />
-                <Route exact path="/JuniorNationalTeam" Component={JuniorNationalTeam} />
-                <Route exact path="/LeagueOne" Component={LeagueOne} />
-                <Route exact path="/LeagueTwo" Component={LeagueTwo} />
-                <Route exact path="/LeagueThree" Component={LeagueThree} />
-                <Route exact path="/Careers" Component={Careers} />
-                <Route exact path="/About" Component={About} />
-                <Route exact path="/Contact" Component={Contact} />
-                <Route exact path="/Credits" Component={Credits} />
-                <Route exact path="/PrivacyPolicy" Component={PrivacyPolicy} />
-                <Route exact path="/DivisionOne" Component={DivisionOne} />
-                <Route exact path="/DivisionTwo" Component={DivisionTwo} />
-                <Route exact path="/BeninCupMen" Component={BeninCupMen} />
-                <Route exact path="/Live" Component={Live} />
-                <Route path="/live/:slug" element={<WatchPage />} />
-            </Routes>
+        <>
+            {/* Default title/description for every route. Pages that render their
+                own <Head> override these (react-helmet "last wins"). */}
+            <Head>
+                <html lang="fr" />
+                <title>BencoFoot – Le média du football béninois</title>
+                <meta
+                    name="description"
+                    content="Toute l’actualité du football béninois sur BencoFoot : matchs, résultats, classements, analyses et compétitions locales. Le football du Bénin à portée de clic."
+                />
+            </Head>
+            <Outlet />
             <Analytics />
-        </Router>
+        </>
     );
 }
 
-export default App;
+// Route records consumed by vite-react-ssg (static prerendering) and the
+// client router. Each non-dynamic path below is rendered to static HTML at
+// build time; dynamic routes hydrate on the client.
+export const routes = [
+    {
+        path: "/",
+        element: <Layout />,
+        children: [
+            { index: true, Component: Home },
+            { path: "Mercato", Component: Mercato },
+            { path: "Championship", Component: Championship },
+            { path: "NationalTeam", Component: NationalTeam },
+            { path: "WomenNationalTeam", Component: WomenNationalTeam },
+            { path: "JuniorNationalTeam", Component: JuniorNationalTeam },
+            { path: "LeagueOne", Component: LeagueOne },
+            { path: "LeagueTwo", Component: LeagueTwo },
+            { path: "LeagueThree", Component: LeagueThree },
+            { path: "DivisionOne", Component: DivisionOne },
+            { path: "DivisionTwo", Component: DivisionTwo },
+            { path: "BeninCupMen", Component: BeninCupMen },
+            { path: "Live", Component: Live },
+            { path: "Careers", Component: Careers },
+            { path: "About", Component: About },
+            { path: "Contact", Component: Contact },
+            { path: "Credits", Component: Credits },
+            { path: "PrivacyPolicy", Component: PrivacyPolicy },
+            // Dynamic route: not prerendered (no params known at build), client-only.
+            { path: "live/:slug", Component: WatchPage, getStaticPaths: () => [] },
+            { path: "Page404", Component: Page404 },
+            { path: "*", Component: Page404 },
+        ],
+    },
+];
+
+export default routes;
