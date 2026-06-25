@@ -1,0 +1,7 @@
+# BencoFoot – robots.txt
+# Le média du football béninois
+
+User-agent: *
+Allow: /
+
+Sitemap: https://www.bencofoot.com/sitemap.xml
