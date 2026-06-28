@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { supabase } from "../Functions/SupabaseClient"
+import { Head } from "vite-react-ssg";
 import Navbar from "../Components/Navbar"
 import Footer from "../Components/Footer"
 import HeroStatiq from "../Components/HeroStatiq";
@@ -83,6 +84,11 @@ export default function Home() {
 
     return (
         <>
+            <Head>
+                <title>Équipe nationale féminine du Bénin : actualités et résultats | BencoFoot</title>
+                <meta name="description" content="Suivez l’équipe nationale féminine de football du Bénin sur BencoFoot : matchs, résultats et actualités des Amazones." />
+                <link rel="canonical" href="https://www.bencofoot.com/WomenNationalTeam" />
+            </Head>
             <Navbar />
             <HeroStatiq src={getSupabaseImageUrl('medias/wnt/wnt_quatre.jpg')} alt="équipe nationale féminine" />
 

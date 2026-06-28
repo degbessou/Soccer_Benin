@@ -23,7 +23,7 @@ export default () => {
         },
         {
             title: "Championnats",
-            path: "/championship",
+            path: "/Championship",
             submenu: [
                 { title: "Histoire", path: "/Championship" },
                 {
@@ -44,8 +44,8 @@ export default () => {
                 { title: "Coupe du Bénin", path: "/BeninCupMen" }
             ]
         },
-        { title: "Mercato", path: "/mercato" },
-        { title: "Archives", path: "/page404" }
+        { title: "Mercato", path: "/Mercato" },
+        { title: "Archives", path: "/Page404" }
     ]
 
     useEffect(() => {
@@ -208,7 +208,7 @@ export default () => {
                         <div className="mt-4 px-2 md:mt-0 md:ml-auto">
                             <MovingBorderDemo
                                 text="Match en direct"
-                                onClick={() => handleNavigation("/live")}
+                                onClick={() => handleNavigation("/Live")}
                             />
                         </div>
                     </div >

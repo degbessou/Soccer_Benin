@@ -80,6 +80,7 @@ export default () => {
                     name="description"
                     content="Retrouvez le calendrier, les résultats, le classement et le calendrier de la Celtiis Ligue 2 du Bénin sur Bencofoot."
                 />
+                <link rel="canonical" href="https://www.bencofoot.com/LeagueTwo" />
             </Head>
             <Navbar />
             <HeroStatiq src={getSupabaseImageUrl('medias/banner/cotonfc_banner.jpg')} alt="banner" />

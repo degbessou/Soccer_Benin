@@ -83,6 +83,7 @@ export default function LeagueThree() {
                     name="description"
                     content="Retrouvez le calendrier, les résultats, le classement et le calendrier de la Ligue 3 Amateur du Bénin sur Bencofoot."
                 />
+                <link rel="canonical" href="https://www.bencofoot.com/LeagueThree" />
             </Head>
             <Navbar />
             <CaptureOverlay isCapturing={isCapturing} />

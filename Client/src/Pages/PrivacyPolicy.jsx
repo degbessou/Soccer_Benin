@@ -1,4 +1,5 @@
 
+import { Head } from "vite-react-ssg";
 import Navbar from "../Components/Navbar"
 import Footer from "../Components/Footer"
 import HeroStatiq from "../Components/HeroStatiq";
@@ -37,6 +38,11 @@ export default function Privacy() {
 
     return (
         <>
+            <Head>
+                <title>Politique de confidentialité | BencoFoot</title>
+                <meta name="description" content="Politique de confidentialité de BencoFoot : comment nous collectons, utilisons et protégeons vos données personnelles." />
+                <link rel="canonical" href="https://www.bencofoot.com/PrivacyPolicy" />
+            </Head>
             <Navbar />
             <HeroStatiq src={getSupabaseImageUrl('medias/banner/damissa_un.jpg')} alt="équipe de damissa fc" />
             <section className="py-14">

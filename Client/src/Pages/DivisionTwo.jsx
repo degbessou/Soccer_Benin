@@ -84,6 +84,7 @@ export default function DivisionTwo() {
                     name="description"
                     content="Retrouvez le calendrier, les résultats, le classement et le calendrier de la D2 Féminine du Bénin sur Bencofoot."
                 />
+                <link rel="canonical" href="https://www.bencofoot.com/DivisionTwo" />
             </Head>
             <Navbar />
             <CaptureOverlay isCapturing={isCapturing} />

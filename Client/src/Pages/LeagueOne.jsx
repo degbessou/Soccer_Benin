@@ -104,6 +104,7 @@ export default () => {
                     name="description"
                     content="Suivez la Celtiis Ligue 1 sur BencoFoot : calendrier des matchs, résultats, classement et statistiques de la première ligue béninoise."
                 />
+                <link rel="canonical" href="https://www.bencofoot.com/LeagueOne" />
             </Head>
             <Navbar />
             <HeroStatiq src={getSupabaseImageUrl('medias/banner/cotonfc_banner.jpg')} alt="banner" />

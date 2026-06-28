@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite-react-ssg build",
+    "build": "vite-react-ssg build && cp dist/Page404.html dist/404.html",
     "lint": "eslint .",
     "preview": "vite preview"
   },

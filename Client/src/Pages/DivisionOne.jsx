@@ -114,6 +114,7 @@ export default function DivisionOne() {
                     name="description"
                     content="Retrouvez le calendrier, les résultats, le classement et le calendrier de la D1 Féminine du Bénin sur Bencofoot."
                 />
+                <link rel="canonical" href="https://www.bencofoot.com/DivisionOne" />
             </Head>
             <Navbar />
             <CaptureOverlay isCapturing={isCapturing} />

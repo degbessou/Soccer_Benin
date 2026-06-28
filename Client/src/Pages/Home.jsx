@@ -1,5 +1,6 @@
 
 import React from 'react'
+import { Head } from "vite-react-ssg";
 import Navbar from '../Components/Navbar'
 import HeroDynamiq from '../Components/HeroDynamiq'
 import Cards from '../Components/Cards'
@@ -37,6 +38,11 @@ export default function Home() {
 
     return (
         <>
+            <Head>
+                <title>BencoFoot – Le média du football béninois</title>
+                <meta name="description" content="Toute l’actualité du football béninois sur BencoFoot : matchs, résultats, classements, analyses et compétitions locales. Le football du Bénin à portée de clic." />
+                <link rel="canonical" href="https://www.bencofoot.com/" />
+            </Head>
             <Navbar />
             <HeroDynamiq images={carouselImages} />
             <Cards />

@@ -1,5 +1,6 @@
 
 import React, { useState, useEffect } from 'react'
+import { Head } from "vite-react-ssg";
 import Navbar from '../Components/Navbar'
 import Footer from '../Components/Footer'
 import HeroStatiq from '../Components/HeroStatiq';
@@ -131,6 +132,11 @@ export default function Contact() {
 
     return (
         <>
+            <Head>
+                <title>Contact | BencoFoot</title>
+                <meta name="description" content="Contactez l’équipe de BencoFoot pour toute question, suggestion ou partenariat autour du football béninois." />
+                <link rel="canonical" href="https://www.bencofoot.com/Contact" />
+            </Head>
             <Navbar />
             <HeroStatiq src={getSupabaseImageUrl('medias/mnt/nt_fan_benin.jpg')} alt="équipe de damissa fc" />
             <main className="py-14">
