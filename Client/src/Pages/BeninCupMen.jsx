@@ -7,7 +7,7 @@ import Tabs, { TabsList, TabContent } from '../Components/Tabs'
 import ScheduleTournament from "../Components/ScheduleTournament";
 import { supabase } from "../Functions/SupabaseClient"
 import Section404 from "../Components/Section404";
-import { Helmet } from "react-helmet-async";
+import { Head } from "vite-react-ssg";
 
 export default function CoupeDuBenin() {
     const tabItems = [
@@ -28,20 +28,21 @@ export default function CoupeDuBenin() {
 
     return (
         <>
-            <Helmet>
+            <Head>
                 <title>Coupe du Bénin : calendrier et résultats | Bencofoot</title>
                 <meta
                     name="description"
                     content="Suivez la Coupe du Bénin sur BencoFoot : calendrier des matchs, résultats et statistiques de la coupe béninoise."
                 />
-            </Helmet>
+                <link rel="canonical" href="https://www.bencofoot.com/BeninCupMen" />
+            </Head>
             <Navbar />
             <HeroStatiq src={getSupabaseImageUrl('medias/banner/cotonfc_banner.jpg')} alt="banner" />
             <TitleBis title="Tout savoir sur la Coupe du Bénin 2025-2026" />
             <Tabs defaultTab="calendrier">
                 <TabsList items={tabItems} />
-                <div> <h2 class="py-2 text-lg underline underline-offset-3">
-                    Déroulement de la <a class="font-semibold">Coupe du Bénin</a> 2025-2026:
+                <div> <h2 className="py-2 text-lg underline underline-offset-3">
+                    Déroulement de la <a className="font-semibold">Coupe du Bénin</a> 2025-2026:
                 </h2>
 
                     <p className="py-2">

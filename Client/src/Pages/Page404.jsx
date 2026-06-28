@@ -1,9 +1,14 @@
+import { Head } from "vite-react-ssg";
 import Navbar from "../Components/Navbar"
 import Footer from "../Components/Footer"
 
 export default () => {
     return (
         <>
+            <Head>
+                <title>Page introuvable (404) | BencoFoot</title>
+                <meta name="robots" content="noindex" />
+            </Head>
             <Navbar />
             <main>
                 <div className="max-w-screen-xl mx-auto px-4 flex items-center justify-start h-screen md:px-8">

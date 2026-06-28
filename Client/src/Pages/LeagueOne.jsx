@@ -9,7 +9,7 @@ import { supabase } from "../Functions/SupabaseClient"
 import Standing from "../Components/Standing";
 //import Section404 from "../Components/Section404";
 import { useRef, useState } from "react";
-import { Helmet } from "react-helmet-async";
+import { Head } from "vite-react-ssg";
 import StatList from "../Components/StatList"
 import StatTeam from "../Components/StatTeam"
 // import Statistics from "./Stats/Statistics";
@@ -98,13 +98,14 @@ export default () => {
 
     return (
         <>
-            <Helmet>
+            <Head>
                 <title>Celtiis Ligue 1 : calendrier, résultats et classement | Bencofoot</title>
                 <meta
                     name="description"
                     content="Suivez la Celtiis Ligue 1 sur BencoFoot : calendrier des matchs, résultats, classement et statistiques de la première ligue béninoise."
                 />
-            </Helmet>
+                <link rel="canonical" href="https://www.bencofoot.com/LeagueOne" />
+            </Head>
             <Navbar />
             <HeroStatiq src={getSupabaseImageUrl('medias/banner/cotonfc_banner.jpg')} alt="banner" />
             <TitleBis title="Tout savoir sur la Celtiis Ligue 1 2025-2026" />

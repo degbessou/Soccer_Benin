@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { supabase } from "../Functions/SupabaseClient"
 
 import React from "react"
+import { Head } from "vite-react-ssg";
 import Navbar from "../Components/Navbar"
 import Footer from "../Components/Footer"
 import HeroDynamiq from "../Components/HeroDynamiq"
@@ -92,6 +93,11 @@ export default function Mercato() {
     }
     return (
         <>
+            <Head>
+                <title>Mercato du football béninois : transferts et rumeurs | BencoFoot</title>
+                <meta name="description" content="Suivez le mercato du football béninois sur BencoFoot : transferts, arrivées, départs et rumeurs des clubs et joueurs du Bénin." />
+                <link rel="canonical" href="https://www.bencofoot.com/Mercato" />
+            </Head>
             <Navbar />
             <HeroDynamiq images={carouselImages} />
             <TitleBis title="Le mercato béninois, c'est ici."

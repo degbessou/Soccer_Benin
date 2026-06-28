@@ -1,4 +1,5 @@
 
+import { Head } from "vite-react-ssg";
 import Navbar from "../Components/Navbar"
 import Footer from "../Components/Footer"
 import HeroStatiq from "../Components/HeroStatiq";
@@ -36,6 +37,11 @@ export default function Contact() {
 
     return (
         <>
+            <Head>
+                <title>Crédits | BencoFoot</title>
+                <meta name="description" content="Crédits et sources des contenus, images et données utilisés sur BencoFoot, le média du football béninois." />
+                <link rel="canonical" href="https://www.bencofoot.com/Credits" />
+            </Head>
             <Navbar />
             <HeroStatiq src={getSupabaseImageUrl('medias/mnt/nt_neuf.jpg')} alt="équipe nationale homme" />
             <section className='pt-8'>

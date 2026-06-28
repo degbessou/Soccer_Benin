@@ -1,4 +1,5 @@
 
+import { Head } from "vite-react-ssg";
 import Navbar from "../Components/Navbar"
 import Footer from "../Components/Footer"
 import HeroStatiq from "../Components/HeroStatiq";
@@ -22,6 +23,11 @@ export default function Careers() {
 
     return (
         <>
+            <Head>
+                <title>Carrières et recrutement | BencoFoot</title>
+                <meta name="description" content="Rejoignez l’équipe de BencoFoot. Découvrez nos offres et opportunités pour contribuer au média du football béninois." />
+                <link rel="canonical" href="https://www.bencofoot.com/Careers" />
+            </Head>
             <Navbar />
             <HeroStatiq src={getSupabaseImageUrl('medias/banner/damissa_un.jpg')} alt="équipe de damissa fc" />
             <section className="py-14">

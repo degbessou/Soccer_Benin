@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { supabase } from "../Functions/SupabaseClient";
+import { Head } from "vite-react-ssg";
 import Navbar from "../Components/Navbar";
 import Footer from "../Components/Footer";
 import HeroStatiq from "../Components/HeroStatiq";
@@ -33,6 +34,10 @@ export default function WatchPage() {
 
     if (loading) return (
         <>
+            <Head>
+                <title>Match en direct | BencoFoot</title>
+                <meta name="description" content="Suivez ce match du football béninois en direct sur BencoFoot : score en temps réel, compositions et déroulé de la rencontre." />
+            </Head>
             <Navbar />
             <p className="text-center text-gray-400 py-32">Chargement...</p>
             <Footer />

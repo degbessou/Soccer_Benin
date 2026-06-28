@@ -1,6 +1,7 @@
 // src/pages/Live.jsx
 import { useEffect, useState } from "react";
 import { supabase } from "../Functions/SupabaseClient";
+import { Head } from "vite-react-ssg";
 import Navbar from "../Components/Navbar";
 import Footer from "../Components/Footer";
 import HeroStatiq from "../Components/HeroStatiq";
@@ -30,6 +31,11 @@ export default function Live() {
 
     return (
         <>
+            <Head>
+                <title>Matchs en direct du football béninois | BencoFoot</title>
+                <meta name="description" content="Suivez les matchs du football béninois en direct sur BencoFoot : scores en temps réel, compositions et déroulé des rencontres." />
+                <link rel="canonical" href="https://www.bencofoot.com/Live" />
+            </Head>
             <Navbar />
             <HeroStatiq src={getSupabaseImageUrl('medias/mnt/nt_neuf.jpg')} alt="équipe de damissa fc" />
             <TitleBis title="Regardez les matchs des équipes nationales en direct" />

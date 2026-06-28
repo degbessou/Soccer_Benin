@@ -1,3 +1,4 @@
+import { Head } from "vite-react-ssg";
 import Navbar from "../Components/Navbar";
 import Footer from "../Components/Footer";
 import HeroStatiq from "../Components/HeroStatiq";
@@ -57,6 +58,11 @@ export default function About() {
 
   return (
     <>
+      <Head>
+          <title>À propos de BencoFoot | Le média du football béninois</title>
+          <meta name="description" content="BencoFoot est le média de référence du football béninois. Découvrez notre mission, notre équipe et notre couverture du football au Bénin." />
+          <link rel="canonical" href="https://www.bencofoot.com/About" />
+      </Head>
       <Navbar />
       <HeroStatiq
         src={getSupabaseImageUrl("medias/banner/sobemap_un.jpg")}

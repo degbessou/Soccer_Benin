@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { supabase } from "../Functions/SupabaseClient"
+import { Head } from "vite-react-ssg";
 import Navbar from "../Components/Navbar"
 import Footer from "../Components/Footer"
 import HeroStatiq from "../Components/HeroStatiq";
@@ -55,6 +56,11 @@ export default function Home() {
 
     return (
         <>
+            <Head>
+                <title>Championnat du Bénin de football : présentation | BencoFoot</title>
+                <meta name="description" content="Découvrez le championnat de football du Bénin sur BencoFoot : organisation, divisions et compétitions du football béninois." />
+                <link rel="canonical" href="https://www.bencofoot.com/Championship" />
+            </Head>
             <Navbar />
             <HeroStatiq src={getSupabaseImageUrl('medias/banner/dadje_un.jpg')} alt="équipe de dadje fc, champion en titre" />
 

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { supabase } from "../Functions/SupabaseClient"
+import { Head } from "vite-react-ssg";
 import Navbar from "../Components/Navbar"
 import Footer from "../Components/Footer"
 import HeroStatiq from "../Components/HeroStatiq";
@@ -83,6 +84,11 @@ export default function Home() {
 
     return (
         <>
+            <Head>
+                <title>Équipes nationales jeunes du Bénin : actualités | BencoFoot</title>
+                <meta name="description" content="L’actualité des sélections nationales jeunes du Bénin sur BencoFoot : équipes U17, U20, U23 et espoirs du football béninois." />
+                <link rel="canonical" href="https://www.bencofoot.com/JuniorNationalTeam" />
+            </Head>
             <Navbar />
             <HeroStatiq src={getSupabaseImageUrl('medias/mjnt/u20_douze.jpg')} alt="équipe nationale féminine" />
 

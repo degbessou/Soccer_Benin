@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { supabase } from "../Functions/SupabaseClient"
+import { Head } from "vite-react-ssg";
 import Navbar from "../Components/Navbar"
 import Footer from "../Components/Footer"
 import HeroStatiq from "../Components/HeroStatiq";
@@ -75,6 +76,11 @@ export default function Home() {
 
     return (
         <>
+            <Head>
+                <title>Équipe nationale du Bénin (Guépards) : actualités et résultats | BencoFoot</title>
+                <meta name="description" content="Toute l’actualité des Guépards du Bénin sur BencoFoot : matchs, résultats, convocations et performances de l’équipe nationale masculine." />
+                <link rel="canonical" href="https://www.bencofoot.com/NationalTeam" />
+            </Head>
             <Navbar />
             <HeroStatiq src="/en_benin.jpeg" alt="équipe nationale senoir homme" />
 
