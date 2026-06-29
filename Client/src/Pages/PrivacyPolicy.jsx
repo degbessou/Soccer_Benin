@@ -41,7 +41,7 @@ export default function Privacy() {
             <Head>
                 <title>Politique de confidentialité | BencoFoot</title>
                 <meta name="description" content="Politique de confidentialité de BencoFoot : comment nous collectons, utilisons et protégeons vos données personnelles." />
-                <link rel="canonical" href="https://www.bencofoot.com/PrivacyPolicy" />
+                <link rel="canonical" href="https://www.bencofoot.com/politique-de-confidentialite" />
             </Head>
             <Navbar />
             <HeroStatiq src={getSupabaseImageUrl('medias/banner/damissa_un.jpg')} alt="équipe de damissa fc" />

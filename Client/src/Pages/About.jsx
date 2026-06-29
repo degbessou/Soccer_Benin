@@ -75,7 +75,7 @@ export default function About() {
       <Head>
           <title>À propos de BencoFoot | Le média du football béninois</title>
           <meta name="description" content="BencoFoot est le média de référence du football béninois. Découvrez notre mission, notre équipe et notre couverture du football au Bénin." />
-          <link rel="canonical" href="https://www.bencofoot.com/About" />
+          <link rel="canonical" href="https://www.bencofoot.com/a-propos" />
           <script type="application/ld+json">{faqJsonLd}</script>
       </Head>
       <Navbar />
@@ -94,7 +94,7 @@ export default function About() {
                 Vous ne retrouvez pas l'information que vous recherchez ?{" "}
                 <Link
                   className="text-yellow-700 font-semibold whitespace-nowrap"
-                  to="/Contact"
+                  to="/contact"
                 >
                   Contactez-nous
                 </Link>

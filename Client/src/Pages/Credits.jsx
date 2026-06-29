@@ -40,7 +40,7 @@ export default function Contact() {
             <Head>
                 <title>Crédits | BencoFoot</title>
                 <meta name="description" content="Crédits et sources des contenus, images et données utilisés sur BencoFoot, le média du football béninois." />
-                <link rel="canonical" href="https://www.bencofoot.com/Credits" />
+                <link rel="canonical" href="https://www.bencofoot.com/credits" />
             </Head>
             <Navbar />
             <HeroStatiq src={getSupabaseImageUrl('medias/mnt/nt_neuf.jpg')} alt="équipe nationale homme" />

@@ -59,7 +59,7 @@ export default function Home() {
             <Head>
                 <title>Championnat du Bénin de football : présentation | BencoFoot</title>
                 <meta name="description" content="Découvrez le championnat de football du Bénin sur BencoFoot : organisation, divisions et compétitions du football béninois." />
-                <link rel="canonical" href="https://www.bencofoot.com/Championship" />
+                <link rel="canonical" href="https://www.bencofoot.com/championnat" />
             </Head>
             <Navbar />
             <HeroStatiq src={getSupabaseImageUrl('medias/banner/dadje_un.jpg')} alt="équipe de dadje fc, champion en titre" />

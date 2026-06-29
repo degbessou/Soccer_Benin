@@ -79,7 +79,7 @@ export default function Home() {
             <Head>
                 <title>Équipe nationale du Bénin (Guépards) : actualités et résultats | BencoFoot</title>
                 <meta name="description" content="Toute l’actualité des Guépards du Bénin sur BencoFoot : matchs, résultats, convocations et performances de l’équipe nationale masculine." />
-                <link rel="canonical" href="https://www.bencofoot.com/NationalTeam" />
+                <link rel="canonical" href="https://www.bencofoot.com/equipe-nationale" />
             </Head>
             <Navbar />
             <HeroStatiq src="/en_benin.jpeg" alt="équipe nationale senoir homme" />

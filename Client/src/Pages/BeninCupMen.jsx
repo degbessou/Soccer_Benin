@@ -34,7 +34,7 @@ export default function CoupeDuBenin() {
                     name="description"
                     content="Suivez la Coupe du Bénin sur BencoFoot : calendrier des matchs, résultats et statistiques de la coupe béninoise."
                 />
-                <link rel="canonical" href="https://www.bencofoot.com/BeninCupMen" />
+                <link rel="canonical" href="https://www.bencofoot.com/coupe-du-benin" />
             </Head>
             <Navbar />
             <HeroStatiq src={getSupabaseImageUrl('medias/banner/cotonfc_banner.jpg')} alt="banner" />

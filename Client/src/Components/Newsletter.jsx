@@ -130,7 +130,7 @@ export default ({ isOpen, setIsOpen }) => {
                                         Aucun spam, jamais. Nous respectons la protection de vos données.
                                         <br />
                                         Consultez notre{' '}
-                                        <a className="underline hover:text-white transition-colors" href="/PrivacyPolicy">
+                                        <a className="underline hover:text-white transition-colors" href="/politique-de-confidentialite">
                                             Politique de confidentialité
                                         </a>
                                     </p>

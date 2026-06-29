@@ -6,22 +6,22 @@ Contenu en français. Les données proviennent du suivi des compétitions et des
 
 ## Compétitions et championnats
 
-- [Celtiis Ligue 1](https://www.bencofoot.com/LeagueOne): calendrier, résultats, classement et statistiques de la première division masculine.
-- [Celtiis Ligue 2](https://www.bencofoot.com/LeagueTwo): calendrier, résultats et classement de la deuxième division masculine.
-- [Ligue 3](https://www.bencofoot.com/LeagueThree): calendrier, résultats et classement de la troisième division.
-- [D1 Féminine](https://www.bencofoot.com/DivisionOne): championnat féminin de première division.
-- [D2 Féminine](https://www.bencofoot.com/DivisionTwo): championnat féminin de deuxième division.
-- [Coupe du Bénin](https://www.bencofoot.com/BeninCupMen): calendrier et résultats de la coupe nationale.
+- [Celtiis Ligue 1](https://www.bencofoot.com/ligue-1): calendrier, résultats, classement et statistiques de la première division masculine.
+- [Celtiis Ligue 2](https://www.bencofoot.com/ligue-2): calendrier, résultats et classement de la deuxième division masculine.
+- [Ligue 3](https://www.bencofoot.com/ligue-3): calendrier, résultats et classement de la troisième division.
+- [D1 Féminine](https://www.bencofoot.com/d1-feminine): championnat féminin de première division.
+- [D2 Féminine](https://www.bencofoot.com/d2-feminine): championnat féminin de deuxième division.
+- [Coupe du Bénin](https://www.bencofoot.com/coupe-du-benin): calendrier et résultats de la coupe nationale.
 
 ## Équipes nationales
 
-- [Équipe nationale masculine (Guépards)](https://www.bencofoot.com/NationalTeam): actualités, matchs et résultats des Guépards du Bénin.
-- [Équipe nationale féminine](https://www.bencofoot.com/WomenNationalTeam): actualités et résultats des Amazones du Bénin.
-- [Sélections jeunes](https://www.bencofoot.com/JuniorNationalTeam): équipes U17, U20 et U23.
+- [Équipe nationale masculine (Guépards)](https://www.bencofoot.com/equipe-nationale): actualités, matchs et résultats des Guépards du Bénin.
+- [Équipe nationale féminine](https://www.bencofoot.com/equipe-nationale-feminine): actualités et résultats des Amazones du Bénin.
+- [Sélections jeunes](https://www.bencofoot.com/equipes-nationales-jeunes): équipes U17, U20 et U23.
 
 ## Autres rubriques
 
-- [Mercato](https://www.bencofoot.com/Mercato): transferts, arrivées, départs et rumeurs du football béninois.
-- [Match en direct](https://www.bencofoot.com/Live): suivi des rencontres en direct.
-- [À propos](https://www.bencofoot.com/About): mission, fonctionnement et sources de BencoFoot.
-- [Contact](https://www.bencofoot.com/Contact): nous contacter.
+- [Mercato](https://www.bencofoot.com/mercato): transferts, arrivées, départs et rumeurs du football béninois.
+- [Match en direct](https://www.bencofoot.com/direct): suivi des rencontres en direct.
+- [À propos](https://www.bencofoot.com/a-propos): mission, fonctionnement et sources de BencoFoot.
+- [Contact](https://www.bencofoot.com/contact): nous contacter.

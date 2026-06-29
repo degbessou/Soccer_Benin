@@ -17,7 +17,7 @@ export default function Careers() {
             desc_one: "Nous développons une plateforme dédiée au championnat béninois et souhaitons proposer des statistiques fiables, complètes et mises à jour après chaque journée. Pour cela, nous recherchons des personnes intéressées à contribuer à la collecte d’informations : buteurs, passes décisives, feuilles de match, cartons, expulsion…",
             desc_two: "Aucune compétence technique n’est requise : seulement de la passion pour le football et un peu de disponibilité. En participant, vous aidez à enrichir une plateforme qui met en valeur les clubs, les joueurs et tout le football béninois.",
             desc_three: "Si vous souhaitez prendre part au projet ou en savoir plus, ",
-            href: "/Contact"
+            href: "/contact"
         }
     ];
 
@@ -26,7 +26,7 @@ export default function Careers() {
             <Head>
                 <title>Carrières et recrutement | BencoFoot</title>
                 <meta name="description" content="Rejoignez l’équipe de BencoFoot. Découvrez nos offres et opportunités pour contribuer au média du football béninois." />
-                <link rel="canonical" href="https://www.bencofoot.com/Careers" />
+                <link rel="canonical" href="https://www.bencofoot.com/carrieres" />
             </Head>
             <Navbar />
             <HeroStatiq src={getSupabaseImageUrl('medias/banner/damissa_un.jpg')} alt="équipe de damissa fc" />

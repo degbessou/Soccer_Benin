@@ -14,38 +14,38 @@ export default () => {
         { title: "Actualités", path: "/" },
         {
             title: "Le football béninois",
-            path: "/NationalTeam",
+            path: "/equipe-nationale",
             submenu: [
-                { title: "Équipe nationale homme", path: "/NationalTeam" },
-                { title: "Équipe nationale femme", path: "/WomenNationalTeam" },
-                { title: "Équipe U20", path: "/JuniorNationalTeam" }
+                { title: "Équipe nationale homme", path: "/equipe-nationale" },
+                { title: "Équipe nationale femme", path: "/equipe-nationale-feminine" },
+                { title: "Équipe U20", path: "/equipes-nationales-jeunes" }
             ]
         },
         {
             title: "Championnats",
-            path: "/Championship",
+            path: "/championnat",
             submenu: [
-                { title: "Histoire", path: "/Championship" },
+                { title: "Histoire", path: "/championnat" },
                 {
                     title: "Foot masculin",
                     submenu: [
-                        { title: "Ligue 1", path: "/LeagueOne" },
-                        { title: "Ligue 2", path: "/LeagueTwo" },
-                        { title: "Ligue 3", path: "/LeagueThree" }
+                        { title: "Ligue 1", path: "/ligue-1" },
+                        { title: "Ligue 2", path: "/ligue-2" },
+                        { title: "Ligue 3", path: "/ligue-3" }
                     ]
                 },
                 {
                     title: "Foot féminin",
                     submenu: [
-                        { title: "D1 Féminine", path: "/DivisionOne" },
-                        { title: "D2 Féminine", path: "/DivisionTwo" }
+                        { title: "D1 Féminine", path: "/d1-feminine" },
+                        { title: "D2 Féminine", path: "/d2-feminine" }
                     ]
                 },
-                { title: "Coupe du Bénin", path: "/BeninCupMen" }
+                { title: "Coupe du Bénin", path: "/coupe-du-benin" }
             ]
         },
-        { title: "Mercato", path: "/Mercato" },
-        { title: "Archives", path: "/Page404" }
+        { title: "Mercato", path: "/mercato" },
+        { title: "Archives", path: "/archives" }
     ]
 
     useEffect(() => {
@@ -208,7 +208,7 @@ export default () => {
                         <div className="mt-4 px-2 md:mt-0 md:ml-auto">
                             <MovingBorderDemo
                                 text="Match en direct"
-                                onClick={() => handleNavigation("/Live")}
+                                onClick={() => handleNavigation("/direct")}
                             />
                         </div>
                     </div >

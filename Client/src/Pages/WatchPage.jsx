@@ -58,7 +58,7 @@ export default function WatchPage() {
             <HeroStatiq src={getSupabaseImageUrl('medias/mnt/nt_douze.jpg')} alt="équipe de damissa fc" />
             <TitleBis title="Regardez les matchs des équipes nationales en direct" />
             <div className="max-w-screen-lg mx-auto px-8 py-8">
-                <BackButton to="/Live" label="Retour aux matchs" />
+                <BackButton to="/direct" label="Retour aux matchs" />
                 <h1 className="text-gray-900 text-2xl font-bold mb-2">{match.title}</h1>
                 <p className="text-gray-400 text-sm mb-6">{match.descr} | {match.heure}</p>
                 {match.iframe ? (
