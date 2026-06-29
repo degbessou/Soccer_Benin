@@ -110,7 +110,8 @@ export default function Cards() {
                                         <div className="w-[185px] md:w-[185px] h-[105px] flex items-center justify-center bg-gray-100 rounded-md overflow-hidden mx-auto md:mx-0">
                                             <img
                                                 src={getSupabaseImageUrl(item.image)}
-                                                alt="Image"
+                                                alt={`Actualité football béninois — #${item.tag_un}`}
+                                                loading="lazy"
                                                 className="w-full h-full object-cover"
                                             />
                                         </div>

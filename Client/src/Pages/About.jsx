@@ -1,4 +1,5 @@
 import { Head } from "vite-react-ssg";
+import { Link } from "react-router-dom";
 import Navbar from "../Components/Navbar";
 import Footer from "../Components/Footer";
 import HeroStatiq from "../Components/HeroStatiq";
@@ -56,12 +57,26 @@ export default function About() {
     },
   ];
 
+  // FAQPage structured data, generated from the Q&A above (E-E-A-T + rich results).
+  const faqJsonLd = JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqsList.flatMap((list) =>
+      list.qas.map((item) => ({
+        "@type": "Question",
+        name: item.q,
+        acceptedAnswer: { "@type": "Answer", text: item.a },
+      }))
+    ),
+  });
+
   return (
     <>
       <Head>
           <title>À propos de BencoFoot | Le média du football béninois</title>
           <meta name="description" content="BencoFoot est le média de référence du football béninois. Découvrez notre mission, notre équipe et notre couverture du football au Bénin." />
           <link rel="canonical" href="https://www.bencofoot.com/About" />
+          <script type="application/ld+json">{faqJsonLd}</script>
       </Head>
       <Navbar />
       <HeroStatiq
@@ -77,12 +92,12 @@ export default function About() {
             <div className="mt-3 text-gray-600 text-center dark:text-gray-400">
               <p>
                 Vous ne retrouvez pas l'information que vous recherchez ?{" "}
-                <a
+                <Link
                   className="text-yellow-700 font-semibold whitespace-nowrap"
-                  href="javascript:void(0)"
+                  to="/Contact"
                 >
                   Contactez-nous
-                </a>
+                </Link>
                 .
               </p>
             </div>

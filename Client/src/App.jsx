@@ -18,6 +18,7 @@ const ORG_JSONLD = JSON.stringify({
     url: `${SITE_URL}/`,
     logo: `${SITE_URL}/logo.png`,
     description: DEFAULT_DESCRIPTION,
+    sameAs: ["https://www.facebook.com/benco.football"],
 });
 const WEBSITE_JSONLD = JSON.stringify({
     "@context": "https://schema.org",
