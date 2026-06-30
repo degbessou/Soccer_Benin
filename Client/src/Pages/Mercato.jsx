@@ -96,7 +96,7 @@ export default function Mercato() {
             <Head>
                 <title>Mercato du football béninois : transferts et rumeurs | BencoFoot</title>
                 <meta name="description" content="Suivez le mercato du football béninois sur BencoFoot : transferts, arrivées, départs et rumeurs des clubs et joueurs du Bénin." />
-                <link rel="canonical" href="https://www.bencofoot.com/Mercato" />
+                <link rel="canonical" href="https://www.bencofoot.com/mercato" />
             </Head>
             <Navbar />
             <HeroDynamiq images={carouselImages} />

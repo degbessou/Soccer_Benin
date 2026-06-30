@@ -1,9 +1,30 @@
 {
     "cleanUrls": true,
     "trailingSlash": false,
+    "redirects": [
+        { "source": "/Mercato", "destination": "/mercato", "permanent": true },
+        { "source": "/Championship", "destination": "/championnat", "permanent": true },
+        { "source": "/NationalTeam", "destination": "/equipe-nationale", "permanent": true },
+        { "source": "/WomenNationalTeam", "destination": "/equipe-nationale-feminine", "permanent": true },
+        { "source": "/JuniorNationalTeam", "destination": "/equipes-nationales-jeunes", "permanent": true },
+        { "source": "/LeagueOne", "destination": "/ligue-1", "permanent": true },
+        { "source": "/LeagueTwo", "destination": "/ligue-2", "permanent": true },
+        { "source": "/LeagueThree", "destination": "/ligue-3", "permanent": true },
+        { "source": "/DivisionOne", "destination": "/d1-feminine", "permanent": true },
+        { "source": "/DivisionTwo", "destination": "/d2-feminine", "permanent": true },
+        { "source": "/BeninCupMen", "destination": "/coupe-du-benin", "permanent": true },
+        { "source": "/Live", "destination": "/direct", "permanent": true },
+        { "source": "/Careers", "destination": "/carrieres", "permanent": true },
+        { "source": "/About", "destination": "/a-propos", "permanent": true },
+        { "source": "/Contact", "destination": "/contact", "permanent": true },
+        { "source": "/Credits", "destination": "/credits", "permanent": true },
+        { "source": "/PrivacyPolicy", "destination": "/politique-de-confidentialite", "permanent": true },
+        { "source": "/Page404", "destination": "/archives", "permanent": true },
+        { "source": "/live/:slug*", "destination": "/direct/:slug*", "permanent": true }
+    ],
     "rewrites": [
         {
-            "source": "/live/:slug*",
+            "source": "/direct/:slug*",
             "destination": "/index.html"
         }
     ],

@@ -25,7 +25,7 @@ const MatchCard = ({ img, date, heure, title, desc, isLive, slug, status }) => {
 
     const handleClick = (e) => {
         e.preventDefault();
-        navigate(`/live/${slug}`);
+        navigate(`/direct/${slug}`);
     };
 
     const formatDate = (dateStr) => {

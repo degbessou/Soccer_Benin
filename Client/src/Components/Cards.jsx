@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react"
+import { Head } from "vite-react-ssg"
 import { supabase } from "../Functions/SupabaseClient"
 import { getSupabaseImageUrl } from "../assets/Helpers"
 import { getPreposition } from "../assets/Helpers"
@@ -79,8 +80,29 @@ export default function Cards() {
     const [year, monthNumber] = currentMonthKey.split("-")
     const monthName = monthNumber ? monthNames[parseInt(monthNumber, 10) - 1] : ""
 
+    // Lightweight ItemList schema describing the visible news feed (no per-item
+    // pages — these are brief summaries, not standalone articles).
+    const itemListJsonLd = currentNews.length > 0 ? JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "ItemList",
+        name: monthName && year
+            ? `Actualités du football béninois — ${monthName} ${year}`
+            : "Actualités du football béninois",
+        numberOfItems: currentNews.length,
+        itemListElement: currentNews.map((item, i) => ({
+            "@type": "ListItem",
+            position: i + 1,
+            name: (item.infos || `#${item.tag_un}`).slice(0, 110),
+        })),
+    }) : null
+
     return (
         <section className="py-4">
+            {itemListJsonLd && (
+                <Head>
+                    <script type="application/ld+json">{itemListJsonLd}</script>
+                </Head>
+            )}
             <div className="max-w-screen-lg mx-auto px-4 md:px-8">
                 <div ref={topRef}></div>
 
@@ -110,7 +132,8 @@ export default function Cards() {
                                         <div className="w-[185px] md:w-[185px] h-[105px] flex items-center justify-center bg-gray-100 rounded-md overflow-hidden mx-auto md:mx-0">
                                             <img
                                                 src={getSupabaseImageUrl(item.image)}
-                                                alt="Image"
+                                                alt={`Actualité football béninois — #${item.tag_un}`}
+                                                loading="lazy"
                                                 className="w-full h-full object-cover"
                                             />
                                         </div>

@@ -34,7 +34,7 @@ export default function Live() {
             <Head>
                 <title>Matchs en direct du football béninois | BencoFoot</title>
                 <meta name="description" content="Suivez les matchs du football béninois en direct sur BencoFoot : scores en temps réel, compositions et déroulé des rencontres." />
-                <link rel="canonical" href="https://www.bencofoot.com/Live" />
+                <link rel="canonical" href="https://www.bencofoot.com/direct" />
             </Head>
             <Navbar />
             <HeroStatiq src={getSupabaseImageUrl('medias/mnt/nt_neuf.jpg')} alt="équipe de damissa fc" />

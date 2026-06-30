@@ -87,7 +87,7 @@ export default function Home() {
             <Head>
                 <title>Équipe nationale féminine du Bénin : actualités et résultats | BencoFoot</title>
                 <meta name="description" content="Suivez l’équipe nationale féminine de football du Bénin sur BencoFoot : matchs, résultats et actualités des Amazones." />
-                <link rel="canonical" href="https://www.bencofoot.com/WomenNationalTeam" />
+                <link rel="canonical" href="https://www.bencofoot.com/equipe-nationale-feminine" />
             </Head>
             <Navbar />
             <HeroStatiq src={getSupabaseImageUrl('medias/wnt/wnt_quatre.jpg')} alt="équipe nationale féminine" />

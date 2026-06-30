@@ -87,7 +87,7 @@ export default function Home() {
             <Head>
                 <title>Équipes nationales jeunes du Bénin : actualités | BencoFoot</title>
                 <meta name="description" content="L’actualité des sélections nationales jeunes du Bénin sur BencoFoot : équipes U17, U20, U23 et espoirs du football béninois." />
-                <link rel="canonical" href="https://www.bencofoot.com/JuniorNationalTeam" />
+                <link rel="canonical" href="https://www.bencofoot.com/equipes-nationales-jeunes" />
             </Head>
             <Navbar />
             <HeroStatiq src={getSupabaseImageUrl('medias/mjnt/u20_douze.jpg')} alt="équipe nationale féminine" />
