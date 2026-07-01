@@ -94,7 +94,7 @@ export default function Standing({
                             <tbody className="divide-y divide-gray-300">
                                 {standing.map((team, idx) => (
                                     <tr
-                                        key={team.id_standing}
+                                        key={team.id_standing ?? team.abreviation ?? team.nom_equipe ?? idx}
                                         className={`${idx === 0 ? 'bg-green-50' :
                                             idx === 1 && caption_yellow ? 'bg-yellow-50' :
                                                 idx >= standing.length - 2 ? 'bg-red-50' : ''
@@ -144,7 +144,7 @@ export default function Standing({
                     <div className="md:hidden">
                         {standing.map((team, idx) => (
                             <div
-                                key={team.id_standing}
+                                key={team.id_standing ?? team.abreviation ?? team.nom_equipe ?? idx}
                                 className={`p-4 border-b border-gray-300 ${idx === 0 ? 'bg-green-50' :
                                     idx === 1 && caption_yellow ? 'bg-yellow-50' :
                                         idx >= standing.length - 2 ? 'bg-red-50' : ''
