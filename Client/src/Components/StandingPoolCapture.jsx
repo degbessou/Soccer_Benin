@@ -1,5 +1,6 @@
 // components/StandingPoolCapture.jsx
 import { forwardRef } from 'react';
+import { CAPTURE_ENABLED } from '../config/features';
 import { getSupabaseImageUrl } from '../assets/Helpers';
 
 const backgroundUrl = '/background.svg';
@@ -19,6 +20,8 @@ const StandingPoolCapture = forwardRef(({
     footerLeft = "Tout le classement détaillé est à retrouver sur notre site.",
     footerRight = new Date().toLocaleDateString('fr-FR')
 }, ref) => {
+
+    if (!CAPTURE_ENABLED) return null;
 
     const singlePool = pouleBStanding === null  // mode 1 table
 

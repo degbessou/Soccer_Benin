@@ -1,10 +1,14 @@
 // assets/DownloadButton.jsx
 import * as htmlToImage from "html-to-image";
+import { CAPTURE_ENABLED } from "../config/features";
 
 export default function DownloadButton({ refToCapture, filename, label, onCapturing, disabled = false }) {
 
+    // Fonctionnalité de capture désactivée globalement : on ne rend pas le bouton.
+    if (!CAPTURE_ENABLED) return null;
+
     const handleCapture = async () => {
-        if (!refToCapture?.current || disabled) return;
+        if (!CAPTURE_ENABLED || !refToCapture?.current || disabled) return;
 
         onCapturing?.(true);
 

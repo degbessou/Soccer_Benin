@@ -1,5 +1,6 @@
 // components/ScheduleCapture.jsx
 import { forwardRef } from 'react';
+import { CAPTURE_ENABLED } from '../config/features';
 import { getSupabaseImageUrl } from '../assets/Helpers';
 
 const backgroundUrl = '/background.svg';
@@ -52,6 +53,8 @@ const ScheduleCapture = forwardRef(({
     footerLeft = "Le calendrier et les résultats détaillés sont à retrouver sur notre site.",
     footerRight = new Date().toLocaleDateString('fr-FR')
 }, ref) => {
+
+    if (!CAPTURE_ENABLED) return null;
 
     const colors = {
         primary: '#1C5937',
