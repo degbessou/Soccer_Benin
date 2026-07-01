@@ -329,7 +329,7 @@ export default function LeagueCalendar({
                                                                             {match.statut === 'finished' ? (
                                                                                 <div className="flex flex-col items-center">
                                                                                     <span className="font-bold text-gray-800 text-base">{match.buts_domicile} - {match.buts_exterieur}</span>
-                                                                                    {match.buts_peno_domicile !== null && match.buts_peno_exterieur !== null && (
+                                                                                    {match.buts_peno_domicile != null && match.buts_peno_exterieur != null && (
                                                                                         <span className="text-xs text-gray-500">
                                                                                             TAB {match.buts_peno_domicile}-{match.buts_peno_exterieur}
                                                                                         </span>
