@@ -43,6 +43,7 @@ export default function ScheduleTournament({
                 const now = new Date()
                 const matchesWithStatus = (data || []).map(match => {
                     if (match.statut === 'postponed') return match
+                    if (match.statut === 'cancelled') return match
                     if (match.buts_domicile !== null && match.buts_exterieur !== null) {
                         return { ...match, statut: 'finished' }
                     }
@@ -67,7 +68,7 @@ export default function ScheduleTournament({
         for (let tour of orderedTours) {
             const matchsTour = matchesData.filter(m => m.phase === tour.value)
             if (matchsTour.length === 0) continue
-            const hasUnfinished = matchsTour.some(m => m.statut !== 'finished' && m.statut !== 'postponed')
+            const hasUnfinished = matchsTour.some(m => m.statut !== 'finished' && m.statut !== 'postponed' && m.statut !== 'cancelled')
             if (hasUnfinished) return tour.value
         }
         return 'Finale'
@@ -100,14 +101,16 @@ export default function ScheduleTournament({
         statut === 'finished' ? 'Terminé' :
             statut === 'live' ? 'En cours' :
                 statut === 'postponed' ? 'Reporté' :
-                    statut === 'pending' ? 'En attente' : 'À venir'
+                    statut === 'cancelled' ? 'Annulé' :
+                        statut === 'pending' ? 'En attente' : 'À venir'
 
     const statutClass = (statut) =>
         statut === 'finished' ? 'bg-green-100 text-green-700' :
             statut === 'live' ? 'bg-red-100 text-red-700' :
                 statut === 'postponed' ? 'bg-orange-100 text-orange-700' :
-                    statut === 'pending' ? 'bg-gray-100 text-gray-700' :
-                        'bg-yellow-100 text-yellow-700'
+                    statut === 'cancelled' ? 'bg-red-200 text-red-800' :
+                        statut === 'pending' ? 'bg-gray-100 text-gray-700' :
+                            'bg-yellow-100 text-yellow-700'
 
     return (
         <>
