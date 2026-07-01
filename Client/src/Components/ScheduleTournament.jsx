@@ -179,7 +179,16 @@ export default function ScheduleTournament({
                                             <h4 className="font-semibold text-gray-800">{tour}</h4>
                                         </div>
                                         <div className="overflow-x-auto">
-                                            <table className="w-full table-auto text-sm">
+                                            <table className="w-full table-fixed text-sm">
+                                                {/* Largeurs fixes pour aligner tous les tours (évite le zig-zag) */}
+                                                <colgroup className="hidden md:table-column-group">
+                                                    <col className="w-[13%]" />
+                                                    <col className="w-[15%]" />
+                                                    <col className="w-[24%]" />
+                                                    <col className="w-[10%]" />
+                                                    <col className="w-[24%]" />
+                                                    <col className="w-[14%]" />
+                                                </colgroup>
                                                 <tbody className="divide-y divide-gray-300">
                                                     {tourMatches.map(match => (
                                                         <tr key={match.id_match} className="hover:bg-gray-50">
