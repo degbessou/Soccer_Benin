@@ -65,13 +65,17 @@ export default function ScheduleTournament({
 
     const getCurrentTour = (matchesData) => {
         const orderedTours = TOURS.filter(t => t.value !== 'all').sort((a, b) => a.order - b.order)
+        let lastTourWithMatches = null
         for (let tour of orderedTours) {
             const matchsTour = matchesData.filter(m => m.phase === tour.value)
             if (matchsTour.length === 0) continue
+            lastTourWithMatches = tour.value
             const hasUnfinished = matchsTour.some(m => m.statut !== 'finished' && m.statut !== 'postponed' && m.statut !== 'cancelled')
             if (hasUnfinished) return tour.value
         }
-        return 'Finale'
+        // Aucun tour « en cours » (tout terminé/reporté/annulé) :
+        // on sélectionne le dernier tour qui possède des matchs, ou 'all' en dernier recours.
+        return lastTourWithMatches ?? 'all'
     }
 
     const toursDisponibles = TOURS.filter(t =>
