@@ -19,7 +19,8 @@ export default () => {
             submenu: [
                 { title: "Équipe nationale homme", path: "/equipe-nationale" },
                 { title: "Équipe nationale femme", path: "/equipe-nationale-feminine" },
-                { title: "Équipe U20", path: "/equipes-nationales-jeunes" }
+                { title: "Équipe U20", path: "/equipes-nationales-jeunes" },
+                { title: "Matchs des sélections", path: "/matchs-selections" }
             ]
         },
         {

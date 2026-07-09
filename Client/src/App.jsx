@@ -85,6 +85,7 @@ export const routes = [
             { path: "equipe-nationale", lazy: page(() => import("./Pages/NationalTeam")) },
             { path: "equipe-nationale-feminine", lazy: page(() => import("./Pages/WomenNationalTeam")) },
             { path: "equipes-nationales-jeunes", lazy: page(() => import("./Pages/JuniorNationalTeam")) },
+            { path: "matchs-selections", lazy: page(() => import("./Pages/NationalSelections")) },
             { path: "ligue-1", lazy: page(() => import("./Pages/LeagueOne")) },
             { path: "ligue-2", lazy: page(() => import("./Pages/LeagueTwo")) },
             { path: "ligue-3", lazy: page(() => import("./Pages/LeagueThree")) },

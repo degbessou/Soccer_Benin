@@ -1,1 +1,9 @@
 @import "tailwindcss";
+
+/* Fond blanc explicite : sans cela le body reste transparent (Tailwind v4 ne
+   définit pas de couleur de fond), ce qui laisse apparaître le fond sombre de
+   certains contextes de rendu (previews, webviews). */
+html,
+body {
+    background-color: #ffffff;
+}
