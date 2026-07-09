@@ -277,7 +277,16 @@ export default function LeagueCalendar({
                                             </h4>
                                         </div>
                                         <div className="overflow-x-auto">
-                                            <table className="w-full table-auto text-sm">
+                                            <table className="w-full table-fixed text-sm">
+                                                {/* Largeurs fixes pour aligner toutes les journées (évite le zig-zag) */}
+                                                <colgroup className="hidden md:table-column-group">
+                                                    <col className="w-[13%]" />
+                                                    <col className="w-[15%]" />
+                                                    <col className="w-[24%]" />
+                                                    <col className="w-[10%]" />
+                                                    <col className="w-[24%]" />
+                                                    <col className="w-[14%]" />
+                                                </colgroup>
                                                 <tbody className="divide-y divide-gray-300">
                                                     {journeeMatches.map(match => (
                                                         <tr key={match.id_match} className="hover:bg-gray-50">
@@ -329,7 +338,7 @@ export default function LeagueCalendar({
                                                                             {match.statut === 'finished' ? (
                                                                                 <div className="flex flex-col items-center">
                                                                                     <span className="font-bold text-gray-800 text-base">{match.buts_domicile} - {match.buts_exterieur}</span>
-                                                                                    {match.buts_peno_domicile !== null && match.buts_peno_exterieur !== null && (
+                                                                                    {match.buts_peno_domicile != null && match.buts_peno_exterieur != null && (
                                                                                         <span className="text-xs text-gray-500">
                                                                                             TAB {match.buts_peno_domicile}-{match.buts_peno_exterieur}
                                                                                         </span>

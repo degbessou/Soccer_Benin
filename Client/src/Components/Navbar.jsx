@@ -7,6 +7,7 @@ import Newsletter from './Newsletter'
 export default () => {
     const [state, setState] = useState(false)
     const [openDropdown, setOpenDropdown] = useState(null)
+    const [isDesktop, setIsDesktop] = useState(false)
     //const [isNewsletterOpen, setIsNewsletterOpen] = useState(false)
     const navigate = useNavigate();
 
@@ -18,7 +19,8 @@ export default () => {
             submenu: [
                 { title: "Équipe nationale homme", path: "/equipe-nationale" },
                 { title: "Équipe nationale femme", path: "/equipe-nationale-feminine" },
-                { title: "Équipe U20", path: "/equipes-nationales-jeunes" }
+                { title: "Équipe U20", path: "/equipes-nationales-jeunes" },
+                { title: "Matchs des sélections", path: "/matchs-selections" }
             ]
         },
         {
@@ -56,6 +58,16 @@ export default () => {
                 setOpenDropdown(null);
             }
         };
+    }, [])
+
+    // Détecte le desktop (>= md) pour activer l'ouverture au survol,
+    // tout en gardant l'ouverture au clic sur mobile/tactile.
+    useEffect(() => {
+        const mq = window.matchMedia("(min-width: 768px)")
+        const update = () => setIsDesktop(mq.matches)
+        update()
+        mq.addEventListener("change", update)
+        return () => mq.removeEventListener("change", update)
     }, [])
 
     const toggleDropdown = (idx) => {
@@ -103,11 +115,16 @@ export default () => {
                     <div className={`flex-1 items-center mt-8 md:mt-0 md:flex ${state ? 'block' : 'hidden'}`}>
                         <ul className="justify-center items-center gap-x-4 space-y-6 px-2 md:flex md:space-x-6 md:space-y-0">
                             {navigation.map((item, idx) => (
-                                <li key={idx} className="relative dropdown-item z-50">
+                                <li
+                                    key={idx}
+                                    className="relative dropdown-item z-50"
+                                    onMouseEnter={() => { if (isDesktop && item.submenu) { setOpenDropdown(idx); setOpenSubDropdown(null); } }}
+                                    onMouseLeave={() => { if (isDesktop && item.submenu) { setOpenDropdown(null); setOpenSubDropdown(null); } }}
+                                >
                                     {item.submenu ? (
                                         <div>
                                             <button
-                                                onClick={() => toggleDropdown(idx)}
+                                                onClick={() => { if (isDesktop) { if (item.path) handleNavigation(item.path); } else { toggleDropdown(idx); } }}
                                                 className="hover:text-yellow-700 flex items-center gap-2"
                                             >
                                                 {item.title}
@@ -118,15 +135,20 @@ export default () => {
                                             </button>
 
                                             {openDropdown === idx && (
-                                                <ul className="md:absolute md:top-full md:left-0 md:mt-2 md:bg-white md:shadow-lg md:rounded-lg md:min-w-[220px] md:py-2 md:z-50 mt-2 space-y-2 md:space-y-0 md:border">
+                                                <ul className="md:absolute md:top-full md:left-0 md:mt-0 md:bg-white md:shadow-lg md:rounded-lg md:min-w-[220px] md:py-2 md:z-50 mt-2 space-y-2 md:space-y-0 md:border">
                                                     {item.submenu.map((subItem, subIdx) => (
-                                                        <li key={subIdx} className="relative group">
+                                                        <li
+                                                            key={subIdx}
+                                                            className="relative group"
+                                                            onMouseEnter={() => { if (isDesktop && subItem.submenu) setOpenSubDropdown(`${idx}-${subIdx}`); }}
+                                                            onMouseLeave={() => { if (isDesktop && subItem.submenu) setOpenSubDropdown(null); }}
+                                                        >
 
                                                             {subItem.submenu ? (
                                                                 // Sous-item avec sous-sous-menu (Ligues Hommes / Ligues Femmes)
                                                                 <div>
                                                                     <button
-                                                                        onClick={() => setOpenSubDropdown(openSubDropdown === `${idx}-${subIdx}` ? null : `${idx}-${subIdx}`)}
+                                                                        onClick={() => { if (!isDesktop) setOpenSubDropdown(openSubDropdown === `${idx}-${subIdx}` ? null : `${idx}-${subIdx}`); }}
                                                                         className="w-full flex items-center justify-between px-4 py-2 hover:bg-gray-100 hover:text-yellow-700 md:rounded text-left"
                                                                     >
                                                                         {subItem.title}
